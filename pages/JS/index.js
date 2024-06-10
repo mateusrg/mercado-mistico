@@ -15,10 +15,8 @@ function verificarEstadoDeLogin() {
 }
 
 // Se o carrinho não existir no localStorage, ele cria
-try {
-    localStorage.getItem("carrinho");
-} catch {
+if (localStorage.getItem("carrinho") === null) {
     localStorage.setItem("carrinho", JSON.stringify({"carrinho": []}));
-}
+};
 
 verificarEstadoDeLogin();
