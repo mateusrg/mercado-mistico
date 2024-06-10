@@ -13,6 +13,12 @@ function verificarEstadoDeLogin() {
         document.getElementById('botoes_header_direita_logado').style.display = 'none';
     }
 }
-localStorage.setItem("carrinho", JSON.stringify({"carrinho": []}));
+
+// Se o carrinho não existir no localStorage, ele cria
+try {
+    localStorage.getItem("carrinho");
+} catch {
+    localStorage.setItem("carrinho", JSON.stringify({"carrinho": []}));
+}
 
 verificarEstadoDeLogin();
