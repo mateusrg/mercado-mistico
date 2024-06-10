@@ -1,0 +1,227 @@
+* {
+    margin: 0;
+    padding: 0;
+    border: none;
+}
+
+body {
+    height: 100vh;
+    width: 100vw;
+}
+
+main {
+    background-color: var(--amarelo);
+    display: flex;
+    justify-content: center;
+}
+
+.secaoPersonalizacao {
+    display: flex;
+    flex-direction: column;
+    width: 94.16vw;
+    gap: 5.85vh;
+    margin-top: 3vh;
+}
+
+#divTitulo {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#tituloAdicionais {
+    color: var(--branco);
+    font-family: "Inknut Antiqua";
+    font-weight: 400;
+    font-size: 3.515vh;
+}
+
+.imagens {
+    height: 5.05vh;
+    cursor: pointer;
+}
+
+#imagens {
+    height: 5.05vh;
+    cursor: pointer;
+}
+
+.secaoLista {
+    display: flex;
+    justify-content: space-between;
+}
+
+#secaoTapete {
+    display: flex;
+}
+
+#secaoFrasco {
+    display: none;
+}
+
+#secaoBota {
+    display: none;
+}
+
+#secaoPocao {
+    display: none;
+}
+
+#secaoAnel {
+    display: none;
+}
+
+#secaoBorracha {
+    display: none;
+}
+
+#lista1 {
+    width: 38.75vw;
+    display: flex;
+    flex-direction: column;
+    gap: 8vh;
+}
+
+#lista2 {
+    width: 38.75vw;
+    display: flex;
+    flex-direction: column;
+    gap: 8vh;
+}
+
+.secaoProduto {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.subdivAdicional {
+    width: 27.08vw;
+    display: flex;
+    align-items: center;
+    gap: 2vw;
+}
+
+.subdivAdicional_Botao {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5vh;
+}
+
+.subdivAdicional_Texto {
+    color: var(--azulEscuro);
+    font-family: "Inder";
+    font-weight: 400;
+    font-size: 2.343vh;
+}
+
+.subdivAdicional_Valor {
+    color: var(--branco);
+    font-family: "Inder";
+    font-weight: 400;
+    font-size: 2.343vh;
+}
+
+#divPosition {
+    position: relative;
+}
+
+.botaoQuantidade {
+    background-color: var(--verdeMusgo);
+    color: var(--branco);
+    border: 0;
+    border-radius: 15px;
+    padding: 0.7rem 0.5rem 0.7rem 0.5rem;
+    gap: 0.5vw;
+    text-shadow: none;
+    font-family: "Inknut Antiqua";
+    font-size: 8px;
+    height: 3.09vh;
+    width: 10vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#seta {
+    height: 2.12vh;
+    filter: invert(100%);
+}
+
+#divBotao {
+    display: flex;
+    justify-content: flex-end;
+}
+
+#buttonSubmit {
+    background-color: var(--azulEscuro);
+    color: var(--branco);
+    border: 0;
+    border-radius: 15px;
+    padding: 0px 2.6rem 0px 2.6rem;
+    text-shadow: none;
+    font-family: "Inknut Antiqua";
+    font-size: calc(6vh / 2.56);
+    height: 6.7vh;
+    width: 8.55vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.imagens:hover,
+#imagens:hover {
+    filter: invert(100%) sepia(99%) saturate(2%) hue-rotate(113deg) brightness(103%) contrast(100%);
+    /* Deixa o botão branco */
+}
+
+/* Dropdown */
+
+#tempFechaDropdown {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    z-index: 2;
+}
+
+.dropdown {
+    list-style: none;
+    border: 1px solid var(--verdeMusgo);
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25);
+    transform: scaleY(0);
+    transform-origin: top;
+    position: absolute;
+    top: 0vh;
+    left: 0;
+    z-index: 3;
+    border-radius: 100px;
+    width: 10vw; /* Precisa mudar pra ficar igual ao width do botão */
+}
+
+.dropdown li {
+    padding: 0.4rem 1rem;
+    cursor: pointer;
+    background-color: var(--verdeMusgo);
+    color: var(--branco);
+}
+
+.dropdown li:hover {
+    filter: brightness(90%);
+}
+
+.dropdown li:first-child {
+    border-radius: 10px 10px 0px 0px;
+}
+
+.dropdown li:last-child {
+    border-radius: 0px 0px 10px 10px;
+}
+
+.dropdown.visivel {
+    transform: scaleY(1);
+}

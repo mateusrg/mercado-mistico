@@ -1,0 +1,155 @@
+body {
+    background-color: var(--azulEscuro);
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#secaoSelecionarEFinalizar {
+    width: 75vw;
+    background-color: var(--azulMaisEscuro);
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 3px 8px;
+    margin: 2rem 0px 1.5rem 0px;
+}
+
+#divSelecionarTodosEsquerda {
+    width: fit-content;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+#selecionarTodos {
+    width: 2.3rem;
+}
+
+#selecionarTodosMarcado {
+    width: calc(2.3rem + 2px);
+}
+
+#todosItens {
+    color: var(--amarelo);
+    font-family: "Inknut Antiqua";
+    font-size: 1.55rem;
+}
+
+#botaoFinalizarCompra {
+    color: var(--amarelo);
+    border-radius: 5px;
+    font-family: "Inknut Antiqua";
+    font-size: 1.5rem;
+    font-weight: 400;
+    padding: 0px 1.5rem;
+    background-color: var(--verdeMusgo);
+    cursor: pointer;
+}
+
+.checkbox {
+    width: 2rem;
+    aspect-ratio: 1 / 1;
+    border: 1.5px solid var(--amarelo);
+    border-radius: 3px;
+}
+
+.checkboxMarcado {
+    width: calc(2rem + 2px);
+}
+
+#listaProdutos {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+    padding-bottom: 1rem;
+}
+
+.secaoProduto {
+    position: relative;
+    width: 88.75vw;
+    display: flex;
+    align-items: center;
+}
+
+.imagemProduto {
+    height: 130px;
+    border-radius: 5px;
+    margin: 0px 1.5rem 0px 1rem;
+}
+
+.direitaImagem {
+    height: 100%;
+}
+
+.nomeProduto {
+    font-family: "Inknut Antiqua";
+    font-size: 2rem;
+    color: var(--branco);
+    line-height: 1; /* Faz caixa ficar colada no texto!!!!!!!!!! */
+}
+
+.emEstoque {
+    color: var(--vermelhoAlaranjado);
+    font-size: 20px;
+    font-family: "Inder";
+    font-weight: 400;
+    margin-top: 4px;
+}
+
+.botaoPersonalizar {
+    background-color: var(--amarelo);
+    color: var(--verdeMusgo);
+    font-size: 18px;
+    font-family: "Inder";
+    border-radius: 50px;
+    padding: 0.5rem 0.7rem;
+    cursor: pointer;
+}
+
+.preco {
+    color: var(--branco);
+    font-size: 1.5rem;
+    font-family: "Inknut Antiqua";
+    line-height: 1;
+    position: absolute;
+    bottom: 0;
+}
+
+
+.excluir {
+    height: 3rem;
+    cursor: pointer;
+}
+
+.favoritar {
+    height: 2.8rem;
+    cursor: pointer;
+}
+
+.excluirE {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+.interacoesProduto {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+}
+
+.escondido {
+    display: none;
+}
+
+.secaoDesmarcada {    
+    filter: opacity(0.5);
+}

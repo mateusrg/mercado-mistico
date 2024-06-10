@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../CSS/usuario.css">
+    <link rel="stylesheet" href="../CSS/style.css">
+    <script defer src="../JS/usuario.js"></script>
+</head>
+<body>
+    <header>
+        <div id="header_esquerda">
+            <a href="../../index.html" class="auxHeader"><img src="../../assets/logo.png" alt="Logo" id="logo"></a>
+            <a href="../../index.html" id="nome_do_site">Mistic Market</h1></a>
+        </div>
+        <div id="botoes_header_direita_deslogado">
+            <form action="./cadastro.html"><button id="sign_up">Sign Up</button></form>
+            <form action="./login.html"><button id="login">Login</button></form>
+        </div>
+        <div id="botoes_header_direita_logado">
+            <a href="./carrinho_de_compras.html" class="auxHeader"><img src="../../assets/carrinho.png" alt="Carrinho" id="botao_logado_carrinho"></a>
+            <a href="./usuario.html" class="auxHeader"><img src="../../assets/usuarioLogado.png" alt="Usuário Logado" id="botao_logado_usuario"></a>
+        </div>
+    </header>
+    <main>
+        <section class="secaoPrincipal">
+            <div id="divTitulo">
+                <h2 id="tituloBemVindo">Olá, nome do usuário</h2>
+            </div>
+            <section class="secoesSecundarias">
+                <a href="catalogo_de_produtos.html" class="topicosEsquerda" id="catalogoProdutos">
+                    <img src="../../assets/caixa.png" alt="caixa" class="imagens" id="caixa">
+                    <h2 class="topicosEsquerda_Texto">Catálogo de produtos</h2>
+                </a>
+                <a href="cupons.html" class="topicosEsquerda" id="cupons">
+                    <img src="../../assets/cupom.png" alt="cupom" class="imagens">
+                    <h2 class="topicosEsquerda_Texto">Cupons</h2>
+                </a>
+                <div class="topicosEsquerda" id="enderecos" onclick="alert('O botão não funciona, ignora')">
+                    <img src="../../assets/casa.png" alt="casa" class="imagens">
+                    <h2 class="topicosEsquerda_Texto">Endereços</h2>
+                </div>
+                <a href="compra_cartao_presente.html" class="topicosEsquerda" id="cartoes">
+                    <img src="../../assets/presente.png" alt="casa" class="imagens">
+                    <h2 class="topicosEsquerda_Texto">Cartões Presente</h2>
+                </a>
+                <a href="#" onclick="sairConta()" id="sair">Sair</a>
+                <div class="topicoDireita" id="cliente">
+                    <h2 class="topicoDireita_Titulo">Atendimento ao cliente</h2>
+                    <div class="topicoDireita_Opcoes">
+                        <div class="subtopicoDireita" onclick="alert('O botão não funciona, ignora')">
+                            <img src="../../assets/carta.png" alt="carta" class="imagens">
+                            <h2 class="subtopicoDireita_Texto">Suas mensagens</h2>
+                        </div>
+                        <a href="registros.html" class="subtopicoDireita">
+                            <img src="../../assets/documento.png" alt="documento" class="imagens">
+                            <h2 class="subtopicoDireita_Texto">Seus registros</h2>
+                        </a>
+                    </div>
+                </div>
+                <div class="topicoDireita" id="desejo">
+                    <h2 class="topicoDireita_Titulo">Lista de desejos</h2>
+                    <h3 id="listaVazia">Sua lista está vazia</h3>
+                </div>
+            </section>
+        </section>
+    </main>
+</body>
+</html>

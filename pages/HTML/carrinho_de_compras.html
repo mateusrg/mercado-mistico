@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mistic Market</title>
+    <link rel="stylesheet" href="../CSS/carrinho_de_compras.css">
+    <link rel="stylesheet" href="../CSS/style.css">
+    <script defer src="../JS/carrinho_de_compras.js"></script>
+</head>
+<body>
+    <header>
+        <div id="header_esquerda">
+            <a href="../../index.html" class="auxHeader"><img src="../../assets/logo.png" alt="Logo" id="logo"></a>
+            <a href="../../index.html" id="nome_do_site">Mistic Market</h1></a>
+        </div>
+        <div id="botoes_header_direita_deslogado">
+            <form action="./cadastro.html"><button id="sign_up">Sign Up</button></form>
+            <form action="./login.html"><button id="login">Login</button></form>
+        </div>
+        <div id="botoes_header_direita_logado">
+            <a href="./carrinho_de_compras.html" class="auxHeader"><img src="../../assets/carrinho.png" alt="Carrinho" id="botao_logado_carrinho"></a>
+            <a href="./usuario.html" class="auxHeader"><img src="../../assets/usuarioLogado.png" alt="Usuário Logado" id="botao_logado_usuario"></a>
+        </div>
+    </header>
+    <main>
+        <section id="secaoSelecionarEFinalizar">
+            <div id="divSelecionarTodosEsquerda">
+                <div class="checkbox escondido" id="selecionarTodos" onclick="marcaTodos()"></div>
+                <img src="../../assets/checkbox_marcado.png" alt="Checkbox marcado" class="checkboxMarcado" id="selecionarTodosMarcado" onclick="marcaTodos('p${idProduto}')">
+                <p id="todosItens">Todos os itens (0)</p>
+            </div>
+            <button id="botaoFinalizarCompra">Finalizar compra</button>
+        </section>
+        <section id="listaProdutos"></section>
+    </main>
+</body>
+</html>

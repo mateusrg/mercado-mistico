@@ -1,0 +1,176 @@
+* {
+    margin: 0;
+    padding: 0;
+    border: none;
+}
+
+body {
+    height: 100vh;
+    width: 100vw;
+}
+
+main {
+    background-color: var(--azulEscuro);
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.secaoPrincipal {
+    width: 87.08vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4vh;
+}
+
+#divTitulo {
+    display: flex;
+    justify-content: flex-start;
+    width: 100%;
+}
+
+#tituloBemVindo {
+    color: var(--amarelo);
+    font-family: "Inknut Antiqua";
+    font-weight: 400;
+    font-size: 3.125vh;
+    height: 100%;
+}
+
+.secoesSecundarias {
+    width: 80%;
+    display: grid;
+    justify-content: space-between;
+    grid-template-columns: repeat(2, 30.35vw);
+    grid-template-rows: repeat(4, 11.99vh) 5vh;
+    column-gap: 5.9vw;
+    row-gap: 3.22vh;
+    grid-template-areas:
+        "produtos cliente"
+        "cupons cliente"
+        "enderecos desejo"
+        "cartao desejo"
+        "sair .";
+}
+
+.topicosEsquerda {
+    display: flex;
+    align-items: center;
+    background-color: var(--verdeMusgo);
+    height: 100%;
+    width: 100%;
+    padding-left: 2.64vw;
+    gap: 1.73vw;
+    border-radius: 5px;
+}
+
+.topicosEsquerda_Texto {
+    color: var(--amarelo);
+    font-family: "Inknut Antiqua";
+    font-weight: 400;
+    font-size: 3.125vh;
+}
+
+.topicoDireita {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    background-color: var(--verdeMusgo);
+    height: 100%;
+    width: 100%;
+    border-radius: 5px;
+}
+
+.topicoDireita_Titulo {
+    color: var(--branco);
+    font-family: "Inknut Antiqua";
+    font-weight: 400;
+    font-size: 3.125vh;
+}
+
+.topicoDireita_Opcoes {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+}
+
+.subtopicoDireita_Texto {
+    color: var(--amarelo);
+    font-family: "Inder";
+    font-weight: 400;
+    font-size: 2.743vh;
+}
+
+.subtopicoDireita {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#listaVazia {
+    color: var(--branco);
+    font-family: "Inder";
+    font-weight: 400;
+    font-size: 2.743vh;
+}
+
+.imagens {
+    height: 7.34vh;
+}
+
+#sair {
+    color: var(--branco);
+    font-family: "Inder";
+    font-weight: 400;
+    font-size: 3.125vh;
+    width: 2.7vw;
+    grid-area: sair;
+}
+
+#catalogoProdutos {
+    grid-area: produtos;
+    background-color: var(--amarelo);
+}
+
+#catalogoProdutos > .topicosEsquerda_Texto {
+    color: var(--verdeMusgo);
+}
+
+#caixa {
+    filter: brightness(0) saturate(100%) invert(15%) sepia(12%) saturate(5937%) hue-rotate(156deg) brightness(95%) contrast(92%);
+}
+
+#cupons {
+    grid-area: cupons;
+}
+
+#enderecos {
+    grid-area: enderecos;
+}
+
+#cartoes {
+    grid-area: cartao;
+}
+
+#cliente {
+    grid-area: cliente;
+}
+
+#desejo {
+    grid-area: desejo;
+}
+
+#sair:hover {
+    border-bottom: 2px solid var(--vermelhoAlaranjado);
+    cursor: pointer;
+}
+
+.topicosEsquerda:hover,
+.subtopicoDireita:hover {
+    cursor: pointer;
+    filter: brightness(115%);
+}
