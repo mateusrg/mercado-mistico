@@ -100,6 +100,11 @@ a {
     align-items: center;
 }
 
+#botao_logado_coracao {
+    height: 45%;
+    cursor: pointer;
+}
+
 #botao_logado_carrinho {
     height: 50%;
     cursor: pointer;
@@ -139,7 +144,19 @@ a {
     cursor: pointer;
 }
 
+#seta_volta {
+    position: absolute;
+    top: 18.2vh;
+    left: 2.5vw;
+    height: 9%;
+}
+
 button:hover {
     cursor: pointer;
     filter: brightness(115%);
+}
+
+#seta_volta:hover {
+    cursor: pointer;
+    filter: brightness(130%);
 }

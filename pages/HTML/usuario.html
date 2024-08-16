@@ -19,11 +19,13 @@
             <form action="./login.html"><button id="login">Login</button></form>
         </div>
         <div id="botoes_header_direita_logado">
+            <a href="./pages/HTML/carrinho_de_compras.html" class="auxHeader"><img src="../../assets/coracao.png" alt="Coração" id="botao_logado_coracao"></a>
             <a href="./carrinho_de_compras.html" class="auxHeader"><img src="../../assets/carrinho.png" alt="Carrinho" id="botao_logado_carrinho"></a>
             <a href="./usuario.html" class="auxHeader"><img src="../../assets/usuarioLogado.png" alt="Usuário Logado" id="botao_logado_usuario"></a>
         </div>
     </header>
     <main>
+        <img src="/assets/seta_volta.png" alt="seta" id="seta_volta">
         <section class="secaoPrincipal">
             <div id="divTitulo">
                 <h2 id="tituloBemVindo">Olá, nome do usuário</h2>
@@ -46,22 +48,24 @@
                     <h2 class="topicosEsquerda_Texto">Cartões Presente</h2>
                 </a>
                 <a href="#" onclick="sairConta()" id="sair">Sair</a>
-                <div class="topicoDireita" id="cliente">
-                    <h2 class="topicoDireita_Titulo">Atendimento ao cliente</h2>
-                    <div class="topicoDireita_Opcoes">
-                        <div class="subtopicoDireita" onclick="alert('O botão não funciona, ignora')">
-                            <img src="../../assets/carta.png" alt="carta" class="imagens">
-                            <h2 class="subtopicoDireita_Texto">Suas mensagens</h2>
-                        </div>
-                        <a href="registros.html" class="subtopicoDireita">
-                            <img src="../../assets/documento.png" alt="documento" class="imagens">
-                            <h2 class="subtopicoDireita_Texto">Seus registros</h2>
-                        </a>
+                <div class="topicoDireita" id="creditos">
+                    <h2 class="topicoDireita_Titulo">Créditos</h2>
+                    <div id="subtopicoDireita">
+                        <h3 class="topicoDireita_Subtitulo">Você tem</h3>
+                        <h1 class="topicoDireita_Pontos">0 pontos</h1>
+                        <h3 class="topicoDireita_Subtitulo">disponíveis</h3>
                     </div>
                 </div>
-                <div class="topicoDireita" id="desejo">
+                <div class="topicoDireitaBaixo" id="desejo">
                     <h2 class="topicoDireita_Titulo">Lista de desejos</h2>
                     <h3 id="listaVazia">Sua lista está vazia</h3>
+                    <section id="produtosFavoritos">
+                        <img src="/assets/seta.svg" alt="seta" id="seta_produto_esquerda">
+                        <img src="/assets/produtos/tapete.png" alt="produto1" id="produto_um">
+                        <img src="/assets/produtos/frasco.png" alt="produto2" id="produto_dois">
+                        <img src="/assets/produtos/bota.png" alt="produto3" id="produto_tres">
+                        <img src="/assets/seta.svg" alt="seta" id="seta_produto_direita">
+                    </section>
                 </div>
             </section>
         </section>

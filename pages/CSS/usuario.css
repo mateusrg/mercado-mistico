@@ -13,16 +13,16 @@ main {
     background-color: var(--azulEscuro);
     display: flex;
     justify-content: center;
-    align-items: flex-start;
+    align-items: center;
 }
 
 .secaoPrincipal {
-    width: 87.08vw;
+    width: 83.08vw;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 4vh;
+    gap: 2vh;
 }
 
 #divTitulo {
@@ -48,8 +48,8 @@ main {
     column-gap: 5.9vw;
     row-gap: 3.22vh;
     grid-template-areas:
-        "produtos cliente"
-        "cupons cliente"
+        "produtos creditos"
+        "cupons creditos"
         "enderecos desejo"
         "cartao desejo"
         "sair .";
@@ -76,12 +76,30 @@ main {
 .topicoDireita {
     display: flex;
     flex-direction: column;
-    justify-content: space-evenly;
+    justify-content: flex-start;
     align-items: center;
     background-color: var(--verdeMusgo);
     height: 100%;
     width: 100%;
     border-radius: 5px;
+}
+
+.topicoDireitaBaixo {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--verdeMusgo);
+    height: 100%;
+    width: 100%;
+    border-radius: 5px;
+}
+
+#subtopicoDireita {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
 }
 
 .topicoDireita_Titulo {
@@ -91,31 +109,85 @@ main {
     font-size: 3.125vh;
 }
 
-.topicoDireita_Opcoes {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 40px;
-}
-
-.subtopicoDireita_Texto {
-    color: var(--amarelo);
+.topicoDireita_Subtitulo {
+    color: var(--verdeEscuro);
     font-family: "Inder";
     font-weight: 400;
-    font-size: 2.743vh;
+    font-size: 2.125vh;
 }
 
-.subtopicoDireita {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+.topicoDireita_Pontos {
+    color: var(--vermelhoAlaranjado);
+    font-family: "Inknut Antiqua";
+    font-weight: 400;
+    font-size: 4.125vh;
 }
+
+/* Não tem nenhum produto na lista de favoritos */
 
 #listaVazia {
     color: var(--branco);
     font-family: "Inder";
     font-weight: 400;
     font-size: 2.743vh;
+    display: none;
+}
+
+/* Lista de produtos presentes nos favoritos */
+
+#produtosFavoritos {
+    display: grid;
+    align-items: center;
+    grid-template-rows: 13vh;
+    grid-template-columns: 5vw 5vw 5vw 5vw 5vw;
+    grid-template-areas: "seta_produto_esquerda produto1 produto2 produto3 seta_produto_direita";
+    column-gap: 0.9vw;
+}
+
+#produto_um {
+    display: flex;
+    height: 13vh;
+    grid-area: produto1;
+}
+
+#produto_dois {
+    display: flex;
+    height: 13vh;
+    grid-area: produto2;
+}
+
+#produto_tres {
+    display: flex;
+    height: 13vh;
+    grid-area: produto3;
+}
+
+#seta_produto_direita {
+    display: flex;
+    justify-self: center;
+    height: 6vh;
+    grid-area: seta_produto_direita;
+    rotate: -90deg;
+    filter: invert(100%);
+}
+
+#seta_produto_esquerda {
+    display: flex;
+    justify-self: center;
+    height: 6vh;
+    grid-area: seta_produto_esquerda;
+    rotate: 90deg;
+    filter: invert(100%);
+}
+
+#produto_um:hover, #produto_dois:hover, #produto_tres:hover {
+    cursor: pointer;
+    filter: brightness(115%);
+}
+
+#seta_produto_direita:hover, #seta_produto_esquerda:hover {
+    cursor: pointer;
+    filter: invert(57%) sepia(74%) saturate(498%) hue-rotate(5deg) brightness(113%) contrast(84%);
 }
 
 .imagens {
@@ -156,8 +228,8 @@ main {
     grid-area: cartao;
 }
 
-#cliente {
-    grid-area: cliente;
+#creditos {
+    grid-area: creditos;
 }
 
 #desejo {
