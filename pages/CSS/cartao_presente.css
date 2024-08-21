@@ -10,7 +10,7 @@ main {
 
 #titulo {
     font-family: "Inknut Antiqua";
-    font-size: 40px;
+    font-size: 2vw;
     font-weight: 400;
     padding: 3.2vh 0px 0px 8.9vw;
     color: var(--amarelo);
@@ -35,7 +35,7 @@ main {
 
 #textinho_centro {
     font-family: "Inknut Antiqua";
-    font-size: 32px;
+    font-size: 2vw;
     font-weight: 400;
     color: var(--branco);
 }

@@ -44,43 +44,6 @@ main {
     color: var(--amarelo);
 }
 
-#divPersonalizacoes {
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-}
-
-#escolhaControle {
-    font-family: "Inder";
-    font-weight: 400;
-    font-size: 3vh;
-    color: var(--branco);
-}
-
-#flex {
-    display: flex;
-}
-
-#textoValorNivel {
-    font-family: "Inder";
-    font-weight: 400;
-    font-size: 3vh;
-    color: var(--amarelo);
-}
-
-li {
-    font-family: "Inder";
-    font-weight: 400;
-    font-size: 2.3vh;
-    color: var(--branco);
-    margin-left: 3vw;
-}
-
-.lis {
-    visibility: hidden;
-    color: var(--branco);
-}
-
 #botaoSubmit {
     background-color: var(--amarelo);
     border-radius: 100px;
@@ -89,17 +52,6 @@ li {
     font-family: "Inder";
     font-weight: 400;
     padding: 0.3rem 0px;
-}
-
-#personalizar {
-    background-color: var(--amarelo);
-    border-radius: 100px;
-    color: var(--verdeMusgo);
-    font-size: 2.5vh;
-    font-family: "Inder";
-    font-weight: 400;
-    padding: 0.3rem 0.7rem;
-    align-self: center;
 }
 
 #secaoDireita {
