@@ -144,11 +144,14 @@ a {
     cursor: pointer;
 }
 
-#seta_volta {
+.seta_volta_com_titulo {
+    height: 8vh;
+}
+
+.seta_volta_sem_titulo {
     position: absolute;
-    top: 20.2vh;
-    left: 2.5vw;
-    height: 9%;
+    top: 19vh;
+    left: 3vw;
 }
 
 button:hover {
@@ -156,7 +159,7 @@ button:hover {
     filter: brightness(115%);
 }
 
-#seta_volta:hover {
+.seta_volta:hover {
     cursor: pointer;
     filter: brightness(130%);
 }
