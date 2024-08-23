@@ -6,13 +6,22 @@ main {
     position: relative; /* Pra conseguir usar absolute no secao_centro */
     background-color: var(--azulEscuro);
     width: 100vw;
+    display: flex;
+}
+
+#divTitulo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-self: flex-start;
+    padding: 3vh 0 0 3vw;
 }
 
 #titulo {
     font-family: "Inknut Antiqua";
     font-size: 2vw;
     font-weight: 400;
-    padding: 3.2vh 0px 0px 8.9vw;
+    padding-left: 2vw;
     color: var(--amarelo);
 }
 
@@ -24,7 +33,7 @@ main {
 
     /* Pra conseguir centralizar o elemento na main */
     position: absolute;
-    top: 50%;
+    top: 60%;
     left: 50%;
     transform: translate(-50%, -50%);
 }
@@ -44,7 +53,7 @@ main {
     color: var(--branco);
     background-color: var(--vermelhoAlaranjado);
     border-radius: 50px;
-    padding: 6px;
+    padding: 2vh;
     font-family: "Inder";
-    font-size: 1.5rem;
+    font-size: 2vw;
 }
