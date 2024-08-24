@@ -7,4 +7,6 @@ app.use(express.json());
 app.listen(porta, () => console.log(`Rodando na porta ${porta}!`));
 const connection = require("./db_config");
 
-app.get("")
+app.get("/", (request, response) => {
+    
+});
