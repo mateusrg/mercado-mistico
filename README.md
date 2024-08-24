@@ -1,7 +1,7 @@
 <h1 align="center">Mystic Market</h1>
 <p align="center">Esse projeto consiste na criação de um site para um mercado, que neste caso vende produtos místicos, como tapetes voadores e botas de supervelocidade. O projeto foi criado para um trabalho do componente do técnico, para praticar HTML, CSS e JavaScript.</p>
 <h3 align="center">Status do Projeto:</h3>
-<h4 align="center">Finalizado</h4>
+<h4 align="center">Em Andamento</h4>
 <h3 align="center">Features</h3>
 
 - [x] Cadastro de usuário - "./pages/HTML/cadastro.html"
