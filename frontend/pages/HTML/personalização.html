@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personalização - Mystic Market</title>
+    <link rel="stylesheet" href="../CSS/personalização.css">
+    <link rel="stylesheet" href="../CSS/style.css">
+    <script defer src="../JS/personalizacao.js"></script>
+</head>
+<body>
+    <header>
+        <div id="header_esquerda">
+            <a href="../../index.html" class="auxHeader"><img src="../../assets/logo.png" alt="Logo" id="logo"></a>
+            <a href="../../index.html" id="nome_do_site">Mystic Market</h1></a>
+        </div>
+        <div id="botoes_header_direita_deslogado">
+            <form action="./cadastro.html"><button id="sign_up">Sign Up</button></form>
+            <form action="./login.html"><button id="login">Login</button></form>
+        </div>
+        <div id="botoes_header_direita_logado">
+            <a href="./carrinho_de_compras.html" class="auxHeader"><img src="../../assets/carrinho.png" alt="Carrinho" id="botao_logado_carrinho"></a>
+            <a href="./usuario.html" class="auxHeader"><img src="../../assets/usuarioLogado.png" alt="Usuário Logado" id="botao_logado_usuario"></a>
+        </div>
+    </header>
+    <main>
+        <section class="secaoPersonalizacao">
+            <div id="divTitulo">
+                <h2 id="tituloAdicionais">Adicionais:</h2>
+                <a href="#" onclick="voltarPagina()">
+                    <img src="../../assets/fechar.png" alt="fechar" class="imagens">
+                </a>
+            </div>
+            <section class="secaoLista" id="secaoTapete">
+                <div id="lista1">
+                    <div class="secaoProduto" id="p0">
+                        <div class="subdivAdicional">
+                            <p class="subdivAdicional_Texto">Direção do voo: Somente voa para cima</p>
+                        </div>
+                        <div class="subdivAdicional_Botao">
+                            <div id="divPosition">
+                                <button class="botaoQuantidade" onclick="mudarQuantidade(0)">Somente voa para cima <img src="../../assets/seta.svg" alt="Seta" id="seta"></button>
+                                <ul class="dropdown escondido">
+                                    <li onclick="selecionaValorDropdown(this.innerHTML, 0)">Somente voa para cima</li>
+                                    <li onclick="selecionaValorDropdown(this.innerHTML, 0)">Voar para baixo</li>
+                                    <li onclick="selecionaValorDropdown(this.innerHTML, 0)">Voar para todas as direções</li>
+                                </ul>
+                            </div>
+                            <p class="subdivAdicional_Valor">R$ 00,00</p>
+                        </div>
+                    </div>
+                    <div class="secaoProduto" id="p1">
+                        <div class="subdivAdicional">
+                            <p class="subdivAdicional_Texto">Distância que voa: 500m</p>
+                        </div>
+                        <div class="subdivAdicional_Botao">
+                            <div id="divPosition">
+                                <button class="botaoQuantidade" onclick="mudarQuantidade(1)">500m <img src="../../assets/seta.svg" alt="Seta" id="seta"></button>
+                                <ul class="dropdown escondido">
+                                    <li onclick="selecionaValorDropdown(this.innerHTML, 1)">750m</li>
+                                    <li onclick="selecionaValorDropdown(this.innerHTML, 1)">1km</li>
+                                    <li onclick="selecionaValorDropdown(this.innerHTML, 1)">1,25km</li>
+                                    <li onclick="selecionaValorDropdown(this.innerHTML, 1)">1,5km</li>
+                                    <li onclick="selecionaValorDropdown(this.innerHTML, 1)">1,75km</li>
+                                    <li onclick="selecionaValorDropdown(this.innerHTML, 1)">2km</li>
+                                    <li onclick="selecionaValorDropdown(this.innerHTML, 1)">2,5km</li>
+                                    <li onclick="selecionaValorDropdown(this.innerHTML, 1)">3km</li>
+                                    <li onclick="selecionaValorDropdown(this.innerHTML, 1)">4km</li>
+                                    <li onclick="selecionaValorDropdown(this.innerHTML, 1)">5km</li>
+                                    <li onclick="selecionaValorDropdown(this.innerHTML, 1)">7,5km</li>
+                                    <li onclick="selecionaValorDropdown(this.innerHTML, 1)">10km</li>
+                                    <li onclick="selecionaValorDropdown(this.innerHTML, 1)">Ilimitado</li>
+                                </ul>
+                            </div>
+                            <p class="subdivAdicional_Valor">R$ 00,00</p>
+                        </div>
+                    </div>
+                    <div class="secaoProduto" id="p2">
+                        <div class="subdivAdicional">
+                            <p class="subdivAdicional_Texto">Peso que aguenta: 50kg</p>
+                        </div>
+                        <div class="subdivAdicional_Botao">
+                            <div id="divPosition">
+                                <button class="botaoQuantidade" onclick="mudarQuantidade(2)">50kg <img src="../../assets/seta.svg" alt="Seta" id="seta"></button>
+                                <ul class="dropdown escondido">
+                                    <li onclick="selecionaValorDropdown(this.innerHTML, 2)">50kg</li>
+                                    <li onclick="selecionaValorDropdown(this.innerHTML, 2)">60kg</li>
+                                    <li onclick="selecionaValorDropdown(this.innerHTML, 2)">70kg</li>
+                                    <li onclick="selecionaValorDropdown(this.innerHTML, 2)">80kg</li>
+                                    <li onclick="selecionaValorDropdown(this.innerHTML, 2)">90kg</li>
+                                    <li onclick="selecionaValorDropdown(this.innerHTML, 2)">100kg</li>
+                                    <li onclick="selecionaValorDropdown(this.innerHTML, 2)">120kg</li>
+                                    <li onclick="selecionaValorDropdown(this.innerHTML, 2)">140kg</li>
+                                    <li onclick="selecionaValorDropdown(this.innerHTML, 2)">160kg</li>
+                                    <li onclick="selecionaValorDropdown(this.innerHTML, 2)">180kg</li>
+                                    <li onclick="selecionaValorDropdown(this.innerHTML, 2)">200kg</li>
+                                    <li onclick="selecionaValorDropdown(this.innerHTML, 2)">Ilimitado</li>
+                                </ul>
+                            </div>
+                            <p class="subdivAdicional_Valor">R$ 00,00</p>
+                        </div>
+                    </div>
+                </div>
+                <div id="lista2">
+                    <div class="secaoProduto" id="p3">
+                        <div class="subdivAdicional">
+                            <p class="subdivAdicional_Texto">Tamanho: Minúsculo</p>
+                        </div>
+                        <div class="subdivAdicional_Botao">
+                            <div id="divPosition">
+                                <button class="botaoQuantidade" onclick="mudarQuantidade(3)">Minúsculo <img src="../../assets/seta.svg" alt="Seta" id="seta"></button>
+                                <ul class="dropdown escondido">
+                                    <li onclick="selecionaValorDropdown(this.innerHTML, 3)">Minúsculo</li>
+                                    <li onclick="selecionaValorDropdown(this.innerHTML, 3)">Pequeno</li>
+                                    <li onclick="selecionaValorDropdown(this.innerHTML, 3)">Médio</li>
+                                    <li onclick="selecionaValorDropdown(this.innerHTML, 3)">Grande</li>
+                                    <li onclick="selecionaValorDropdown(this.innerHTML, 3)">Gigante</li>
+                                    <li onclick="selecionaValorDropdown(this.innerHTML, 3)">Mega</li>
+                                    <li onclick="selecionaValorDropdown(this.innerHTML, 3)">Hiper</li>
+                                </ul>
+                            </div>
+                            <p class="subdivAdicional_Valor">R$ 00,00</p>
+                        </div>
+                    </div>
+                    <div class="secaoProduto" id="p4">
+                        <div class="subdivAdicional">
+                            <p class="subdivAdicional_Texto">Velocidade: 10km/h</p>
+                        </div>
+                        <div class="subdivAdicional_Botao">
+                            <div id="divPosition">
+                                <button class="botaoQuantidade" onclick="mudarQuantidade(4)">10 km/h <img src="../../assets/seta.svg" alt="Seta" id="seta"></button>
+                                <ul class="dropdown escondido">
+                                    <li onclick="selecionaValorDropdown(this.innerHTML, 4)">10 km/h</li>
+                                    <li onclick="selecionaValorDropdown(this.innerHTML, 4)">20 km/h</li>
+                                    <li onclick="selecionaValorDropdown(this.innerHTML, 4)">30 km/h</li>
+                                    <li onclick="selecionaValorDropdown(this.innerHTML, 4)">40 km/h</li>
+                                    <li onclick="selecionaValorDropdown(this.innerHTML, 4)">50 km/h</li>
+                                    <li onclick="selecionaValorDropdown(this.innerHTML, 4)">60 km/h</li>
+                                    <li onclick="selecionaValorDropdown(this.innerHTML, 4)">70 km/h</li>
+                                    <li onclick="selecionaValorDropdown(this.innerHTML, 4)">80 km/h</li>
+                                    <li onclick="selecionaValorDropdown(this.innerHTML, 4)">90 km/h</li>
+                                    <li onclick="selecionaValorDropdown(this.innerHTML, 4)">100 km/h</li>
+                                    <li onclick="selecionaValorDropdown(this.innerHTML, 4)">120 km/h</li>
+                                    <li onclick="selecionaValorDropdown(this.innerHTML, 4)">140 km/h</li>
+                                    <li onclick="selecionaValorDropdown(this.innerHTML, 4)">160 km/h</li>
+                                    <li onclick="selecionaValorDropdown(this.innerHTML, 4)">180 km/h</li>
+                                    <li onclick="selecionaValorDropdown(this.innerHTML, 4)">200 km/h</li>
+                                </ul>
+                            </div>
+                            <p class="subdivAdicional_Valor">R$ 00,00</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="secaoLista" id="secaoFrasco">
+                <div id="lista1">
+                    <div class="secaoProduto" id="p5">
+                        <div class="subdivAdicional">
+                            <p class="subdivAdicional_Texto">Gravidade voltar ao normal: Não volta</p>
+                        </div>
+                        <div class="subdivAdicional_Botao">
+                            <div id="divPosition">
+                                <button class="botaoQuantidade" onclick="mudarQuantidade(5)">Não volta <img src="../../assets/seta.svg" alt="Seta" id="seta"></button>
+                                <ul class="dropdown escondido">
+                                    <li onclick="selecionaValorDropdown(this.innerHTML, 5)">Não volta</li>
+                                    <li onclick="selecionaValorDropdown(this.innerHTML, 5)">1 mês</li>
+                                    <li onclick="selecionaValorDropdown(this.innerHTML, 5)">25 dias</li>
+                                    <li onclick="selecionaValorDropdown(this.innerHTML, 5)">20 dias</li>
+                                    <li onclick="selecionaValorDropdown(this.innerHTML, 5)">15 dias</li>
+                                    <li onclick="selecionaValorDropdown(this.innerHTML, 5)">10 dias</li>
+                                    <li onclick="selecionaValorDropdown(this.innerHTML, 5)">5 dias</li>
+                                    <li onclick="selecionaValorDropdown(this.innerHTML, 5)">3 dias</li>
+                                    <li onclick="selecionaValorDropdown(this.innerHTML, 5)">1 dia</li>
+                                </ul>
+                            </div>
+                            <p class="subdivAdicional_Valor">R$ 00,00</p>
+                        </div>
+                    </div>
+                    <div class="secaoProduto">
+                        <div class="subdivAdicional">
+                            <a href="#">
+                                <img src="../../assets/mais.png" alt="mais" id="imagens" onclick="clicarMaisSemBotao(event)">
+                            </a>
+                            <p class="subdivAdicional_Texto">Ativar e desativar a qualquer momento</p>
+                        </div>
+                        <p class="subdivAdicional_Valor">R$ 00,00</p>
+                    </div>
+                <div id="lista2">
+                </div>
+            </section>
+
+            <section class="secaoLista" id="secaoBota">
+                <div id="lista1">
+                    <div class="secaoProduto">
+                        <div class="subdivAdicional">
+                            <a href="#">
+                                <img src="../../assets/mais.png" alt="mais" id="imagens" onclick="clicarMaisSemBotao(event)">
+                            </a>
+                            <p class="subdivAdicional_Texto">Tem freio</p>
+                        </div>
+                        <p class="subdivAdicional_Valor">R$ 00,00</p>
+                    </div>
+                    <div class="secaoProduto">
+                        <div class="subdivAdicional">
+                            <a href="#">
+                                <img src="../../assets/mais.png" alt="mais" id="imagens" onclick="clicarMaisSemBotao(event)">
+                            </a>
+                            <p class="subdivAdicional_Texto">Velocidade extra</p>
+                        </div>
+                        <p class="subdivAdicional_Valor">R$ 00,00</p>
+                    </div>
+                <div id="lista2">
+                </div>
+            </section>
+
+            <section class="secaoLista" id="secaoPocao">
+                <div id="lista1">
+                    <div class="secaoProduto" id="p6">
+                        <div class="subdivAdicional">
+                            <p class="subdivAdicional_Texto">Cura qualquer doença, mas cada vez que você toma a poção, perde tempo de vida: 1 ano</p>
+                        </div>
+                        <div class="subdivAdicional_Botao">
+                            <div id="divPosition">
+                                <button class="botaoQuantidade" onclick="mudarQuantidade(6)">1 ano <img src="../../assets/seta.svg" alt="Seta" id="seta"></button>
+                                <ul class="dropdown escondido">
+                                    <li onclick="selecionaValorDropdown(this.innerHTML, 6)">1 ano</li>
+                                    <li onclick="selecionaValorDropdown(this.innerHTML, 6)">10 meses</li>
+                                    <li onclick="selecionaValorDropdown(this.innerHTML, 6)">8 meses</li>
+                                    <li onclick="selecionaValorDropdown(this.innerHTML, 6)">6 meses</li>
+                                    <li onclick="selecionaValorDropdown(this.innerHTML, 6)">5 meses</li>
+                                    <li onclick="selecionaValorDropdown(this.innerHTML, 6)">4 meses</li>
+                                    <li onclick="selecionaValorDropdown(this.innerHTML, 6)">3 meses</li>
+                                    <li onclick="selecionaValorDropdown(this.innerHTML, 6)">2 meses</li>
+                                    <li onclick="selecionaValorDropdown(this.innerHTML, 6)">1 mês</li>
+                                    <li onclick="selecionaValorDropdown(this.innerHTML, 6)">20 dias</li>
+                                    <li onclick="selecionaValorDropdown(this.innerHTML, 6)">10 dias</li>
+                                    <li onclick="selecionaValorDropdown(this.innerHTML, 6)">5 dias</li>
+                                    <li onclick="selecionaValorDropdown(this.innerHTML, 6)">1 dia</li>
+                                </ul>
+                            </div>
+                            <p class="subdivAdicional_Valor">R$ 00,00</p>
+                        </div>
+                    </div>
+                <div id="lista2">
+                </div>
+            </section>
+
+            <section class="secaoLista" id="secaoAnel">
+                <div id="lista1">
+                    <div class="secaoProduto" id="p7">
+                        <div class="subdivAdicional">
+                            <p class="subdivAdicional_Texto">Teleporta para: Lugar aleatório</p>
+                        </div>
+                        <div class="subdivAdicional_Botao">
+                            <div id="divPosition">
+                                <button class="botaoQuantidade" onclick="mudarQuantidade(7)">Lugar aleatório <img src="../../assets/seta.svg" alt="Seta" id="seta"></button>
+                                <ul class="dropdown escondido">
+                                    <li onclick="selecionaValorDropdown(this.innerHTML, 7)">Lugar aleatório</li>
+                                    <li onclick="selecionaValorDropdown(this.innerHTML, 7)">Ocidente e Oriente</li>
+                                    <li onclick="selecionaValorDropdown(this.innerHTML, 7)">Continente</li>
+                                    <li onclick="selecionaValorDropdown(this.innerHTML, 7)">País</li>
+                                    <li onclick="selecionaValorDropdown(this.innerHTML, 7)">Estado</li>
+                                    <li onclick="selecionaValorDropdown(this.innerHTML, 7)">Cidade</li>
+                                    <li onclick="selecionaValorDropdown(this.innerHTML, 7)">Raio de 10km</li>
+                                    <li onclick="selecionaValorDropdown(this.innerHTML, 7)">Raio de 5km</li>
+                                    <li onclick="selecionaValorDropdown(this.innerHTML, 7)">Lugar específico</li>
+                                </ul>
+                            </div>
+                            <p class="subdivAdicional_Valor">R$ 00,00</p>
+                        </div>
+                    </div>
+                    <div class="secaoProduto" id="p8">
+                        <div class="subdivAdicional">
+                            <p class="subdivAdicional_Texto">Timeout de: 1 hora</p>
+                        </div>
+                        <div class="subdivAdicional_Botao">
+                            <div id="divPosition">
+                                <button class="botaoQuantidade" onclick="mudarQuantidade(8)">1 hora <img src="../../assets/seta.svg" alt="Seta" id="seta"></button>
+                                <ul class="dropdown escondido">
+                                    <li onclick="selecionaValorDropdown(this.innerHTML, 8)">1 hora</li>
+                                    <li onclick="selecionaValorDropdown(this.innerHTML, 8)">45 minutos</li>
+                                    <li onclick="selecionaValorDropdown(this.innerHTML, 8)">30 minutos</li>
+                                    <li onclick="selecionaValorDropdown(this.innerHTML, 8)">20 minutos</li>
+                                    <li onclick="selecionaValorDropdown(this.innerHTML, 8)">15 minutos</li>
+                                    <li onclick="selecionaValorDropdown(this.innerHTML, 8)">10 minutos</li>
+                                    <li onclick="selecionaValorDropdown(this.innerHTML, 8)">5 minutos</li>
+                                    <li onclick="selecionaValorDropdown(this.innerHTML, 8)">3 minutos</li>
+                                    <li onclick="selecionaValorDropdown(this.innerHTML, 8)">2 minutos</li>
+                                    <li onclick="selecionaValorDropdown(this.innerHTML, 8)">1 minuto</li>
+                                    <li onclick="selecionaValorDropdown(this.innerHTML, 8)">Sem timeout</li>
+                                </ul>
+                            </div>
+                            <p class="subdivAdicional_Valor">R$ 00,00</p>
+                        </div>
+                    </div>
+                <div id="lista2">
+                </div>
+            </section>
+
+            <section class="secaoLista" id="secaoBorracha">
+                <div id="lista1">
+                    <div class="secaoProduto" id="p9">
+                        <div class="subdivAdicional">
+                            <p class="subdivAdicional_Texto">Quanto pode apagar por hora: 10 cm³</p>
+                        </div>
+                        <div class="subdivAdicional_Botao">
+                            <div id="divPosition">
+                                <button class="botaoQuantidade" onclick="mudarQuantidade(9)">10 cm³ <img src="../../assets/seta.svg" alt="Seta" id="seta"></button>
+                                <ul class="dropdown escondido">
+                                    <li onclick="selecionaValorDropdown(this.innerHTML, 9)">10 cm³</li>
+                                    <li onclick="selecionaValorDropdown(this.innerHTML, 9)">20 cm³</li>
+                                    <li onclick="selecionaValorDropdown(this.innerHTML, 9)">30 cm³</li>
+                                    <li onclick="selecionaValorDropdown(this.innerHTML, 9)">40 cm³</li>
+                                    <li onclick="selecionaValorDropdown(this.innerHTML, 9)">50 cm³</li>
+                                    <li onclick="selecionaValorDropdown(this.innerHTML, 9)">60 cm³</li>
+                                    <li onclick="selecionaValorDropdown(this.innerHTML, 9)">70 cm³</li>
+                                    <li onclick="selecionaValorDropdown(this.innerHTML, 9)">80 cm³</li>
+                                    <li onclick="selecionaValorDropdown(this.innerHTML, 9)">90 cm³</li>
+                                    <li onclick="selecionaValorDropdown(this.innerHTML, 9)">1 m³</li>
+                                </ul>
+                            </div>
+                            <p class="subdivAdicional_Valor">R$ 00,00</p>
+                        </div>
+                    </div>
+                    <div class="secaoProduto">
+                        <div class="subdivAdicional">
+                            <a href="#">
+                                <img src="../../assets/mais.png" alt="mais" id="imagens" onclick="clicarMaisSemBotao(event)">
+                            </a>
+                            <p class="subdivAdicional_Texto">Capinha especial (para evitar de apagar a própria mão)</p>
+                        </div>
+                        <p class="subdivAdicional_Valor">R$ 00,00</p>
+                    </div>
+                <div id="lista2">
+                </div>
+            </section>
+            <div id="divBotao">
+                <button onclick="salvarPersonalizacoes()" type="submit" id="buttonSubmit">Concluir</button>
+            </div>
+        <section>
+    </main>
+</body>
+</html>

@@ -1,0 +1,149 @@
+html {
+    scroll-padding-top: 17.3vh;
+}
+
+body {
+    background-color: var(--azulEscuro);
+}
+
+main {
+    padding: 1rem 5.5rem;
+}
+
+#secao_titulo {
+    padding-left: 7.5rem;
+}
+
+#principal {
+    width: 65vw;
+    margin-top: 2.5rem;
+    display: flex;
+    gap: 2rem;
+}
+
+#titulo {
+    color: var(--amarelo);
+    font-family: "Inknut Antiqua";
+    font-size: 40px;
+    font-weight: 400;
+}
+
+#subtitulo {
+    color: var(--branco);
+    font-family: "Inder";
+    font-size: 20px;
+    font-weight: 400;
+    margin-top: -1rem;
+}
+
+#secaoCategorias {
+    display: flex;
+    height: fit-content;
+}
+
+#textoCategorias {
+    font-family: "Inknut Antiqua";
+    font-size: 2rem;
+    font-weight: 400;
+    color: var(--amarelo);
+    margin-bottom: 0.25rem;
+}
+
+#subtextoCategorias:hover {
+    color: var(--amarelo);
+}
+
+ul {
+    list-style-type: none;
+}
+
+li > a {
+    font-family: "Inder";
+    font-size: 1.5rem;
+    color: var(--branco);
+    margin-bottom: 1rem;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+li:last-child {
+    margin-bottom: 3rem; /* Isso é para aumentar o tamanho da div e, portanto, da linha ao lado */
+}
+
+#linhaVerticalDivisoria {
+    align-self: stretch; /* Faz a altura ser igual à do pai */
+    width: 0px;
+    border: 4px solid var(--verdeMusgo);
+    margin-left: 2rem;
+}
+
+.tituloCategoria {
+    font-size: 2rem;
+    font-family: "Inknut Antiqua";
+    font-weight: 400;
+    color: var(--amarelo);
+}
+
+.produto {
+    position: relative;
+    margin-left: 3.5rem;
+    display: flex;
+    flex-direction: column;
+    width: fit-content; /* Faz a caixa se ajustar ao conteúdo */
+}
+
+.imagemProduto {
+    height: 190px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    cursor: pointer;
+}
+
+.nomeProduto {
+    font-size: 1.25rem;
+    font-family: "Inknut Antiqua";
+    color: var(--amarelo);
+    cursor: pointer;
+    white-space: nowrap; /* Evita quebra de linha */
+}
+
+.precoProduto {
+    font-size: 0.75rem;
+    font-family: "Inder";
+    font-weight: 400;
+    color: var(--branco);
+    margin: -10px 0px 2rem 0px;
+}
+
+.titulo_produto {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.carrinho {
+    height: 40%;
+}
+
+.carrinho:hover {
+    cursor: pointer;
+    filter: invert(57%) sepia(74%) saturate(498%) hue-rotate(5deg) brightness(153%) contrast(84%);
+}
+
+#divParaVoar {
+    display: flex;
+    gap: -0.5rem;
+}
+
+#bota {
+    font-size: 0.95rem;
+    margin-bottom: 2px;
+}
+
+#anel {
+    font-size: 1.05rem;
+}
+
+#borracha {
+    font-size: 1.1rem;
+    margin-bottom: 1px;
+}
