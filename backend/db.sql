@@ -6,7 +6,7 @@ CREATE TABLE Produto (
     nome VARCHAR(255) NOT NULL,
     preco DECIMAL(2) NOT NULL,
     descricao TEXT,
-    imagem VARCHAR(65),
+    imagem VARCHAR(65) NOT NULL,
     quantidade INT
 );
 
