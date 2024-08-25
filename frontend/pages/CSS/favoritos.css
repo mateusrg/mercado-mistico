@@ -1,0 +1,110 @@
+body {
+    background-color: var(--azulEscuro);
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5vh;
+}
+
+#listaProdutos {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+    padding-bottom: 1rem;
+}
+
+#divTitulo {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    align-self: flex-start;
+    padding-left: 4.5vw;
+}
+
+#tituloFavoritos {
+    font-family: "Inknut Antiqua";
+    font-weight: 400;
+    font-size: 4vh;
+    color: var(--amarelo);
+    padding-left: 1vw;
+}
+
+.divProduto {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 80vw;
+    height: 16vh;
+}
+
+.secaoProduto {
+    position: relative;
+    width: 88.75vw;
+    display: flex;
+    align-items: center;
+}
+
+#subdivProduto {
+    display: flex;
+    align-items: center;
+}
+
+.imagemProduto {
+    height: 14vh;
+    border-radius: 5px;
+    margin: 0px 1.5rem 0px 1rem;
+}
+
+.direitaImagem {
+    height: 12vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.nomeProduto {
+    font-family: "Inknut Antiqua";
+    font-size: 4vh;
+    color: var(--branco);
+    line-height: 1; /* Faz caixa ficar colada no texto!!!!!!!!!! */
+}
+
+.emEstoque {
+    color: var(--vermelhoAlaranjado);
+    font-size: 2vh;
+    font-family: "Inder";
+    font-weight: 400;
+    margin-top: 4px;
+}
+
+.preco {
+    color: var(--branco);
+    font-size: 2.5vh;
+    font-family: "Inknut Antiqua";
+    line-height: 1;
+}
+
+.carrinho {
+    height: 7vh;
+    cursor: pointer;
+}
+
+.favoritar {
+    height: 5.4vh;
+    cursor: pointer;
+}
+
+.interacoesProduto {
+    display: flex;
+    gap: 2vw;
+    align-items: center;
+    justify-self: flex-end;
+}
+
+.favoritar:hover, .excluir:hover {
+    cursor: pointer;
+    filter: invert(57%) sepia(74%) saturate(498%) hue-rotate(5deg) brightness(153%) contrast(84%);
+}
