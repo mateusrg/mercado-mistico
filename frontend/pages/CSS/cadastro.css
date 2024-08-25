@@ -116,11 +116,12 @@ input {
 }
 
 #olho {
-    height: 5vh;
+    height: 60%;
     cursor: pointer;
     position: absolute;
-    bottom: 7px;
-    right: 2px;
+    top: 50%;
+    right: 5px;
+    transform: translate(0, -50%);
 }
 
 #buttonSubmit {

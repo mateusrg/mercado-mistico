@@ -15,53 +15,53 @@ app.get("/", (request, response) => {
 });
 
 app.get("/cadastro", (request, response) => {
-    response.sendFile("cadastro.html");
+    response.sendFile(path.join(__dirname, "..", "..", "frontend", "pages", "HTML", "cadastro.html"));
 });
 
 app.get("/carrinho", (request, response) => {
-    response.sendFile("carrinho_de_compras.html");
+    response.sendFile(path.join(__dirname, "..", "..", "frontend", "pages", "HTML", "carrinho_de_compras.html"));
 });
 
 app.get("/cartao_presente", (request, response) => {
-    response.sendFile("cartao_presente.html");
+    response.sendFile(path.join(__dirname, "..", "..", "frontend", "pages", "HTML", "cartao_presente.html"));
 });
 
 app.get("/catalogo", (request, response) => {
-    response.sendFile("catalogo_de_produtos.html");
+    response.sendFile(path.join(__dirname, "..", "..", "frontend", "pages", "HTML", "catalogo_de_produtos.html"));
 });
 
 app.get("/compra_cartao_presente", (request, response) => {
-    response.sendFile("compra_cartao_presente.html");
+    response.sendFile(path.join(__dirname, "..", "..", "frontend", "pages", "HTML", "compra_cartao_presente.html"));
 });
 
 app.get("/creditos", (request, response) => {
-    response.sendFile("creditos.html");
+    response.sendFile(path.join(__dirname, "..", "..", "frontend", "pages", "HTML", "creditos.html"));
 });
 
 app.get("/cupons", (request, response) => {
-    response.sendFile("cupons.html");
+    response.sendFile(path.join(__dirname, "..", "..", "frontend", "pages", "HTML", "cupons.html"));
 });
 
 app.get("/finalizar_compra", (request, response) => {
-    response.sendFile("finalizar_compra.html");
+    response.sendFile(path.join(__dirname, "..", "..", "frontend", "pages", "HTML", "finalizar_compra.html"));
 });
 
 app.get("/login", (request, response) => {
-    response.sendFile("login.html");
+    response.sendFile(path.join(__dirname, "..", "..", "frontend", "pages", "HTML", "login.html"));
 });
 
 app.get("/p/:id", (request, response) => {
-    response.sendFile("pagina_produto.html");
+    response.sendFile(path.join(__dirname, "..", "..", "frontend", "pages", "HTML", "pagina_produto.html"));
 });
 
 app.get("/personalizacao", (request, response) => {
-    response.sendFile("personalizacao.html");
+    response.sendFile(path.join(__dirname, "..", "..", "frontend", "pages", "HTML", "personalizacao.html"));
 });
 
 app.get("/registros", (request, response) => {
-    response.sendFile("registros.html");
+    response.sendFile(path.join(__dirname, "..", "..", "frontend", "pages", "HTML", "registros.html"));
 });
 
 app.get("/usuario", (request, response) => {
-    response.sendFile("usuario.html");
+    response.sendFile(path.join(__dirname, "..", "..", "frontend", "pages", "HTML", "usuario.html"));
 });
