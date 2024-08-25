@@ -142,5 +142,5 @@ function finalizarCompra() {
     const itensNaoSelecionados = itensCarrinhos.filter(produto => !idsParaExcluir.includes(itensCarrinhos.indexOf(produto)));
     console.log(itensNaoSelecionados);
     localStorage.setItem("carrinho", JSON.stringify({carrinho: itensNaoSelecionados}));
-    window.location.href = "./usuario.html";
+    window.location.href = "/usuario";
 }

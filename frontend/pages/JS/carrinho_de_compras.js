@@ -214,9 +214,9 @@ carrinho.forEach(produtoNoCarrinho => {
         <p class="preco">${produto["preco"]}</p>
     </div>
     <div class="interacoesProduto">
-        <button class="botaoPersonalizar">Personalizações</button>
         <div class="excluirE">
             <img src="../../assets/lixo.png" alt="Excluir" class="excluir" onclick="excluir('p${idProduto}')">
+            <img src="../../assets/coracao_cheio.png" alt="Favoritar" class="favoritar">
         </div>
     </div>
     `;
@@ -313,6 +313,6 @@ document.querySelector("#botaoFinalizarCompra").addEventListener("click", () => 
     if (idsSecoesSelecionadas.length > 0) {
         localStorage.setItem("indiceProdutosSelecionados", JSON.stringify(idsSecoesSelecionadas));
         localStorage.setItem("precoTotal", JSON.stringify(precoTotal));
-        window.location.href = './finalizar_compra.html';
+        window.location.href = '/finalizar_compra';
     }
 });

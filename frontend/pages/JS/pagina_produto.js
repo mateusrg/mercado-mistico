@@ -9,7 +9,7 @@ function verificarEstadoDeLogin() {
         // Usuário está deslogado, mostrar elementos do cabeçalho deslogado
         document.getElementById('botoes_header_direita_deslogado').style.display = 'flex';
         document.getElementById('botoes_header_direita_logado').style.display = 'none';
-        window.location.href = "./login.html"; // A pessoa precisa estar logada para poder comprar os produtos
+        window.location.href = "/login"; // A pessoa precisa estar logada para poder comprar os produtos
     }
 }
 

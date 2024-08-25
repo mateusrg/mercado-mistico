@@ -18,7 +18,7 @@ function verificarLogin () {
                 localStorage.setItem('estaLogado', 'true');
 
                 // Redirecionar para a página do usuário ou realizar outra ação desejada
-                window.location.href = 'usuario.html';
+                window.location.href = '/usuario';
             } else {
                 alert('Email ou senha incorretos.');
             }

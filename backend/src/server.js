@@ -42,6 +42,10 @@ app.get("/cupons", (request, response) => {
     response.sendFile(path.join(__dirname, "..", "..", "frontend", "pages", "HTML", "cupons.html"));
 });
 
+app.get("/favoritos", (request, response) => {
+    response.sendFile(path.join(__dirname, "..", "..", "frontend", "pages", "HTML", "favoritos.html"));
+});
+
 app.get("/finalizar_compra", (request, response) => {
     response.sendFile(path.join(__dirname, "..", "..", "frontend", "pages", "HTML", "finalizar_compra.html"));
 });

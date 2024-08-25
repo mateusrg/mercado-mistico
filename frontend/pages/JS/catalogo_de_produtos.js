@@ -26,7 +26,7 @@ function produtoTapete () {
         }
     }
     localStorage.setItem('produtoSelecionado', JSON.stringify(produto));
-    window.location.href = 'pagina_produto.html';
+    window.location.href = '/p/1';
 }
 
 function produtoFrasco () {
@@ -37,7 +37,7 @@ function produtoFrasco () {
         }
     }
     localStorage.setItem('produtoSelecionado', JSON.stringify(produto));
-    window.location.href = 'pagina_produto.html';
+    window.location.href = '/p/2';
 }
 
 function produtoBota () {
@@ -49,7 +49,7 @@ function produtoBota () {
         }
     }
     localStorage.setItem('produtoSelecionado', JSON.stringify(produto));
-    window.location.href = 'pagina_produto.html';
+    window.location.href = '/p/3';
 }
 
 function produtoPocao () {
@@ -60,7 +60,7 @@ function produtoPocao () {
         }
     }
     localStorage.setItem('produtoSelecionado', JSON.stringify(produto));
-    window.location.href = 'pagina_produto.html';
+    window.location.href = '/p/4';
 }
 
 function produtoAnel () {
@@ -72,7 +72,7 @@ function produtoAnel () {
         }
     }
     localStorage.setItem('produtoSelecionado', JSON.stringify(produto));
-    window.location.href = 'pagina_produto.html';
+    window.location.href = '/p/5';
 }
 
 function produtoBorracha () {
@@ -84,5 +84,5 @@ function produtoBorracha () {
         }
     }
     localStorage.setItem('produtoSelecionado', JSON.stringify(produto));
-    window.location.href = 'pagina_produto.html';
+    window.location.href = '/p/6';
 }

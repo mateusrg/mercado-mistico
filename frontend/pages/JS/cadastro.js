@@ -24,7 +24,7 @@ function verificarCadastro() {
 
         form.reset();  // Limpa o formulário após o envio
 
-        window.location.href = 'usuario.html';
+        window.location.href = '/usuario';
     });
 }
 

@@ -4,24 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Catálogo de Produtos - Mystic Market</title>
-    <link rel="stylesheet" href="../CSS/catalogo_de_produtos.css">
-    <link rel="stylesheet" href="../CSS/style.css">
-    <script defer src="../JS/catalogo_de_produtos.js"></script>
+    <link rel="stylesheet" href="./pages/CSS/catalogo_de_produtos.css">
+    <link rel="stylesheet" href="./pages/CSS/style.css">
+    <script defer src="./pages/JS/catalogo_de_produtos.js"></script>
 </head>
 <body>
     <header>
         <div id="header_esquerda">
-            <a href="../../index.html" class="auxHeader"><img src="../../assets/logo.png" alt="Logo" id="logo"></a>
-            <a href="../../index.html" id="nome_do_site">Mystic Market</h1></a>
+            <a href="/" class="auxHeader"><img src="../../assets/logo.png" alt="Logo" id="logo"></a>
+            <a href="/" id="nome_do_site">Mystic Market</h1></a>
         </div>
         <div id="botoes_header_direita_deslogado">
-            <form action="./cadastro.html"><button id="sign_up">Sign Up</button></form>
-            <form action="./login.html"><button id="login">Login</button></form>
+            <form action="/cadastro"><button id="sign_up">Sign Up</button></form>
+            <form action="/login"><button id="login">Login</button></form>
         </div>
         <div id="botoes_header_direita_logado">
-            <a href="./favoritos.html" class="auxHeader"><img src="../../assets/coracao.png" alt="Coração" id="botao_logado_coracao"></a>
-            <a href="./carrinho_de_compras.html" class="auxHeader"><img src="../../assets/carrinho.png" alt="Carrinho" id="botao_logado_carrinho"></a>
-            <a href="./usuario.html" class="auxHeader"><img src="../../assets/usuarioLogado.png" alt="Usuário Logado" id="botao_logado_usuario"></a>
+            <a href="/favoritos" class="auxHeader"><img src="../../assets/coracao.png" alt="Coração" id="botao_logado_coracao"></a>
+            <a href="/carrinho" class="auxHeader"><img src="../../assets/carrinho.png" alt="Carrinho" id="botao_logado_carrinho"></a>
+            <a href="/usuario" class="auxHeader"><img src="../../assets/usuarioLogado.png" alt="Usuário Logado" id="botao_logado_usuario"></a>
         </div>
     </header>
     <main>
@@ -51,24 +51,24 @@
                     <h5 class="tituloCategoria">Para voar</h5>
                     <div id="divParaVoar">
                         <section class="produto">
-                            <a onclick="produtoTapete()" href="pagina_produto.html">
+                            <a onclick="produtoTapete()" href="/p">
                                 <img src="../../assets/produtos/tapete.png" alt="Tapete Voador" class="imagemProduto">
                             </a>
                             <div class="titulo_produto">
                                 <div>
-                                    <a onclick="produtoTapete()" href="pagina_produto.html" class="nomeProduto">Tapete voador</a>
+                                    <a onclick="produtoTapete()" href="/p/1" class="nomeProduto">Tapete voador</a>
                                     <h6 class="precoProduto">Preço: R$ 67.319,99</h6>
                                 </div>
                                 <img src="../../assets/adicionar_carrinho.png" alt="carrinho" class="carrinho">
                             </div>
                         </section>
                         <section class="produto">
-                            <a onclick="produtoFrasco()" href="pagina_produto.html">
+                            <a onclick="produtoFrasco()" href="/p/2">
                                 <img src="../../assets/produtos/frasco.png" alt="Tapete Voador" class="imagemProduto">
                             </a>
                             <div class="titulo_produto">
                                 <div>
-                                    <a onclick="produtoFrasco()" href="pagina_produto.html" class="nomeProduto">Frasco de ar da lua</a>
+                                    <a onclick="produtoFrasco()" href="/p/2" class="nomeProduto">Frasco de ar da lua</a>
                                     <h6 class="precoProduto">Preço: R$ 5.749,99</h6>
                                 </div>
                                 <img src="../../assets/adicionar_carrinho.png" alt="carrinho" class="carrinho">
@@ -79,12 +79,12 @@
                 <section id="paraCorrer">
                     <h5 class="tituloCategoria">Para correr</h5>
                         <section class="produto">
-                            <a onclick="produtoBota()" href="pagina_produto.html">
+                            <a onclick="produtoBota()" href="/p/3">
                                 <img src="../../assets/produtos/bota.png" alt="Bota de supervelocidade" class="imagemProduto">
                             </a>
                             <div class="titulo_produto">
                                 <div>
-                                    <a onclick="produtoBota()" href="pagina_produto.html" class="nomeProduto" id="bota">Bota de supervelocidade</a>
+                                    <a onclick="produtoBota()" href="/p/3" class="nomeProduto" id="bota">Bota de supervelocidade</a>
                                     <h6 class="precoProduto">Preço: R$ 28.499,99</h6>
                                 </div>
                                 <img src="../../assets/adicionar_carrinho.png" alt="carrinho" class="carrinho">
@@ -94,12 +94,12 @@
                 <section id="paraCurar">
                     <h5 class="tituloCategoria">Para curar</h5>
                         <section class="produto">
-                            <a onclick="produtoPocao()" href="pagina_produto.html">
+                            <a onclick="produtoPocao()" href="/p/4">
                                 <img src="../../assets/produtos/pocao.png" alt="Poção da saúde" class="imagemProduto">
                             </a>
                             <div class="titulo_produto">
                                 <div>
-                                    <a onclick="produtoPocao()" href="pagina_produto.html" class="nomeProduto">Poção da saúde</a>
+                                    <a onclick="produtoPocao()" href="/p/4" class="nomeProduto">Poção da saúde</a>
                                     <h6 class="precoProduto">Preço: R$ 22.399,99</h6>
                                 </div>
                                 <img src="../../assets/adicionar_carrinho.png" alt="carrinho" class="carrinho">
@@ -109,12 +109,12 @@
                 <section id="paraTeletransportar">
                     <h5 class="tituloCategoria">Para teletransportar</h5>
                         <section class="produto">
-                            <a onclick="produtoAnel()" href="pagina_produto.html">
+                            <a onclick="produtoAnel()" href="/p/5">
                                 <img src="../../assets/produtos/anel.png" alt="Anel de teletransporte" class="imagemProduto">
                             </a>
                             <div class="titulo_produto">
                                 <div>
-                                    <a onclick="produtoAnel()" href="pagina_produto.html" class="nomeProduto" id="anel">Anel de teletransporte</a>
+                                    <a onclick="produtoAnel()" href="/p/5" class="nomeProduto" id="anel">Anel de teletransporte</a>
                                     <h6 class="precoProduto">Preço: R$ 215.999,99</h6>
                                 </div>
                                 <img src="../../assets/adicionar_carrinho.png" alt="carrinho" class="carrinho">
@@ -124,12 +124,12 @@
                 <section id="paraApagar">
                     <h5 class="tituloCategoria">Para apagar</h5>
                         <section class="produto">
-                            <a onclick="produtoBorracha()" href="pagina_produto.html">
+                            <a onclick="produtoBorracha()" href="/p/6">
                                 <img src="../../assets/produtos/borracha.png" alt="Borracha apaga-tudo" class="imagemProduto">
                             </a>
                             <div class="titulo_produto">
                                 <div>
-                                    <a onclick="produtoBorracha()" href="pagina_produto.html" class="nomeProduto" id="borracha">Borracha apaga-tudo</a>
+                                    <a onclick="produtoBorracha()" href="/p/6" class="nomeProduto" id="borracha">Borracha apaga-tudo</a>
                                     <h6 class="precoProduto">Preço: R$ 107.999,99</h6>
                                 </div>
                                 <img src="../../assets/adicionar_carrinho.png" alt="carrinho" class="carrinho">

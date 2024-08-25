@@ -29,5 +29,5 @@ function sairConta () {
 
     alert('Usuário Deslogado!');
 
-    window.location.href = 'login.html';
+    window.location.href = '/login';
 }

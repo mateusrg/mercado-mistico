@@ -39,12 +39,12 @@ main {
 }
 
 #imagem_centro {
-    height: 35vh;
+    height: 30vh;
 }
 
 #textinho_centro {
     font-family: "Inknut Antiqua";
-    font-size: 2vw;
+    font-size: 1.5vw;
     font-weight: 400;
     color: var(--branco);
 }
@@ -52,8 +52,8 @@ main {
 #botao_comprar_presente {
     color: var(--branco);
     background-color: var(--vermelhoAlaranjado);
-    border-radius: 50px;
+    border-radius: 5vh;
     padding: 2vh;
     font-family: "Inder";
-    font-size: 2vw;
+    font-size: 1.5vw;
 }

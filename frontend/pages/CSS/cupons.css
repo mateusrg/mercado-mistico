@@ -11,7 +11,7 @@ main {
 
 #titulo {
     font-family: "Inknut Antiqua";
-    font-size: 40px;
+    font-size: 6vh;
     font-weight: 400;
     padding: 3.2vh 0px 0px 8.9vw;
     color: var(--amarelo);
@@ -21,7 +21,7 @@ main {
 
 #secao_centro {
     width: 100vw;
-    display: flex;
+    display: none;
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -34,7 +34,7 @@ main {
 
 #textinho_centro {
     font-family: "Inknut Antiqua";
-    font-size: 28px;
+    font-size: 3vh;
     font-weight: 400;
     color: var(--branco);
     text-align: center;
@@ -64,7 +64,7 @@ main {
 
 .disponibilidade_cupons {
     font-family: "Inknut Antiqua";
-    font-size: 28px;
+    font-size: 3.5vh;
     font-weight: 400;
     color: var(--amarelo);
     position: relative;
@@ -75,10 +75,10 @@ main {
     content: "";
     position: absolute;
     width: 100%;
-    height: 4px;
+    height: 0.5vh;
     background: var(--vermelhoAlaranjado);
-    bottom: 8px;
-    left: 0px;
+    bottom: 1vh;
+    left: 0;
     transform: scaleX(0);
     transition: transform 0.3s ease;
 }
@@ -90,12 +90,94 @@ main {
 #sublinhadoDisponivel, #sublinhadoIndisponivel {
     position: absolute;
     width: 100%;
-    height: 4px;
+    height: 0.5vh;
     background: var(--vermelhoAlaranjado);
-    bottom: 8px;
-    left: 0px;
+    bottom: 1vh;
+    left: 0;
 }
 
 #sublinhadoIndisponivel {
     display: none;
+}
+
+#secao_disponivel {
+    display: none;
+    flex-direction: column;
+    padding-top: 4vh;
+    padding-left: 8vw;
+    align-items: flex-start;
+}
+
+#secao_nao_disponivel {
+    display: flex;
+    flex-direction: column;
+    padding-top: 4vh;
+    padding-left: 8vw;
+    align-items: flex-start;
+    opacity: 50%;
+}
+
+.divCupom {
+    border-top: 0.5vh solid var(--amarelo);
+    background-color: var(--verdeMusgo);
+    display: flex;
+    flex-direction: column;
+    padding: 1vh 1.8vw 1vh 1.8vw;
+    align-items: flex-start;
+    border-radius: 0.5vh;
+    height: 13vh;
+    width: 13vw;
+}
+
+#divcupomTitulo {
+    width: 13vw;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#valorCupom {
+    font-family: "Inknut Antiqua";
+    font-size: 2vh;
+    font-weight: 400;
+    color: var(--branco);
+}
+
+#mensagemExpira {
+    font-family: "Inknut Antiqua";
+    font-size: 1.7vh;
+    font-weight: 400;
+    color: var(--amarelo);
+}
+
+#valorMinimo {
+    font-family: "Inder";
+    font-size: 1vh;
+    font-weight: 400;
+    color: var(--branco);
+    margin-top: -1vh;
+    padding-bottom: 3vh;
+}
+
+.listaCupom {
+    padding-left: 0.8vw;
+}
+
+.codigoCupom {
+    font-family: "Inder";
+    font-size: 1.4vh;
+    font-weight: 400;
+    color: var(--branco);
+}
+
+.dataCupom {
+    font-family: "Inder";
+    font-size: 1.4vh;
+    font-weight: 400;
+    color: var(--branco);
+}
+
+.divCupom:hover {
+    cursor: pointer;
+    filter: brightness(120%);
 }

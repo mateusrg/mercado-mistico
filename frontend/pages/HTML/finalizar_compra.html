@@ -4,29 +4,45 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Finalizar Compra - Mystic Market</title>
-    <link rel="stylesheet" href="../CSS/finalizar_compra.css">
-    <link rel="stylesheet" href="../CSS/style.css">
-    <script defer src="../JS/finalizar_compra.js"></script>
+    <link rel="stylesheet" href="./pages/CSS/finalizar_compra.css">
+    <link rel="stylesheet" href="./pages/CSS/style.css">
+    <script defer src="./pages/JS/finalizar_compra.js"></script>
 </head>
 <body>
     <header>
         <div id="header_esquerda">
-            <a href="../../index.html" class="auxHeader"><img src="../../assets/logo.png" alt="Logo" id="logo"></a>
-            <a href="../../index.html" id="nome_do_site">Mystic Market</h1></a>
+            <a href="/" class="auxHeader"><img src="../../assets/logo.png" alt="Logo" id="logo"></a>
+            <a href="/" id="nome_do_site">Mystic Market</h1></a>
         </div>
         <div id="botoes_header_direita_deslogado">
-            <form action="./cadastro.html"><button id="sign_up">Sign Up</button></form>
-            <form action="./login.html"><button id="login">Login</button></form>
+            <form action="/cadastro"><button id="sign_up">Sign Up</button></form>
+            <form action="/login"><button id="login">Login</button></form>
         </div>
         <div id="botoes_header_direita_logado">
-            <a href="./favoritos.html" class="auxHeader"><img src="../../assets/coracao.png" alt="Coração" id="botao_logado_coracao"></a>
-            <a href="./carrinho_de_compras.html" class="auxHeader"><img src="../../assets/carrinho.png" alt="Carrinho" id="botao_logado_carrinho"></a>
-            <a href="./usuario.html" class="auxHeader"><img src="../../assets/usuarioLogado.png" alt="Usuário Logado" id="botao_logado_usuario"></a>
+            <a href="/favoritos" class="auxHeader"><img src="../../assets/coracao.png" alt="Coração" id="botao_logado_coracao"></a>
+            <a href="/carrinho" class="auxHeader"><img src="../../assets/carrinho.png" alt="Carrinho" id="botao_logado_carrinho"></a>
+            <a href="/usuario" class="auxHeader"><img src="../../assets/usuarioLogado.png" alt="Usuário Logado" id="botao_logado_usuario"></a>
         </div>
     </header>
     <main>
         <section class="secaoPrincipal">
-            <h2 id="tituloFinalizar">Finalizar Compra</h2>
+            <div id="divCredito">
+                <div id="subdivCredito">
+                    <p id="mensagemCredito">Só é possível resgatar os créditos em comprar de produtos para desconto</p>
+                    <img src="../../assets/fechar_amarelo.png" alt="Fechar" id="fechar">
+                </div>
+                <p id="totalCredito">Total: 340</p>
+                <p id="maximoCredito">Máximo disponível para compra: 100</p>
+                <div id="divinputCredito">
+                    <input type="text" placeholder="Insira os pontos" id="inputCredito">
+                    <button id="botaoTudo">Tudo</button>
+                </div>
+                <button id="botaoFeito">Feito</button>
+            </div>
+            <div id="divTitulo">
+                <img src="../../assets/seta_volta.png" alt="seta" class="seta_volta_com_titulo">
+                <h2 id="tituloFinalizar">Finalizar Compra</h2>
+            </div>
             <section id="secaoSecundaria">
                 <section id="secaoEsquerda">
                     <h4 class="textosMenores" id="resumo">Resumo do Pedido</h4>
@@ -41,15 +57,15 @@
                         <button id="botaoCodigo">Solicitar</button>
                     </div>
                     <section id="secaoEsquerdaLista">
-                        <a class="secaoEsquerdaLista_Item" href="./cupons.html">
+                        <a class="secaoEsquerdaLista_Item" href="/cupons">
                             <h4 class="textosMenores">Cupons</h4>
                             <img src="../../assets/seta.svg" alt="seta" class="seta">
                         </a>
-                        <a class="secaoEsquerdaLista_Item" href="./creditos.html">
+                        <a class="secaoEsquerdaLista_Item" href="/creditos">
                             <h4 class="textosMenores">Créditos</h4>
                             <img src="../../assets/seta.svg" alt="seta" class="seta">
                         </a>
-                        <a class="secaoEsquerdaLista_Item" href="./cartao_presente.html">
+                        <a class="secaoEsquerdaLista_Item" href="/cartao_presente">
                             <h4 class="textosMenores">Cartão presente</h4>
                             <img src="../../assets/seta.svg" alt="seta" class="seta">
                         </a>
