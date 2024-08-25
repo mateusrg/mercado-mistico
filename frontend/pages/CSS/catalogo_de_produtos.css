@@ -11,7 +11,9 @@ main {
 }
 
 #secao_titulo {
-    padding-left: 7.5rem;
+    display: flex;
+    align-items: flex-start;
+    gap: 2vw;
 }
 
 #principal {
