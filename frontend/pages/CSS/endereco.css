@@ -15,7 +15,7 @@ main {
     background-color: var(--verdeMusgo);
     width: 30vw;
     padding: 3vh 5vw;
-    display: flex;
+    display: none;
     flex-direction: column;
     gap: 1vh;
 }
@@ -65,6 +65,18 @@ label {
 }
 
 .inputEndereco {
+    font-family: "Inder";
+    font-weight: 400;
+    background-color: var(--verdeEscuro);
+    color: var(--branco);
+    width: 27.5vw;
+    font-size: 2.5vh;
+    height: 3vh;
+    border-radius: 0.5vh;
+    padding: 1vh 1vw;
+}
+
+.inputEnderecoPais {
     font-family: "Inder";
     font-weight: 400;
     background-color: var(--verdeEscuro);
@@ -182,9 +194,10 @@ label {
     font-weight: 400;
     font-size: 3vh;
     color: var(--branco);
-    padding: 2vh;
+    padding: 1.5vh;
     margin-right: 2vw;
     margin-bottom: 4vh;
+    border: 0.5vh solid var(--vermelhoAlaranjado);
 }
 
 #excluir:hover {

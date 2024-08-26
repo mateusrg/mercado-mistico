@@ -10,6 +10,8 @@ const connection = require("./db_config");
 
 app.use(express.static(path.join(__dirname, "..", "..", "frontend")));
 
+// Métodos GET
+
 app.get("/", (request, response) => {
     response.sendFile("index.html");
 });
@@ -44,6 +46,29 @@ app.get("/cupons", (request, response) => {
 
 app.get("/enderecos", (request, response) => {
     response.sendFile(path.join(__dirname, "..", "..", "frontend", "pages", "HTML", "endereco.html"));
+
+    const idUsuario = 1; // Substitua isso com o ID do usuário logado
+    const query = "SELECT * FROM Endereco WHERE idUsuario = ?";
+
+    connection.query(query, [idUsuario], (err, results) => {
+        if (err) {
+            response
+            .status(500)
+            .json({
+                success: false,
+                message: "Erro ao buscar endereços",
+                data: err
+            });
+        } else {
+            response
+            .status(200)
+            .json({
+                success: true,
+                message: "Endereços encontrados",
+                data: results
+            });
+        }
+    });
 });
 
 app.get("/favoritos", (request, response) => {
@@ -72,4 +97,43 @@ app.get("/registros", (request, response) => {
 
 app.get("/usuario", (request, response) => {
     response.sendFile(path.join(__dirname, "..", "..", "frontend", "pages", "HTML", "usuario.html"));
+});
+
+// Métodos POST
+
+app.post('/enderecos/adicionar', (request, response) => {
+    let params = [
+        request.body.cep,
+        request.body.endereco,
+        request.body.numero,
+        request.body.complemento,
+        request.body.bairro,
+        request.body.cidade,
+        request.body.estado,
+        1
+    ];
+    
+    console.log(params)
+
+    let query = "INSERT INTO Endereco(CEP, endereco, numeroResidencia, complemento, bairro, cidade, estado, idUsuario) VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
+    
+    connection.query(query, params, (err, results) => {
+        if (results) {
+            response
+            .status(201)
+            .json({
+                success: true,
+                message: "Endereço adicionado com sucesso",
+                data: results
+            });
+        } else {
+            response
+            .status(400)
+            .json({
+                success: false,
+                message: "Erro ao adicionar endereço",
+                data: err
+            });
+        }
+    });
 });
