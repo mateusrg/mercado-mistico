@@ -3,24 +3,39 @@ main {
     display: flex;
     justify-content: center;
     align-items: center;
+    position: relative;
+}
+
+#divBlur {
+    display: none;
+    background-color: var(--preto);
+    opacity: 30%;
+    z-index: 4;
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    top: 0;
+    left: 0;
 }
 
 #divCredito {
     z-index: 5;
-    background-color: var(--verdeEscuro);
+    background-color: var(--verdeOpaco);
     height: 50vh;
     width: 40vw;
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%); /* ajusta a posição da div movendo ela para cima e para a esquerda pela metade da sua largura e altura */
-    display: flex;
+    display: none;
     flex-direction: column;
+    justify-content: space-around;
     padding: 4vh;
+    border-radius: 1.5vh;
+    border-bottom: 0.5vh solid var(--preto);
 }
 
 #subdivCredito {
-    border: 1px solid red;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -35,6 +50,66 @@ main {
     border-radius: 0.5vh;
     color: var(--branco);
     padding: 1vh;
+    width: 30vw;
+}
+
+#fechar {
+    height: 7vh;
+    cursor: pointer;
+}
+
+#totalCredito {
+    font-family: "Inder";
+    font-weight: 400;
+    font-size: 2.3vh;
+    color: var(--branco);
+}
+
+#maximoCredito {
+    font-family: "Inder";
+    font-weight: 400;
+    font-size: 2.3vh;
+    color: var(--branco);
+}
+
+#divinputCredito {
+    display: flex;
+    justify-content: center;
+}
+
+#inputCredito {
+    font-family: "Inder";
+    font-weight: 400;
+    font-size: 2.5vh;
+    background-color: var(--verdeEscuro);
+    color: var(--branco);
+    height: 3.11vh;
+    width: 32.5vw;
+    padding: 1vh 1vw;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+
+#botaoTudo {
+    background-color: var(--verdeEscuro);
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    width: 5.5vw;
+    font-family: "Inder";
+    font-weight: 400;
+    font-size: 2.5vh;
+    color: var(--branco);
+}
+
+#botaoFeito {
+    background-color: var(--vermelhoAlaranjado);
+    border-radius: 1.5vh;
+    font-family: "Inder";
+    font-weight: 400;
+    font-size: 3vh;
+    color: var(--branco);
+    align-self: center;
+    padding: 2.5vh 2vw;
 }
 
 .secaoPrincipal {
