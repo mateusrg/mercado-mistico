@@ -1,31 +1,32 @@
-function verificarLogin () {
-    const form = document.getElementById('formLogin');
+async function realizarLogin(event) {
+    event.preventDefault();
 
-    form.addEventListener('submit', function(event) {
-        event.preventDefault();
+    const email = document.getElementById("email").value;
+    const senha = document.getElementById("password").value;
 
-        const email = document.getElementById('email').value;
-        const senha = document.getElementById('password').value;
+    const data = {
+        email,
+        senha
+    }
 
-        // Recuperar os dados do localStorage
-        const usuarioCadastrado = JSON.parse(localStorage.getItem('usuario'));
+    const response = await fetch('http://localhost:3000/login/verificar', {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data)
+    })
 
-        if (usuarioCadastrado) {
-            // Verificar se o email e senha correspondem aos dados armazenados
-            if (usuarioCadastrado.email === email && usuarioCadastrado.senha === senha) {
-                alert('Login bem-sucedido!');
+    const results = await response.json();
 
-                localStorage.setItem('estaLogado', 'true');
-
-                // Redirecionar para a página do usuário ou realizar outra ação desejada
-                window.location.href = '/usuario';
-            } else {
-                alert('Email ou senha incorretos.');
-            }
-        } else {
-            alert('Nenhum usuário cadastrado encontrado.');
-        }
-    });
+    if(results.success) {
+        alert(results.message);
+        localStorage.setItem('estaLogado', 'true');
+        localStorage.setItem('nomeUsuario', results.nome);
+        window.location.href = '/usuario';
+    } else {
+        alert(results.message);
+    }
 }
 
 function olhoFechado() {

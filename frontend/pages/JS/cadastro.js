@@ -1,31 +1,34 @@
-function verificarCadastro() {
-    const form = document.getElementById('formCadastro');
+async function cadastrarUsuario(event) {
+    event.preventDefault();
 
-    form.addEventListener('submit', function (event) {
-        event.preventDefault();
+    const nome = document.getElementById("name").value;
+    const email = document.getElementById("email").value;
+    const senha = document.getElementById("password").value;
 
-        const nome = document.getElementById('name').value;
-        const email = document.getElementById('email').value;
-        const senha = document.getElementById('password').value;
+    const data = {
+        nome,
+        email,
+        senha
+    }
 
-        // Armazenar os dados no localStorage
-        const usuario = {
-            nome: nome,
-            email: email,
-            senha: senha
-        };
+    const response = await fetch('http://localhost:3000/cadastro/adicionar', {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data)
+    })
 
-        // Converter objeto para JSON e armazenar no localStorage
-        localStorage.setItem('usuario', JSON.stringify(usuario));
+    const results = await response.json();
 
-        alert('Usuário cadastrado com sucesso!');
-
+    if(results.success) {
+        alert(results.message);
         localStorage.setItem('estaLogado', 'true');
-
-        form.reset();  // Limpa o formulário após o envio
-
+        localStorage.setItem('nomeUsuario', results.nome);
         window.location.href = '/usuario';
-    });
+    } else {
+        alert(results.message);
+    }
 }
 
 function olhoFechado() {

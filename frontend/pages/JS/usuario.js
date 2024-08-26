@@ -8,9 +8,9 @@ function verificarEstadoDeLogin() {
         document.getElementById('botoes_header_direita_deslogado').style.display = 'none';
         document.getElementById('botoes_header_direita_logado').style.display = 'flex';
 
-        const usuarioCadastrado = JSON.parse(localStorage.getItem('usuario'));
+        const nomeUsuario = localStorage.getItem('nomeUsuario');
 
-        document.getElementById('tituloBemVindo').innerText = 'Olá, ' + usuarioCadastrado.nome;
+        document.getElementById('tituloBemVindo').innerText = 'Olá, ' + nomeUsuario;
     } else {
         // Usuário está deslogado, mostrar elementos do cabeçalho deslogado
         document.getElementById('botoes_header_direita_deslogado').style.display = 'flex';
