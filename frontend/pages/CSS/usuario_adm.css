@@ -106,14 +106,14 @@ main {
     color: var(--verdeEscuro);
     font-family: "Inder";
     font-weight: 400;
-    font-size: 2.125vh;
+    font-size: 2.5vh;
 }
 
 .topicoDireita_Subtitulo_Branco {
     color: var(--branco);
     font-family: "Inder";
     font-weight: 400;
-    font-size: 2.125vh;
+    font-size: 2.5vh;
 }
 
 .topicoDireita_Subtitulo_Vermelho {
