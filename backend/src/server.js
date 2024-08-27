@@ -47,10 +47,10 @@ app.get("/cupons", (request, response) => {
     response.sendFile(path.join(__dirname, "..", "..", "frontend", "pages", "HTML", "cupons.html"));
 });
 
-app.get("/enderecos", autenticarToken, (request, response) => {
+app.get("/enderecos", (request, response) => {
     response.sendFile(path.join(__dirname, "..", "..", "frontend", "pages", "HTML", "endereco.html"));
 
-    const idUsuario = request.user.id; // Não sei se está certo, ver na aula
+    const idUsuario = 1; // Não sei se está certo, ver na aula
     const query = "SELECT * FROM Endereco WHERE idUsuario = ?";
 
     connection.query(query, [idUsuario], (err, results) => {
