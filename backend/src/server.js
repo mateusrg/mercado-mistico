@@ -16,6 +16,10 @@ app.get("/", (request, response) => {
     response.sendFile("index.html");
 });
 
+app.get("/cadastro_adm", (request, response) => {
+    response.sendFile(path.join(__dirname, "..", "..", "frontend", "pages", "HTML", "cadastrar_adm.html"));
+});
+
 app.get("/cadastro", (request, response) => {
     response.sendFile(path.join(__dirname, "..", "..", "frontend", "pages", "HTML", "cadastro.html"));
 });
@@ -97,6 +101,10 @@ app.get("/registros", (request, response) => {
 
 app.get("/usuario", (request, response) => {
     response.sendFile(path.join(__dirname, "..", "..", "frontend", "pages", "HTML", "usuario.html"));
+});
+
+app.get("/usuario_adm", (request, response) => {
+    response.sendFile(path.join(__dirname, "..", "..", "frontend", "pages", "HTML", "usuario_adm.html"));
 });
 
 // Métodos POST
