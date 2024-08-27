@@ -15,7 +15,8 @@ CREATE TABLE Usuario (
     nome VARCHAR(80) NOT NULL,
     email VARCHAR(80) NOT NULL UNIQUE,
     senha VARCHAR(30) NOT NULL,
-    administrador BIT NOT NULL,
+    creditos INT NOT NULL,
+    administrador BIT NOT NULL DEFAULT 0,
     idEnderecoPadrao INT
 	-- O idEnderecoPadrao é transformado em FK depois num alter table, não dá pra criar direto porque tem referência circular
 );

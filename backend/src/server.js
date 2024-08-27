@@ -1,6 +1,9 @@
 const express = require("express");
 const cors = require("cors");
 const path = require("path");
+const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
+const chaveCriptografia = "ok-jfnxbmdukl-hzfnbd-sifkj"
 const porta = 3000;
 const app = express();
 app.use(cors());
@@ -48,10 +51,10 @@ app.get("/cupons", (request, response) => {
     response.sendFile(path.join(__dirname, "..", "..", "frontend", "pages", "HTML", "cupons.html"));
 });
 
-app.get("/enderecos", (request, response) => {
+app.get("/enderecos", autenticarToken, (request, response) => {
     response.sendFile(path.join(__dirname, "..", "..", "frontend", "pages", "HTML", "endereco.html"));
 
-    const idUsuario = 1; // Substitua isso com o ID do usuário logado
+    const idUsuario = request.user.id; // Não sei se está certo, ver na aula
     const query = "SELECT * FROM Endereco WHERE idUsuario = ?";
 
     connection.query(query, [idUsuario], (err, results) => {
@@ -109,7 +112,7 @@ app.get("/usuario_adm", (request, response) => {
 
 // Métodos POST
 
-app.post('/enderecos/adicionar', (request, response) => {
+app.post('/enderecos/adicionar', autenticarToken, (request, response) => {
     let params = [
         request.body.cep,
         request.body.endereco,
@@ -118,7 +121,7 @@ app.post('/enderecos/adicionar', (request, response) => {
         request.body.bairro,
         request.body.cidade,
         request.body.estado,
-        1
+        1 // Aqui é o ID do usuário, não é esse 1
     ];
 
     let query = "INSERT INTO Endereco(CEP, endereco, numeroResidencia, complemento, bairro, cidade, estado, idUsuario) VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
@@ -144,11 +147,12 @@ app.post('/enderecos/adicionar', (request, response) => {
     });
 });
 
-app.post('/cadastro/adicionar', (request, response) => {
+app.post('/cadastro/adicionar', async (request, response) => {
+    const senhaCriptografada = await bcrypt.hash(request.body.senha, 10);
     let params = [
         request.body.nome,
         request.body.email,
-        request.body.senha,
+        senhaCriptografada,
         0
     ];
 
@@ -180,8 +184,9 @@ app.post('/login/verificar', (request, response) => {
     const { email, senha } = request.body;
 
     const query = 'SELECT * FROM Usuario WHERE email = ?';
+    const params = [email]
     
-    connection.query(query, [email], (err, results) => {
+    connection.query(query, params, async (err, results) => {
         if (err) {
             console.error("Erro no servidor:", err);
             return response
@@ -204,14 +209,16 @@ app.post('/login/verificar', (request, response) => {
         }
         
         const user = results[0];
+        const senhaValida = await bcrypt.compare(senha, user.senha);
         
-        if (user.senha === senha) {
+        if (senhaValida) {
+            const token = jwt.sign({id: user.idUsuario, nome: user.nome}, chaveCriptografia, {expiresIn: "1h"});
             return response
                 .status(200)
                 .json({
                     success: true,
                     message: 'Login bem-sucedido',
-                    data: results,
+                    token: token, // tirei o data: results, pq não faz sentido criptografar a senha e devolvê-la pro client
                     nome: user.nome
                 });
         } else {
@@ -219,9 +226,35 @@ app.post('/login/verificar', (request, response) => {
                 .status(401)
                 .json({
                     success: false,
-                    message: 'Senha incorreta',
-                    data: err
+                    message: 'Senha incorreta'
                 });
         }
     });
 });
+
+function autenticarToken(request, response, next) {
+    const authHeader = request.headers['authorization'];
+    const token = authHeader && authHeader.split(' ')[1];
+
+    if (token == null) {
+        return response
+        .status(401)
+        .json({
+            success: false,
+            message: 'Token não encontrado'
+        });
+    }
+
+    jwt.verify(token, chaveCriptografia, (err, user) => {
+        if (err) {
+            return response
+            .status(403)
+            .json({
+                success: false,
+                message: 'Token inválido'
+            });
+        }
+        request.user = user;
+        next();
+    });
+}
