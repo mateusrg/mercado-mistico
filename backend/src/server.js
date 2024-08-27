@@ -10,6 +10,8 @@ const connection = require("./db_config");
 
 app.use(express.static(path.join(__dirname, "..", "..", "frontend")));
 
+// Métodos GET
+
 app.get("/", (request, response) => {
     response.sendFile("index.html");
 });
@@ -42,6 +44,33 @@ app.get("/cupons", (request, response) => {
     response.sendFile(path.join(__dirname, "..", "..", "frontend", "pages", "HTML", "cupons.html"));
 });
 
+app.get("/enderecos", (request, response) => {
+    response.sendFile(path.join(__dirname, "..", "..", "frontend", "pages", "HTML", "endereco.html"));
+
+    const idUsuario = 1; // Substitua isso com o ID do usuário logado
+    const query = "SELECT * FROM Endereco WHERE idUsuario = ?";
+
+    connection.query(query, [idUsuario], (err, results) => {
+        if (err) {
+            response
+            .status(500)
+            .json({
+                success: false,
+                message: "Erro ao buscar endereços",
+                data: err
+            });
+        } else {
+            response
+            .status(200)
+            .json({
+                success: true,
+                message: "Endereços encontrados",
+                data: results
+            });
+        }
+    });
+});
+
 app.get("/favoritos", (request, response) => {
     response.sendFile(path.join(__dirname, "..", "..", "frontend", "pages", "HTML", "favoritos.html"));
 });
@@ -68,4 +97,123 @@ app.get("/registros", (request, response) => {
 
 app.get("/usuario", (request, response) => {
     response.sendFile(path.join(__dirname, "..", "..", "frontend", "pages", "HTML", "usuario.html"));
+});
+
+// Métodos POST
+
+app.post('/enderecos/adicionar', (request, response) => {
+    let params = [
+        request.body.cep,
+        request.body.endereco,
+        request.body.numero,
+        request.body.complemento,
+        request.body.bairro,
+        request.body.cidade,
+        request.body.estado,
+        1
+    ];
+
+    let query = "INSERT INTO Endereco(CEP, endereco, numeroResidencia, complemento, bairro, cidade, estado, idUsuario) VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
+    
+    connection.query(query, params, (err, results) => {
+        if (results) {
+            response
+            .status(201)
+            .json({
+                success: true,
+                message: "Endereço adicionado com sucesso",
+                data: results
+            });
+        } else {
+            response
+            .status(400)
+            .json({
+                success: false,
+                message: "Erro ao adicionar endereço",
+                data: err
+            });
+        }
+    });
+});
+
+app.post('/cadastro/adicionar', (request, response) => {
+    let params = [
+        request.body.nome,
+        request.body.email,
+        request.body.senha,
+        0
+    ];
+
+    let query = "INSERT INTO Usuario(nome, email, senha, administrador) VALUES (?, ?, ?, ?);";
+    
+    connection.query(query, params, (err, results) => {
+        if (results) {
+            response
+            .status(201)
+            .json({
+                success: true,
+                message: "Usuário cadastrado com sucesso",
+                data: results,
+                nome: request.body.nome
+            });
+        } else {
+            response
+            .status(400)
+            .json({
+                success: false,
+                message: "Erro ao cadastrar usuário",
+                data: err
+            });
+        }
+    });
+});
+
+app.post('/login/verificar', (request, response) => {
+    const { email, senha } = request.body;
+
+    const query = 'SELECT * FROM Usuario WHERE email = ?';
+    
+    connection.query(query, [email], (err, results) => {
+        if (err) {
+            console.error("Erro no servidor:", err);
+            return response
+                .status(500)
+                .json({
+                    success: false,
+                    message: 'Erro no servidor',
+                    data: err
+                });
+        }
+        
+        if (results.length === 0) {
+            return response
+                .status(401)
+                .json({
+                    success: false,
+                    message: 'Email não encontrado',
+                    data: err
+                });
+        }
+        
+        const user = results[0];
+        
+        if (user.senha === senha) {
+            return response
+                .status(200)
+                .json({
+                    success: true,
+                    message: 'Login bem-sucedido',
+                    data: results,
+                    nome: user.nome
+                });
+        } else {
+            return response
+                .status(401)
+                .json({
+                    success: false,
+                    message: 'Senha incorreta',
+                    data: err
+                });
+        }
+    });
 });
