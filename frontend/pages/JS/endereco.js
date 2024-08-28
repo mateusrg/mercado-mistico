@@ -28,12 +28,14 @@ function marcarCheckbox() {
 function botaoAdicionar() {
     document.getElementById('secao_adicionar_endereco').style.display = 'flex';
     document.getElementById('adicionarEndereco').style.backgroundColor = 'var(--azulEscuro)';
+    document.body.style.overflow = "hidden"; // Oculta a barra de rolagem
 }
 
 function botaoFechar () {
     document.getElementById('secao_adicionar_endereco').style.display = 'none';
     document.querySelectorAll('.inputEndereco').forEach(input => input.value = '');
     document.getElementById('adicionarEndereco').style.backgroundColor = 'var(--vermelhoAlaranjado)';
+    document.body.style.overflow = "auto"; // Restaura a barra de rolagem
 }
 
 async function enviar(event) {
@@ -100,39 +102,4 @@ document.getElementById("cepInput").addEventListener("blur", async function() {
         alert("CEP inválido. Deve conter 8 dígitos.");
         document.getElementById("cepInput").value = '';
     }
-});
-
-document.addEventListener("DOMContentLoaded", () => {
-    fetch("http://localhost:3000/enderecos")
-        .then(response => response.json())
-        .then(data => {
-            if (data.success) {
-                const secaoEnderecos = document.getElementById("secao_enderecos");
-
-                data.data.forEach(endereco => {
-                    const divCaixa = document.createElement("div");
-                    divCaixa.classList.add("divCaixa");
-
-                    divCaixa.innerHTML = `
-                        <div class="subdivCaixa_cima">
-                            <h4 class="textosMenores" id="nomeCompleto">${endereco.nomeCompleto}</h4>
-                            <h4 class="textosMenores" id="numeroCelular">${endereco.numeroCelular}</h4>
-                        </div>
-                        <h4 class="textosMenores" id="endereco">${endereco.endereco}, ${endereco.numeroResidencia} - ${endereco.bairro}</h4>
-                        <div class="subdivCaixa_baixo">
-                            <h4 class="textosMenores" id="cep">${endereco.CEP}</h4>
-                            <div id="subdivBotao">
-                                <img src="../../assets/lixo.png" alt="Excluir" id="excluir">
-                                <h4 onclick="mudarTexto()" class="textosMenores" id="editar">Editar</h4>
-                            </div>
-                        </div>
-                    `;
-
-                    secaoEnderecos.appendChild(divCaixa);
-                });
-            } else {
-                console.error("Erro ao carregar endereços:", data.message);
-            }
-        })
-        .catch(err => console.error("Erro na requisição:", err));
 });
