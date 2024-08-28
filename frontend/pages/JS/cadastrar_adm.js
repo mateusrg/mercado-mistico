@@ -24,3 +24,9 @@ function marcarCheckbox() {
         img.src = "../../assets/checkbox_azul_marcado.png";
     }
 }
+
+function adicionarAdm() {
+    let checkbox = document.getElementById('checkbox').src;
+
+    // if (src.endsWith("checkbox_azul_marcado.png"))
+}

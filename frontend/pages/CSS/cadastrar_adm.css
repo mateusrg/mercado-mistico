@@ -9,15 +9,16 @@ main {
 }
 
 #lista_adm {
-    width: 40vw;
+    width: 50vw;
 }
 
 #divTitulo {
     display: flex;
-    justify-content: center;
     align-items: center;
     align-self: flex-start;
     padding-top: 2vh;
+    padding-left: 5vw;
+    padding-bottom: 6vh;
 }
 
 #titulo_amarelo {
@@ -39,12 +40,12 @@ main {
     align-items: flex-start;
     gap: 1.5vh;
     padding-left: 2vw;
-    padding-bottom: 4vh;
+    padding-bottom: 5vh;
 }
 
 .label_lista {
     font-family: "Inder";
-    font-size: 1vw;
+    font-size: 1.5vw;
     font-weight: 400;
     color: var(--branco);
 }
@@ -53,7 +54,7 @@ main {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    width: 35vw;
+    width: 40vw;
 }
 
 .email {
@@ -62,8 +63,8 @@ main {
     background-color: var(--ciano);
     color: var(--branco);
     padding: 1vh 1vw;
-    width: 25vw;
-    font-size: 2.5vh;
+    width: 30vw;
+    font-size: 3vh;
     height: 4vh;
     border-bottom: 2px solid var(--preto);
     border-radius: 0.5rem;
@@ -73,7 +74,7 @@ main {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    width: 5.5vw;
+    width: 6vw;
 }
 
 .imagem_excluir {
@@ -82,7 +83,7 @@ main {
 
 .texto_excluir {
     font-family: "Inder";
-    font-size: 1vw;
+    font-size: 1.2vw;
     font-weight: 400;
     color: var(--branco);
 }
@@ -103,7 +104,7 @@ main {
 
 #titulo_branco {
     font-family: "Inknut Antiqua";
-    font-size: 1.5vw;
+    font-size: 2.2vw;
     font-weight: 400;
     color: var(--branco);
 }
@@ -118,7 +119,7 @@ main {
 
 .label_adicionar {
     font-family: "Inder";
-    font-size: 1vw;
+    font-size: 1.5vw;
     font-weight: 400;
     color: var(--branco);
     padding-left: 1vw;
@@ -130,19 +131,19 @@ main {
     background-color: var(--ciano);
     color: var(--branco);
     padding: 1vh 1vw;
-    width: 25vw;
-    font-size: 2.5vh;
-    height: 4vh;
+    width: 30vw;
+    font-size: 3vh;
+    height: 5vh;
     border-bottom: 2px solid var(--preto);
     border-radius: 0.5rem;
 }
 
 #texto_adicionar {
     font-family: "Inder";
-    font-size: 0.6vw;
+    font-size: 1vw;
     font-weight: 400;
     color: var(--branco);
-    width: 26vw;
+    width: 30vw;
 }
 
 #div_selecionar {
@@ -155,12 +156,12 @@ main {
 }
 
 #checkbox {
-    height: 4.5vh;
+    height: 5vh;
 }
 
 #texto_checkbox {
     font-family: "Inder";
-    font-size: 0.8vw;
+    font-size: 2.5vh;
     font-weight: 400;
     color: var(--branco);
 }
@@ -175,7 +176,7 @@ main {
     font-family: "Inknut Antiqua";
     font-weight: 400;
     color: var(--branco);
-    font-size: 2.25vh;
+    font-size: 2.75vh;
     margin-bottom: 4.5vh;
     margin-right: 2.5vw;
     display: flex;
