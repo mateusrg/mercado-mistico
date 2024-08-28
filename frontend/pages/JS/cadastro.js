@@ -11,20 +11,20 @@ async function cadastrarUsuario(event) {
         senha
     }
 
-    const response = await fetch('http://localhost:3000/cadastro/adicionar', {
+    const response = await fetch('http://localhost:3000/usuario/cadastrar', {
         method: "POST",
         headers: {
-            "Content-Type": "application/json",
+            "Content-Type": "application/json"
         },
         body: JSON.stringify(data)
-    })
+    });
 
     const results = await response.json();
 
     if(results.success) {
-        alert(results.message);
-        localStorage.setItem('estaLogado', 'true');
-        localStorage.setItem('nomeUsuario', results.nome);
+        // alert(results.message);
+        // localStorage.setItem('estaLogado', 'true');
+        // localStorage.setItem('nomeUsuario', results.nome);
         window.location.href = '/usuario';
     } else {
         alert(results.message);

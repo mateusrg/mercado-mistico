@@ -20,3 +20,11 @@ if (localStorage.getItem("carrinho") === null) {
 };
 
 verificarEstadoDeLogin();
+
+
+let dados;
+fetch("localhost:3000")
+.then(response => response.json())
+.then(data => dados = data);
+
+console.log(dados);
