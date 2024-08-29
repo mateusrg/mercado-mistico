@@ -48,7 +48,23 @@
                     <p id="slogan">Esqueceu a senha?</p>
                 </div>
                 <button onclick="realizarLogin(event)" type="submit" id="buttonSubmit">Conecte-se</button>
-            </form>          
+            </form>        
+            <!-- Dropdown -->
+            <div class="dropdown">
+                <button id="botaoQuantidade" class="botao-quantidade" onclick="abrirDropdown()">Quantidade: 1 <img src="../../assets/seta.svg" alt="Seta" id="seta"></button>
+                <div id="itensDropdown" class="itens-dropdown">
+                    <a href="#" onclick="selecionarQuantidade(1)">1</a>
+                    <a href="#" onclick="selecionarQuantidade(2)">2</a>
+                    <a href="#" onclick="selecionarQuantidade(3)">3</a>
+                    <a href="#" onclick="selecionarQuantidade(4)">4</a>
+                    <a href="#" onclick="selecionarQuantidade(5)">5</a>
+                    <a href="#" onclick="selecionarQuantidade(6)">6</a>
+                    <a href="#" onclick="selecionarQuantidade(7)">7</a>
+                    <a href="#" onclick="selecionarQuantidade(8)">8</a>
+                    <a href="#" onclick="selecionarQuantidade(9)">9</a>
+                    <a href="#" onclick="selecionarQuantidade(10)">10</a>
+                </div>
+            </div>
         </section>
     </main>
 </body>

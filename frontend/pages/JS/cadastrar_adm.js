@@ -44,8 +44,8 @@ function adicionarAdm() {
                 <label class="label_lista" for="email">Administrador ${numeroAdm}</label>
                 <div class="input">
                     <input type="email" class="email" name="email" value="${email}" placeholder="Email" readonly>
-                    <div class="div_excluir">
-                        <img src="../../assets/lixo.png" alt="Excluir" class="imagem_excluir" onclick="excluirAdm(this)">
+                    <div class="div_excluir" onclick="excluirAdm(this)">
+                        <img src="../../assets/lixo.png" alt="Excluir" class="imagem_excluir">
                         <h4 class="texto_excluir">Excluir</h4>
                     </div>
                 </div>
@@ -53,8 +53,9 @@ function adicionarAdm() {
 
             listaAdm.appendChild(novaEntrada);
 
-            // Limpa o input de email
-            emailInput.value = '';
+            // Limpa o input de email e checkbox
+            document.querySelector('.email_adicionar').value = '';
+            checkbox.src = "../../assets/checkbox_azul.png";
         } else {
             alert("Insira um email válido!");
         }
