@@ -1,0 +1,282 @@
+body {
+    background-color: var(--azulEscuro);
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+}
+
+#secao_criar_categoria {
+    z-index: 5;
+    background-color: var(--verdeOpaco);
+    height: 38vh;
+    width: 28vw;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* ajusta a posição da div movendo ela para cima e para a esquerda pela metade da sua largura e altura */
+    display: none;
+    flex-direction: column;
+    justify-content: space-around;
+    padding: 4vh;
+    border-radius: 0.5vh;
+    border-bottom: 0.5vh solid var(--preto);
+}
+
+#div_criar_categoria {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 2vw;
+}
+
+#tituloCategoria {
+    background-color: var(--verdeMusgo);
+    color: var(--branco);
+    font-family: "Inknut Antiqua";
+    font-weight: 400;
+    font-size: 1.5vw;
+    padding: 1vh 3vw;
+}
+
+#fecharCategoria {
+    height: 6.5vh;
+}
+
+#fecharCategoria:hover {
+    cursor: pointer;
+    filter: brightness(120%);
+}
+
+#formCategoria {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    height: 20vh;
+}
+
+#categoranovaInput {
+    font-family: "Inder";
+    font-weight: 400;
+    background-color: var(--verdeEscuro);
+    color: var(--branco);
+    width: 26vw;
+    font-size: 2.5vh;
+    height: 6vh;
+    border-radius: 0.5vh;
+    padding: 1vh 1vw;
+}
+
+#botaoFeito {
+    background-color: var(--vermelhoAlaranjado);
+    border-radius: 1.5vh;
+    font-family: "Inder";
+    font-weight: 400;
+    font-size: 4vh;
+    color: var(--branco);
+    align-self: center;
+    padding: 2vh 2vw;
+}
+
+#divTitulo {
+    display: flex;
+    align-items: center;
+    align-self: flex-start;
+    padding: 1.7vh 3.2vw;
+}
+
+#tituloCadastro {
+    color: var(--amarelo);
+    font-family: "Inknut Antiqua";
+    font-weight: 400;
+    font-size: 3.3vh;
+}
+
+#formCadastro {
+    margin-left: -9vw;
+    width: 80vw;
+    display: flex;
+    gap: 2vw;
+}
+
+label {
+    color: var(--branco);
+    font-family: "Inder";
+    font-size: 2.5vh;
+    font-weight: 400;
+}
+
+.entradas_imagem {
+    width: 20vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3vh;
+}
+
+#imagemInput {
+    display: none; /* Oculta o input de arquivo */
+}
+
+#imagemPreview {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: "Inder";
+    font-weight: 400;
+    background-color: var(--ciano);
+    color: var(--branco);
+    font-size: 2.5vh;
+    border-radius: 0.5vh;
+    padding: 7vh 3.5vw;
+    cursor: pointer;
+    text-align: center;
+    background-size: 70%;
+    background-position: center;
+    background-repeat: no-repeat;
+    aspect-ratio: 1 / 1; /* Mantém a proporção 1:1 (quadrado) */
+    width: 12vw; /* Largura fixa para o quadrado */
+    height: 12vw; /* Altura fixa para o quadrado */
+}
+
+#botaoCadastrar {
+    background-color: var(--vermelhoAlaranjado);
+    border-radius: 1.5vh;
+    font-family: "Inder";
+    font-weight: 400;
+    font-size: 2vh;
+    color: var(--branco);
+    align-self: center;
+    padding: 2vh 2vw;
+}
+
+#secao_form_direita {
+    width: 46vw;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding-left: 4vw;
+    gap: 2vh;
+}
+
+.entradas {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5vh;
+}
+
+.entradas > input {
+    font-family: "Inder";
+    font-weight: 400;
+    background-color: var(--ciano);
+    color: var(--branco);
+    width: 48vw;
+    font-size: 2.5vh;
+    height: 3vh;
+    border-radius: 0.5vh;
+    padding: 1vh 1vw;
+}
+
+#descricaoInput {
+    font-family: "Inder";
+    font-weight: 400;
+    background-color: var(--ciano);
+    color: var(--branco);
+    width: 48vw;
+    font-size: 2.5vh;
+    border-radius: 0.5vh;
+    padding: 1vh 1vw;
+    overflow-y: auto; /* Adiciona uma barra de rolagem se o texto exceder o tamanho */
+    height: 10vh; /* Altura maior para o textarea */
+}
+
+#categoriaInput {
+    font-family: "Inder";
+    font-weight: 400;
+    font-size: 2.5vh;
+    color: var(--branco);
+    background-color: transparent;
+    height: 3vh;
+    width: 48vw;
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 1vh 1vw;
+}
+
+#divSeta {
+    font-family: "Inder";
+    font-weight: 400;
+    background-color: var(--ciano);
+    color: var(--branco);
+    width: 48vw;
+    font-size: 2.5vh;
+    height: 3vh;
+    border-radius: 0.5vh;
+    padding: 1vh 1vw;
+    position: relative;
+}
+
+#seta {
+    filter: invert(100%);
+    height: 60%;
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    right: 0.5vw;
+    transform: translate(0, -50%);
+}
+
+/* Largura da barra de rolagem */
+.no-scrollbar::-webkit-scrollbar {
+    width: 0px;
+}
+
+/* Dropdown */
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+#itensDropdown {
+    display: none;
+    position: absolute;
+    width: 100%;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 5;
+    background-color: var(--ciano);
+}
+
+.itens-dropdown > a {
+    background-color: var(--ciano);
+    color: var(--branco);
+    padding: 1vh 1.5vw;
+    text-decoration: none;
+    display: block;
+}
+
+.itens-dropdown > a:hover {
+    filter: brightness(130%);
+}
+
+.itens-dropdown > a:last-child {
+    background-color: var(--verdeMusgo);
+    border-bottom-left-radius: 0.5vh;
+    border-bottom-right-radius: 0.5vh;
+}
+
+.show {
+    display: block;
+}
+
+/* Remover as setas de aumento/diminuição em inputs do tipo number */
+input[type=number]::-webkit-outer-spin-button,
+input[type=number]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}

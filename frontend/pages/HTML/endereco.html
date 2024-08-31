@@ -41,31 +41,31 @@
                 </div>
                 <div class="entradas">
                     <label for="cep">CEP*</label>
-                    <input type="number" class="inputEndereco" id="cepInput" name="cep" placeholder="Ex. 12345000" maxlength="8" required>
+                    <input type="text" class="inputEndereco" id="cepInput" name="cep" maxlength = "9" placeholder="Ex.: 12345-678" oninput="formatarCEP(this)" required>
                 </div>
                 <div class="entradas">
                     <label for="endereco">Endereço*</label>
-                    <input type="text" class="inputEndereco" id="enderecoInput" name="endereco" required>
+                    <input type="text" class="inputEndereco" id="enderecoInput" name="endereco" maxlength="100" required>
                 </div>
                 <div class="entradas">
                     <label for="numero">Número da Residência*</label>
-                    <input type="text" class="inputEndereco" id="numeroInput" name="numero" placeholder="Número ou s/n" required>
+                    <input type="text" class="inputEndereco" id="numeroInput" name="numero" maxlength="60" placeholder="Número ou s/n" required>
                 </div>
                 <div class="entradas">
                     <label for="complemento">Complemento (opcional)</label>
-                    <input type="text" class="inputEndereco" id="complementoInput" name="complemento" placeholder="Apartamento, andar, casa">
+                    <input type="text" class="inputEndereco" id="complementoInput" name="complemento" maxlength="14" placeholder="Apartamento, andar, casa">
                 </div>
                 <div class="entradas">
                     <label for="bairro">Bairro*</label>
-                    <input type="text" class="inputEndereco" id="bairroInput" name="bairro" required>
+                    <input type="text" class="inputEndereco" id="bairroInput" name="bairro" maxlength="45" required>
                 </div>
                 <div class="entradas">
                     <label for="cidade">Cidade*</label>
-                    <input type="text" class="inputEndereco" id="cidadeInput" name="cidade" placeholder="Insira o CEP para preencher a cidade" readonly>
+                    <input type="text" class="inputEndereco" id="cidadeInput" name="cidade" maxlength="100" placeholder="Insira o CEP para preencher a cidade" readonly>
                 </div>
                 <div class="entradas">
                     <label for="estado">Estado*</label>
-                    <input type="text" class="inputEndereco" id="estadoInput" name="estado" placeholder="Insira o CEP para preencher o estado" readonly>
+                    <input type="text" class="inputEndereco" id="estadoInput" name="estado" maxlength="2" placeholder="Insira o CEP para preencher o estado" readonly>
                 </div>
                 <div id="divSelecionar">
                     <img src="../../assets/checkbox_marcado.png" alt="Checkbox" id="imagemCheckbox" onclick="marcarCheckbox()">

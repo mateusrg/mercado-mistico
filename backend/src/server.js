@@ -23,6 +23,10 @@ app.get("/cadastro_adm", (request, response) => {
     response.sendFile(path.join(__dirname, "..", "..", "frontend", "pages", "HTML", "cadastrar_adm.html"));
 });
 
+app.get("/cadastro_produto", (request, response) => {
+    response.sendFile(path.join(__dirname, "..", "..", "frontend", "pages", "HTML", "cadastrar_produto.html"));
+});
+
 app.get("/cadastro", (request, response) => {
     response.sendFile(path.join(__dirname, "..", "..", "frontend", "pages", "HTML", "cadastro.html"));
 });

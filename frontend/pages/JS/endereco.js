@@ -28,14 +28,14 @@ function marcarCheckbox() {
 function botaoAdicionar() {
     document.getElementById('secao_adicionar_endereco').style.display = 'flex';
     document.getElementById('adicionarEndereco').style.backgroundColor = 'var(--azulEscuro)';
-    document.body.style.overflow = "hidden"; // Oculta a barra de rolagem
+    document.body.classList.add('no-scrollbar');
 }
 
 function botaoFechar () {
     document.getElementById('secao_adicionar_endereco').style.display = 'none';
     document.querySelectorAll('.inputEndereco').forEach(input => input.value = '');
     document.getElementById('adicionarEndereco').style.backgroundColor = 'var(--vermelhoAlaranjado)';
-    document.body.style.overflow = "auto"; // Restaura a barra de rolagem
+    document.body.classList.remove('no-scrollbar');
 }
 
 async function enviar(event) {
@@ -78,28 +78,35 @@ async function enviar(event) {
     }
 }
 
+function formatarCEP(campo) {
+    let cep = campo.value.replace(/\D/g, '');
+    if (cep.length > 5) {
+        cep = cep.slice(0, 5) + '-' + cep.slice(5);
+    }
+    campo.value = cep;
+}
+
 document.getElementById("cepInput").addEventListener("blur", async function() {
     let cep = document.getElementById("cepInput").value;
 
-    if (cep.length === 8) {
-        try {
-            const response = await fetch(`https://viacep.com.br/ws/${cep}/json/`);
-            const data = await response.json();
+    // Remove o hífen do CEP
+    cep = cep.replace(/-/g, '');
 
-            if (data.erro) {
-                alert("CEP não encontrado.");
-                return;
-            }
+    try {
+        const response = await fetch(`https://viacep.com.br/ws/${cep}/json/`);
+        const data = await response.json();
 
-            document.getElementById("enderecoInput").value = data.logradouro;
-            document.getElementById("bairroInput").value = data.bairro;
-            document.getElementById("cidadeInput").value = data.localidade;
-            document.getElementById("estadoInput").value = data.uf;
-        } catch (error) {
-            alert("Erro ao buscar o CEP.");
+        if (data.erro) {
+            document.getElementById("cepInput").value = '';
+            alert("CEP não encontrado.");
+            return;
         }
-    } else {
-        alert("CEP inválido. Deve conter 8 dígitos.");
-        document.getElementById("cepInput").value = '';
+
+        document.getElementById("enderecoInput").value = data.logradouro;
+        document.getElementById("bairroInput").value = data.bairro;
+        document.getElementById("cidadeInput").value = data.localidade;
+        document.getElementById("estadoInput").value = data.uf;
+    } catch (error) {
+        alert("Erro ao buscar o CEP.");
     }
 });
