@@ -210,6 +210,11 @@ label {
     filter: brightness(115%);
 }
 
+/* Largura da barra de rolagem */
+.no-scrollbar::-webkit-scrollbar {
+    width: 0px;
+}
+
 /* Remover as setas de aumento/diminuição em inputs do tipo number */
 input[type=number]::-webkit-outer-spin-button,
 input[type=number]::-webkit-inner-spin-button {
