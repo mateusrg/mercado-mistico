@@ -13,82 +13,30 @@ const connection = require("./db_config");
 
 app.use(express.static(path.join(__dirname, "..", "..", "frontend")));
 
-// Métodos GET
+// Rotas de Navegação Livres
+app.get("/", (req, response) => response.sendFile(path.join(__dirname, "..", "..", "frontend", "index.html")));
+app.get("/cadastro", (req, response) => response.sendFile(path.join(__dirname, "..", "..", "frontend", "pages", "HTML", "cadastro.html")));
+app.get("/catalogo", (req, response) => response.sendFile(path.join(__dirname, "..", "..", "frontend", "pages", "HTML", "catalogo_de_produtos.html")));
+app.get("/cupons", (req, response) => response.sendFile(path.join(__dirname, "..", "..", "frontend", "pages", "HTML", "cupons.html")));
+app.get("/login", (req, response) => response.sendFile(path.join(__dirname, "..", "..", "frontend", "pages", "HTML", "login.html")));
+app.get("/p/:id", (req, response) => response.sendFile(path.join(__dirname, "..", "..", "frontend", "pages", "HTML", "pagina_produto.html")));
 
-app.get("/", (request, response) => {
-    response.sendFile(path.join(__dirname, "..", "..", "frontend", "index.html"));
-});
+// Rotas de Navegação Restritas - Exigem Login
+app.get("/carrinho", autenticarToken, (req, response) => response.sendFile(path.join(__dirname, "..", "..", "frontend", "pages", "HTML", "carrinho_de_compras.html")));
+app.get("/cartao_presente", autenticarToken, (req, response) => response.sendFile(path.join(__dirname, "..", "..", "frontend", "pages", "HTML", "cartao_presente.html")));
+app.get("/compra_cartao_presente", autenticarToken, (req, response) => response.sendFile(path.join(__dirname, "..", "..", "frontend", "pages", "HTML", "compra_cartao_presente.html")));
+app.get("/enderecos", autenticarToken, (req, response) => response.sendFile(path.join(__dirname, "..", "..", "frontend", "pages", "HTML", "endereco.html")));
+app.get("/favoritos", autenticarToken, (req, response) => response.sendFile(path.join(__dirname, "..", "..", "frontend", "pages", "HTML", "favoritos.html")));
+app.get("/finalizar_compra", autenticarToken, (req, response) => response.sendFile(path.join(__dirname, "..", "..", "frontend", "pages", "HTML", "finalizar_compra.html")));
+app.get("/usuario", autenticarToken, (req, response) => response.sendFile(path.join(__dirname, "..", "..", "frontend", "pages", "HTML", "usuario.html")));
 
-app.get("/cadastro_adm", (request, response) => {
-    response.sendFile(path.join(__dirname, "..", "..", "frontend", "pages", "HTML", "cadastrar_adm.html"));
-});
+// Rotas de Navegação Protegidas - Exigem Login de ADM
+app.get("/cadastro_adm", (req, response) => response.sendFile(path.join(__dirname, "..", "..", "frontend", "pages", "HTML", "cadastrar_adm.html")));
+app.get("/usuario_adm", (req, response) => response.sendFile(path.join(__dirname, "..", "..", "frontend", "pages", "HTML", "usuario_adm.html")));
 
-app.get("/cadastro", (request, response) => {
-    response.sendFile(path.join(__dirname, "..", "..", "frontend", "pages", "HTML", "cadastro.html"));
-});
 
-app.get("/carrinho", (request, response) => {
-    response.sendFile(path.join(__dirname, "..", "..", "frontend", "pages", "HTML", "carrinho_de_compras.html"));
-});
-
-app.get("/cartao_presente", (request, response) => {
-    response.sendFile(path.join(__dirname, "..", "..", "frontend", "pages", "HTML", "cartao_presente.html"));
-});
-
-app.get("/catalogo", (request, response) => {
-    response.sendFile(path.join(__dirname, "..", "..", "frontend", "pages", "HTML", "catalogo_de_produtos.html"));
-});
-
-app.get("/compra_cartao_presente", (request, response) => {
-    response.sendFile(path.join(__dirname, "..", "..", "frontend", "pages", "HTML", "compra_cartao_presente.html"));
-});
-
-app.get("/creditos", (request, response) => {
-    response.sendFile(path.join(__dirname, "..", "..", "frontend", "pages", "HTML", "creditos.html"));
-});
-
-app.get("/cupons", (request, response) => {
-    response.sendFile(path.join(__dirname, "..", "..", "frontend", "pages", "HTML", "cupons.html"));
-});
-
-app.get("/enderecos", (request, response) => {
-    response.sendFile(path.join(__dirname, "..", "..", "frontend", "pages", "HTML", "endereco.html"));
-});
-
-app.get("/favoritos", (request, response) => {
-    response.sendFile(path.join(__dirname, "..", "..", "frontend", "pages", "HTML", "favoritos.html"));
-});
-
-app.get("/finalizar_compra", (request, response) => {
-    response.sendFile(path.join(__dirname, "..", "..", "frontend", "pages", "HTML", "finalizar_compra.html"));
-});
-
-app.get("/login", (request, response) => {
-    response.sendFile(path.join(__dirname, "..", "..", "frontend", "pages", "HTML", "login.html"));
-});
-
-app.get("/p/:id", (request, response) => {
-    response.sendFile(path.join(__dirname, "..", "..", "frontend", "pages", "HTML", "pagina_produto.html"));
-});
-
-app.get("/personalizacao", (request, response) => {
-    response.sendFile(path.join(__dirname, "..", "..", "frontend", "pages", "HTML", "personalizacao.html"));
-});
-
-app.get("/registros", (request, response) => {
-    response.sendFile(path.join(__dirname, "..", "..", "frontend", "pages", "HTML", "registros.html"));
-});
-
-app.get("/usuario", (request, response) => {
-    response.sendFile(path.join(__dirname, "..", "..", "frontend", "pages", "HTML", "usuario.html"));
-});
-
-app.get("/usuario_adm", (request, response) => {
-    response.sendFile(path.join(__dirname, "..", "..", "frontend", "pages", "HTML", "usuario_adm.html"));
-});
-
-// Métodos POST
-app.get("/usuario/selecionar_por_email", (request, response) => {
+// Demais Rotas
+app.get("/usuario/selecionar", (request, response) => {
     query = "SELECT idUsuario, nome FROM Usuario WHERE email = ?;";
     params = [request.body.email];
     connection.query(query, params, (err, results) => {
@@ -164,31 +112,6 @@ app.post("/usuario/cadastrar", async (request, response) => {
     });
 });
 
-app.get("/usuario/selecionar", (request, response) => {
-    const idUsuario = 1 // Valor aleatório de teste
-    const query = "SELECT * FROM Usuario WHERE id = ?;";
-    const params = [idUsuario];
-    connection.query(query, (err, results) => {
-        if (results) {
-            response
-            .status(201)
-            .json({
-                success: true,
-                message: "Consulta bem sucedida!",
-                data: results
-            });
-        } else {
-            response
-            .status(400)
-            .json({
-                success: false,
-                message: "Erro ao consultar usuários.",
-                data: err
-            });
-        }
-    });
-});
-
 // Não tem função pra editar usuário, criar aqui caso seja necessário mudar alguma informação/set específico
 
 app.delete("/usuario/deletar/:id", (request, response) => {
@@ -215,31 +138,52 @@ app.delete("/usuario/deletar/:id", (request, response) => {
     })
 });
 
-// function autenticarToken(request, response, next) {
-//     const token = request.body['token'];
+app.post("/fazer_login", (request, response) => {
+    const query = "SELECT idUsuario, nome, senha FROM Usuario WHERE email = ?;";
+    const params = [email];
 
-//     if (token == null) {
-//         return response
-//         .status(401)
-//         .json({
-//             success: false,
-//             message: 'Token não encontrado'
-//         });
-//     }
+    connection.query(query, params, async (err, results) => {
+        if (err || results.length === 0) {
+            response
+            .status(400)
+            .json({
+                success: false,
+                message: "E-mail não encontrado."
+            });
+            return;
+        }
 
-//     jwt.verify(token, chaveCriptografia, (err, user) => {
-//         if (err) {
-//             return response
-//             .status(403)
-//             .json({
-//                 success: false,
-//                 message: 'Token inválido'
-//             });
-//         }
-//         request.user = user;
-//         next();
-//     });
-// }
+        const usuario = results[0];
+        const senhaValida = await bcrypt.compare(request.body.senha, usuario.senha);
+
+        if(!senhaValida) {
+            response
+            .status(401)
+            .json({
+                success: false,
+                message: "Senha incorreta."
+            });
+        }
+
+        // Daqui pra baixo é só a criação do token de autenticação. Como ele só é criado no login, não fiz uma função separada pra isso
+        const token = jwt.sign(
+            {
+                idUsuario: usuario.idUsuario,
+                nome: usuario.nome
+            },
+            chaveCriptografia,
+            {expiresIn: "1h"}
+        );
+
+        response
+        .status(200)
+        .json({
+            success: true,
+            message: "Usuário autenticado!",
+            token: `Bearer ${token}`
+        });
+    });
+});
 
 function autenticarToken(request, response, next) {
     const tokenRecebido = request.body.token;
