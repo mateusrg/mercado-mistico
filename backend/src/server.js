@@ -316,50 +316,67 @@ app.post("/adicionar_endereco", (request, response) => {
     });
 });
 
-app.get("/pegar_enderecos/:idUsuario", (request, response) => {
-    // Pegando o ID do endereço padrão do usuário
-    let query = "SELECT idEnderecoPadrao FROM Usuario WHERE idUsuario = ?";
-    let params = [request.params.idUsuario];
-
+app.get("/pegar_enderecos/:email", (request, response) => {
+    // Pegando o ID do usuário com base no e-mail
+    query = "SELECT idUsuario FROM Usuario WHERE email = ?";
+    params = [request.params.email];
     connection.query(query, params, (err, results) => {
-        if (err) {
-            return response.status(400).json({
+        if (!(results && results.length > 0)) {
+            response
+            .status(400)
+            .json({
                 success: false,
-                message: "Erro ao buscar o idEnderecoPadrao.",
+                message: "E-mail não cadastrado.",
                 data: err
             });
+            return;
         }
+        idUsuario = results[0]["idUsuario"];
 
-        if (results.length === 0) {
-            return response.status(404).json({
-                success: false,
-                message: "Usuário não encontrado.",
-            });
-        }
+        // Pegando o ID do endereço padrão do usuário
+        let query = "SELECT idEnderecoPadrao FROM Usuario WHERE idUsuario = ?";
+        let params = [idUsuario];
 
-        const idEnderecoPadrao = results[0].idEnderecoPadrao;
-
-        // Pegando os endereços do usuário
-        query = "SELECT * FROM Endereco WHERE idUsuario = ?";
-        connection.query(query, params, (err, enderecos) => {
+        connection.query(query, params, (err, results) => {
             if (err) {
                 return response.status(400).json({
                     success: false,
-                    message: "Erro ao buscar os endereços do usuário.",
+                    message: "Erro ao buscar o idEnderecoPadrao.",
                     data: err
                 });
             }
 
-            // Adiciona uma propriedade em todos os endereços se eles são ou não padrão. no caso, só um vai receber "true"
-            const enderecosComIndicacao = enderecos.map(endereco => ({
-                ...endereco,
-                isPadrao: endereco.id === idEnderecoPadrao
-            }));
+            if (results.length === 0) {
+                return response.status(404).json({
+                    success: false,
+                    message: "Usuário não encontrado.",
+                });
+            }
 
-            response.status(200).json({
-                success: true,
-                message: "Endereços do usuário encontrados!",
-                data: enderecosComIndicacao
+            const idEnderecoPadrao = results[0].idEnderecoPadrao;
+
+            // Pegando os endereços do usuário
+            query = "SELECT * FROM Endereco WHERE idUsuario = ?";
+            connection.query(query, params, (err, enderecos) => {
+                if (err) {
+                    return response.status(400).json({
+                        success: false,
+                        message: "Erro ao buscar os endereços do usuário.",
+                        data: err
+                    });
+                }
+
+                // Adiciona uma propriedade em todos os endereços se eles são ou não padrão. no caso, só um vai receber "true"
+                const enderecosComIndicacao = enderecos.map(endereco => ({
+                    ...endereco,
+                    isPadrao: endereco.id === idEnderecoPadrao
+                }));
+
+                response.status(200).json({
+                    success: true,
+                    message: "Endereços do usuário encontrados!",
+                    data: enderecosComIndicacao
+                });
             });
         });
     });
@@ -384,6 +401,196 @@ app.delete("/deletar_endereco/:idEndereco", (request, response) => {
             .json({
                 success: false,
                 message: "Erro ao remover o endereço.",
+                data: err
+            });
+        }
+    });
+});
+
+app.get("/listar_produtos", (request, response) => {
+    query = "SELECT * FROM Produto";
+    connection.query(query, (err, results) => {
+        if (results) {
+            response
+            .status(201)
+            .json({
+                success: true,
+                message: "Produtos selecionados com sucesso!",
+                data: results
+            });
+        } else {
+            response
+            .status(400)
+            .json({
+                success: false,
+                message: "Erro ao selecionar os produtos.",
+                data: err
+            });
+        }
+    });
+});
+
+app.get("/selecionar_produto/:idProduto", (request, response) => {
+    query = "SELECT * FROM Produto WHERE idProduto = ?";
+    params = [request.params.idProduto];
+
+    connection.query(query, params, (err, results) => {
+        if (results) {
+            response
+            .status(201)
+            .json({
+                success: true,
+                message: "Produto selecionado com sucesso!",
+                data: results
+            });
+        } else {
+            response
+            .status(400)
+            .json({
+                success: false,
+                message: "Erro ao selecionar o produto.",
+                data: err
+            });
+        }
+    });
+});
+
+app.post("/add_produto_carrinho", (request, response) => {
+    // Pegando o ID do usuário com base no e-mail
+    query = "SELECT idUsuario FROM Usuario WHERE email = ?";
+    params = [request.body.emailUsuario];
+    connection.query(query, params, (err, results) => {
+        if (!(results && results.length > 0)) {
+            response
+            .status(400)
+            .json({
+                success: false,
+                message: "E-mail não cadastrado.",
+                data: err
+            });
+            return;
+        }
+        idUsuario = results[0]["idUsuario"];
+
+        // Adicionando produto ao carrinho
+        query = "INSERT INTO ItemCarrinho (idUsuario, idProduto, quantidade) VALUES (?, ?, ?)";
+        params = [
+            idUsuario,
+            request.body.idProduto,
+            request.body.quantidade
+        ];
+
+        connection.query(query, params, (err, results) => {
+            if (results) {
+                response
+                .status(201)
+                .json({
+                    success: true,
+                    message: "Produto adicionado ao carrinho com sucesso!",
+                    data: results
+                });
+            } else {
+                response
+                .status(400)
+                .json({
+                    success: false,
+                    message: "Erro ao adicionar o produto ao carrinho.",
+                    data: err
+                });
+            }
+        });
+    });
+});
+
+app.get("/listar_produtos_carrinho/:email", (request, response) => {
+    // Pegando o ID do usuário com base no e-mail
+    query = "SELECT idUsuario FROM Usuario WHERE email = ?";
+    params = [request.params.email];
+    connection.query(query, params, (err, results) => {
+        if (!(results && results.length > 0)) {
+            response
+            .status(400)
+            .json({
+                success: false,
+                message: "E-mail não cadastrado.",
+                data: err
+            });
+            return;
+        }
+        idUsuario = results[0]["idUsuario"];
+
+        // Listando os produtos no carrinho com base no ID do usuário
+        query = "SELECT * FROM ItemCarrinho WHERE idUsuario = ?";
+        params  = [idUsuario];
+        connection.query(query, params, (err, results) => {
+            if (results) {
+                response
+                .status(201)
+                .json({
+                    success: true,
+                    message: "Itens do carrinho selecionados com sucesso!",
+                    data: results
+                });
+            } else {
+                response
+                .status(400)
+                .json({
+                    success: false,
+                    message: "Erro ao selecionar os itens do carrinho.",
+                    data: err
+                });
+            }
+        });
+    });
+});
+
+app.put("/editar_quant_carrinho", (request, response) => {
+    query = "UPDATE ItemCarrinho SET quantidade = ? WHERE idItemCarrinho = ?";
+    params = [
+        request.body.quantidade,
+        request.body.idItemCarrinho
+    ];
+
+    connection.query(query, params, (err, results) => {
+        if (results) {
+            response
+            .status(201)
+            .json({
+                success: true,
+                message: "Quantidade do item no carrinho atualizada com sucesso!",
+                data: results
+            });
+        } else {
+            response
+            .status(400)
+            .json({
+                success: false,
+                message: "Erro ao atualizar a quantidade do item no carrinho.",
+                data: err
+            });
+        }
+    });
+});
+
+app.delete("/excluir_produto_carrinho/:idItemCarrinho", (request, response) => {
+    query = "DELETE FROM ItemCarrinho WHERE idItemCarrinho = ?";
+    params = [request.params.idItemCarrinho];
+
+    connection.query(query, params, (err, results) => {
+        if (results) {
+            response
+            .status(201)
+            .json({
+                success: true,
+                message: "Produto excluído do carrinho com sucesso!",
+                data: results
+            });
+        } else {
+            response
+            .status(400)
+            .json({
+                success: false,
+                message: "Erro ao excluir o produto do carrinho.",
                 data: err
             });
         }
