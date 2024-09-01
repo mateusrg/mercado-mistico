@@ -204,7 +204,29 @@ main {
     font-weight: 400;
     font-size: 3.125vh;
     width: 2.7vw;
+}
+
+#excluir {
+    color: var(--branco);
+    font-family: "Inder";
+    font-weight: 400;
+    font-size: 3.125vh;
+    width: 3.5vw;
+}
+
+#divSair {
+    display: flex;
+    align-items: center;
+    gap: 1vw;
     grid-area: sair;
+}
+#redefinir_senha {
+    grid-area: redefinir;
+    color: var(--branco);
+    font-family: "Inder";
+    font-weight: 400;
+    font-size: 3.125vh;
+    width: 4vw;
 }
 
 #catalogoProdutos {
@@ -242,6 +264,16 @@ main {
 
 #sair:hover {
     border-bottom: 2px solid var(--vermelhoAlaranjado);
+    cursor: pointer;
+}
+
+#excluir:hover {
+    border-bottom: 2px solid var(--vermelhoAlaranjado);
+    cursor: pointer;
+}
+
+#redefinir_senha:hover {
+    border-bottom: 2px solid var(--ciano);
     cursor: pointer;
 }
 

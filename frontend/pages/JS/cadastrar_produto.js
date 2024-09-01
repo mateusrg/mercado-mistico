@@ -67,33 +67,19 @@ document.getElementById('imagemPreview').addEventListener('click', () => {
     document.getElementById('imagemInput').click();
 });
 
-// Dropdown
-function abrirDropdown() {
-    const dropdown = document.getElementById("itensDropdown");
-    // Alterna entre block e none
-    if (dropdown.style.display === "block") {
-        dropdown.style.display = "none";
-        document.body.classList.remove('no-scrollbar');
-    } else {
-        dropdown.style.display = "block";
-        document.body.classList.add('no-scrollbar');
+
+// Verificar se esta funcionando
+function formatarPreco(campo) {
+    let valor = campo.value.replace(/,/g, '.').replace(/[^0-9.]/g, '');
+
+    const partes = valor.split('.');
+    if (partes.length > 2) {
+        valor = partes[0] + '.' + partes[1];
     }
-}
+    
+    if (partes.length > 1 && partes[1].length > 2) {
+        valor = partes[0] + '.' + partes[1].slice(0, 2);
+    }
 
-function selecionarCategoria(categoria) {
-    // Atualiza o texto do input com a categoria selecionada
-    document.getElementById("categoriaInput").value = categoria;
-    // Fecha o dropdown após a seleção
-    document.getElementById("itensDropdown").classList.remove("show");
-}
-
-function abrirCategoria () {
-    document.getElementById('secao_criar_categoria').style.display = 'flex';
-}
-
-function botaoFechar () {
-    const dropdown = document.getElementById("itensDropdown");
-    document.getElementById('secao_criar_categoria').style.display = 'none';
-    dropdown.style.display = "none";
-    document.body.classList.remove('no-scrollbar');
+    campo.value = valor;
 }

@@ -80,6 +80,17 @@ async function enviar(event) {
 
     if(!results.success) {
         alert(results.message);
+    } else {
+        nome = '';
+        CEP = '';
+        endereco = '';
+        numeroResidencia = '';
+        complemento = '';
+        bairro = '';
+        cidade = '';
+        estado = '';
+        document.getElementById('imagemCheckbox').src = "../../assets/checkbox_desmarcado.png";
+        enderecoPadrao = false;
     }
 }
 
@@ -89,6 +100,13 @@ function formatarCEP(campo) {
         cep = cep.slice(0, 5) + '-' + cep.slice(5);
     }
     campo.value = cep;
+}
+
+function formatarNumero(campo) {
+    let numero = campo.value;
+    if (numero.length > 60) {
+        numero = numero.slice(0, 60);
+    }
 }
 
 document.getElementById("cepInput").addEventListener("blur", async function() {
