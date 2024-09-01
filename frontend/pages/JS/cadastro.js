@@ -5,34 +5,55 @@ async function cadastrarUsuario(event) {
     const email = document.getElementById("email").value;
     const senha = document.getElementById("password").value;
 
-    const data = {
+    const dataCadastro = {
         nome,
         email,
         senha
     }
 
-    const response = await fetch('http://localhost:3000/usuario/cadastrar', {
+    const responseCadastro = await fetch('/usuario/cadastrar', {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
         },
-        body: JSON.stringify(data)
+        body: JSON.stringify(dataCadastro)
     });
 
-    const results = await response.json();
+    const resultsCadastro = await responseCadastro.json();
 
-    if(results.success) {
-        // alert(results.message);
-        // localStorage.setItem('estaLogado', 'true');
-        // localStorage.setItem('nomeUsuario', results.nome);
-        window.location.href = '/usuario';
+    if (!resultsCadastro.success) {
+        alert(resultsCadastro.message);
+        return;
+    }
+
+    const dataLogin = {
+        email,
+        senha
+    }
+
+    const responseLogin = await fetch('/fazer_login', {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(dataLogin)
+    });
+
+    const resultsLogin = await responseLogin.json();
+
+    if (resultsLogin.success) {
+        const usuario = resultsLogin.data;
+        console.log(usuario);
+        localStorage.setItem("nome", usuario.nome);
+        localStorage.setItem("email", usuario.email);
+        localStorage.setItem("senha", usuario.senha);
+        window.location.href = "/usuario";
     } else {
-        alert(results.message);
+        alert(resultsLogin.message);
     }
 }
 
 function olhoFechado() {
-
     if (document.getElementById('password').type === 'password') {
 
         document.getElementById("olho").src = "../../assets/olho_fechado.png";
@@ -46,19 +67,19 @@ function olhoFechado() {
     }
 }
 
-function verificarEstadoDeLogin() {
-    const estaLogado = localStorage.getItem('estaLogado');
+// function verificarEstadoDeLogin() {
+//     const estaLogado = localStorage.getItem('estaLogado');
 
-    if (estaLogado === 'true') {
-        // Usuário está logado, mostrar elementos do cabeçalho logado
-        document.getElementById('botoes_header_direita_deslogado').style.display = 'none';
-        document.getElementById('botoes_header_direita_logado').style.display = 'flex';
-    } else {
-        // Usuário está deslogado, mostrar elementos do cabeçalho deslogado
-        document.getElementById('botoes_header_direita_deslogado').style.display = 'flex';
-        document.getElementById('botoes_header_direita_logado').style.display = 'none';
-    }
-}
+//     if (estaLogado === 'true') {
+//         // Usuário está logado, mostrar elementos do cabeçalho logado
+//         document.getElementById('botoes_header_direita_deslogado').style.display = 'none';
+//         document.getElementById('botoes_header_direita_logado').style.display = 'flex';
+//     } else {
+//         // Usuário está deslogado, mostrar elementos do cabeçalho deslogado
+//         document.getElementById('botoes_header_direita_deslogado').style.display = 'flex';
+//         document.getElementById('botoes_header_direita_logado').style.display = 'none';
+//     }
+// }
 
-// Chama a função verificarEstadoDeLogin quando o DOM estiver totalmente carregado
-verificarEstadoDeLogin();
+// // Chama a função verificarEstadoDeLogin quando o DOM estiver totalmente carregado
+// verificarEstadoDeLogin();

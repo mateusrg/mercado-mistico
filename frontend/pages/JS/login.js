@@ -9,28 +9,29 @@ async function realizarLogin(event) {
         senha
     }
 
-    const response = await fetch('http://localhost:3000/login/verificar', {
+    const response = await fetch('/fazer_login', {
         method: "POST",
         headers: {
-            "Content-Type": "application/json",
+            "Content-Type": "application/json"
         },
         body: JSON.stringify(data)
-    })
+    });
 
     const results = await response.json();
 
-    if(results.success) {
-        alert(results.message);
-        localStorage.setItem('estaLogado', 'true');
-        localStorage.setItem('nomeUsuario', results.nome);
-        window.location.href = '/usuario';
+    if (results.success) {
+        const usuario = results.data;
+        console.log(usuario);
+        localStorage.setItem("nome", usuario.nome);
+        localStorage.setItem("email", usuario.email);
+        localStorage.setItem("senha", usuario.senha);
+        window.location.href = "/usuario";
     } else {
         alert(results.message);
     }
 }
 
 function olhoFechado() {
-
     if (document.getElementById('password').type === 'password') {
 
         document.getElementById("olho").src = "../../assets/olho_fechado.png";

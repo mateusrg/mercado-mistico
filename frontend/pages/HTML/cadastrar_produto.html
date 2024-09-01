@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -30,17 +30,17 @@
                 <h2 id="tituloCategoria">Criar nova categoria</h2>
                 <img src="../../assets/fechar_amarelo.png" alt="Fechar" id="fecharCategoria" onclick="botaoFechar()">
             </div>
-            <form action="/cadastro_produto" id="formCategoria">
-                <input type="text" class="inputCategoriaNova" id="categoranovaInput" name="cetegoriaNova" placeholder="Insira a nova categoria" required>
+            <section id="formCategoria"> <!-- Não está funcionando -->
+                <input type="text" class="inputCategoriaNova" id="categoriaNovaInput" name="categoriaNova" placeholder="Insira a nova categoria" required>
                 <button type="submit" id="botaoFeito">Feito</button>
-            </form>
+            </section>
         </section>
         <div id="divTitulo">
             <img src="../../assets/seta_volta.png" alt="seta" class="seta_volta_com_titulo">
             <h2 id="tituloCadastro">Cadastrar novo produto</h2>
         </div>
         <section id="secao_principal">
-            <form action="/cadastro_produto" id="formCadastro">
+            <section id="formCadastro">
                 <div class="entradas_imagem">
                     <input type="file" class="inputImagem" id="imagemInput" name="imagem" accept="image/*" onchange="mostrarImagem(event)">
                     <div id="imagemPreview">Adicionar imagem</div>
@@ -76,7 +76,7 @@
                         </div>
                     </div>
                 </section>
-            </form>
+            </section>
         </section>
     </main>
 </body>

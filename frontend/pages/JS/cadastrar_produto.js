@@ -14,6 +14,39 @@ function verificarEstadoDeLogin() {
 
 verificarEstadoDeLogin();
 
+async function cadastrar(event) {
+    event.preventDefault();
+
+    const imagem = document.getElementById("imagemInput").value;
+    const nome = document.getElementById("nomeInput").value;
+    const preco = document.getElementById("precoInput").value;
+    const quantidade = document.getElementById("quantidadeInput").value;
+    const descricao = document.getElementById("descricaoInput").value;
+
+    const data = {
+        nome,
+        preco,
+        descricao,
+        imagem,
+        quantidade
+    }
+
+    const response = await fetch('/cad_produto', {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+    });
+
+    const results = await response.json();
+
+    alert(results.message);
+    if (results.success) {
+        window.location.href = "/cadastrar_produto"
+    }
+}
+
 function mostrarImagem(event) {
     const input = event.target;
     const preview = document.getElementById('imagemPreview');
@@ -35,7 +68,6 @@ document.getElementById('imagemPreview').addEventListener('click', () => {
 });
 
 // Dropdown
-
 function abrirDropdown() {
     const dropdown = document.getElementById("itensDropdown");
     // Alterna entre block e none

@@ -14,7 +14,7 @@ CREATE TABLE Usuario (
 	idUsuario INT PRIMARY KEY AUTO_INCREMENT,
     nome VARCHAR(80) NOT NULL,
     email VARCHAR(80) NOT NULL UNIQUE,
-    senha VARCHAR(30) NOT NULL,
+    senha VARCHAR(60) NOT NULL,
     creditos INT NOT NULL DEFAULT 0,
     administrador BIT NOT NULL DEFAULT 0,
     idEnderecoPadrao INT
