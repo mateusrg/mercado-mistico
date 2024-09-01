@@ -315,3 +315,53 @@ app.post("/adicionar_endereco", (request, response) => {
         });
     });
 });
+
+app.get("/pegar_enderecos/:idUsuario", (request, response) => {
+    // Pegando o ID do endereço padrão do usuário
+    let query = "SELECT idEnderecoPadrao FROM Usuario WHERE idUsuario = ?";
+    let params = [request.params.idUsuario];
+
+    connection.query(query, params, (err, results) => {
+        if (err) {
+            return response.status(400).json({
+                success: false,
+                message: "Erro ao buscar o idEnderecoPadrao.",
+                data: err
+            });
+        }
+
+        if (results.length === 0) {
+            return response.status(404).json({
+                success: false,
+                message: "Usuário não encontrado.",
+            });
+        }
+
+        const idEnderecoPadrao = results[0].idEnderecoPadrao;
+
+        // Pegando os endereços do usuário
+        query = "SELECT * FROM Endereco WHERE idUsuario = ?";
+        connection.query(query, params, (err, enderecos) => {
+            if (err) {
+                return response.status(400).json({
+                    success: false,
+                    message: "Erro ao buscar os endereços do usuário.",
+                    data: err
+                });
+            }
+
+            // adiciona uma propriedade em todos os endereços se eles são ou não padrão. no caso, só um vai receber "true"
+            const enderecosComIndicacao = enderecos.map(endereco => ({
+                ...endereco,
+                isPadrao: endereco.id === idEnderecoPadrao
+            }));
+
+            response.status(200).json({
+                success: true,
+                message: "Endereços do usuário encontrados!",
+                data: enderecosComIndicacao
+            });
+        });
+    });
+});
+
