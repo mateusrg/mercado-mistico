@@ -596,3 +596,138 @@ app.delete("/excluir_produto_carrinho/:idItemCarrinho", (request, response) => {
         }
     });
 });
+
+app.post("/add_favorito", (request, response) => {
+    // Pegando o ID do usuário com base no e-mail
+    query = "SELECT idUsuario FROM Usuario WHERE email = ?";
+    params = [request.body.emailUsuario];
+    connection.query(query, params, (err, results) => {
+        if (!(results && results.length > 0)) {
+            response
+            .status(400)
+            .json({
+                success: false,
+                message: "E-mail não cadastrado.",
+                data: err
+            });
+            return;
+        }
+        idUsuario = results[0]["idUsuario"];
+        
+        // Adicionando item aos favoritos
+        query = "INSERT INTO ListaFavoritos (idUsuario, idProduto) VALUES (?, ?)";
+        params = [
+            idUsuario,
+            request.body.idProduto
+        ];
+
+        connection.query(query, params, (err, results) => {
+            if (results) {
+                response
+                .status(201)
+                .json({
+                    success: true,
+                    message: "Produto adicionado à lista de favoritos do usuário com sucesso!",
+                    data: results
+                });
+            } else {
+                response
+                .status(400)
+                .json({
+                    success: false,
+                    message: "Erro ao adicionar o produto à lista de favoritos do usuário.",
+                    data: err
+                });
+            }
+        });
+    });
+});
+
+app.get("listar_favoritos/:emailUsuario", (request, response) => {
+    // Pegando o ID do usuário com base no e-mail
+    query = "SELECT idUsuario FROM Usuario WHERE email = ?";
+    params = [request.params.emailUsuario];
+    connection.query(query, params, (err, results) => {
+        if (!(results && results.length > 0)) {
+            response
+            .status(400)
+            .json({
+                success: false,
+                message: "E-mail não cadastrado.",
+                data: err
+            });
+            return;
+        }
+        idUsuario = results[0]["idUsuario"];
+
+        // Listando os produtos na Lista de Favoritos do usuário com base no seu ID
+        query = "SELECT * FROM ListaFavoritos WHERE idUsuario = ?";
+        params = [idUsuario];
+
+        connection.query(query, params, (err, results) => {
+            if (results) {
+                response
+                .status(201)
+                .json({
+                    success: true,
+                    message: "Lista de favoritos do usuário selecionada com sucesso!",
+                    data: results
+                });
+            } else {
+                response
+                .status(400)
+                .json({
+                    success: false,
+                    message: "Erro ao selecionar a lista de favoritos do usuário.",
+                    data: err
+                });
+            }
+        });
+    });
+});
+
+app.delete("excluir_favorito/:emailUsuario/:idProduto", (request, response) => {
+    // Pegando o ID do usuário com base no e-mail
+    query = "SELECT idUsuario FROM Usuario WHERE email = ?";
+    params = [request.params.emailUsuario];
+    connection.query(query, params, (err, results) => {
+        if (!(results && results.length > 0)) {
+            response
+            .status(400)
+            .json({
+                success: false,
+                message: "E-mail não cadastrado.",
+                data: err
+            });
+            return;
+        }
+        idUsuario = results[0]["idUsuario"];
+
+        // Deletando o produto da lista de favoritos
+        query = "DELETE FROM ListaFavoritos WHERE idUsuario = ? AND idProduto = ?";
+        params = [
+            idUsuario,
+            request.params.idProduto
+        ];
+
+        connection.query(query, params, (err, results) => {
+            if (results) {
+                response
+                .status(201)
+                .json({
+                    success: true,
+                    message: "Produto excluído da lista de favoritos do usuário com sucesso!",
+                    data: results
+                });
+            } else {
+                response
+                .status(400)
+                .json({
+                    success: false,
+                    message: "Erro ao excluir produto da lista de favoritos do usuário.",
+                    data: err
+                });
+            }
+        });
+    });
+});
