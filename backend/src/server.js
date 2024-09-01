@@ -350,7 +350,7 @@ app.get("/pegar_enderecos/:idUsuario", (request, response) => {
                 });
             }
 
-            // adiciona uma propriedade em todos os endereços se eles são ou não padrão. no caso, só um vai receber "true"
+            // Adiciona uma propriedade em todos os endereços se eles são ou não padrão. no caso, só um vai receber "true"
             const enderecosComIndicacao = enderecos.map(endereco => ({
                 ...endereco,
                 isPadrao: endereco.id === idEnderecoPadrao
@@ -365,3 +365,27 @@ app.get("/pegar_enderecos/:idUsuario", (request, response) => {
     });
 });
 
+app.delete("/deletar_endereco/:idEndereco", (request, response) => {
+    query = "DELETE FROM Endereco WHERE idEndereco = ?";
+    params = [request.params.idEndereco];
+
+    connection.query(query, params, (err, results) => {
+        if (results) {
+            response
+            .status(201)
+            .json({
+                success: true,
+                message: "Endereço removido com sucesso!",
+                data: results
+            });
+        } else {
+            response
+            .status(400)
+            .json({
+                success: false,
+                message: "Erro ao remover o endereço.",
+                data: err
+            });
+        }
+    });
+});
