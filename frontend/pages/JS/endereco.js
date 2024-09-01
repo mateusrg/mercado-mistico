@@ -41,39 +41,44 @@ function botaoFechar () {
 async function enviar(event) {
     event.preventDefault();
 
-    const cep = document.getElementById("cepInput").value;
+    const nome = document.getElementById("nomeInput").value;
+    const CEP = document.getElementById("cepInput").value;
     const endereco = document.getElementById("enderecoInput").value;
-    const numero = document.getElementById("numeroInput").value;
+    const numeroResidencia = document.getElementById("numeroInput").value;
     const complemento = document.getElementById("complementoInput").value;
     const bairro = document.getElementById("bairroInput").value;
     const cidade = document.getElementById("cidadeInput").value;
     const estado = document.getElementById("estadoInput").value;
+    const emailUsuario = localStorage.getItem("email");
+    let enderecoPadrao = false;
+    if (document.getElementById('imagemCheckbox').src.endsWith("checkbox_marcado.png")) {
+        enderecoPadrao = true;
+    }
 
     const data = {
-        cep,
+        nome,
+        CEP,
         endereco,
-        numero,
+        numeroResidencia,
         complemento,
         bairro,
         cidade,
-        estado
+        estado,
+        enderecoPadrao,
+        emailUsuario
     }
 
-    const response = await fetch('http://localhost:3000/enderecos/adicionar', {
+    const response = await fetch('/adicionar_endereco', {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
         },
         body: JSON.stringify(data)
-    })
+    });
 
     const results = await response.json();
 
-    console.log(results)
-    if(results.success) {
-        console.log(response);
-        alert(results.message);
-    } else {
+    if(!results.success) {
         alert(results.message);
     }
 }

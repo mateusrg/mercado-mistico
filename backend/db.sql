@@ -23,6 +23,7 @@ CREATE TABLE Usuario (
 
 CREATE TABLE Endereco (
 	idEndereco INT PRIMARY KEY AUTO_INCREMENT,
+    nome VARCHAR(100) NOT NULL,
     CEP VARCHAR(9) NOT NULL,
     endereco VARCHAR(100) NOT NULL,
     numeroResidencia VARCHAR(60) NOT NULL,

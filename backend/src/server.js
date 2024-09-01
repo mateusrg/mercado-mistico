@@ -29,34 +29,51 @@ app.get("/usuario_adm", (req, response) => response.sendFile(path.join(__dirname
 app.get("/cadastrar_produto", (req, response) => response.sendFile(path.join(__dirname, "..", "..", "frontend", "pages", "HTML", "cadastrar_produto.html")));
 
 // Demais Rotas
-app.post("/usuario/cadastrar", (request, response) => { // Depois precisa verificar se o e-mail já existe antes de fazer o cadastro
-    query = "INSERT INTO Usuario (nome, email, senha, creditos, administrador) VALUES (?, ?, ?, ?, ?);";
-    params = [
-        request.body.nome,
-        request.body.email,
-        request.body.senha,
-        0,
-        0
-    ];
-
+app.post("/usuario/cadastrar", (request, response) => {
+    // Verificando se o e-mail existe (diferente das outras rotas, aqui retorna "false" se o e-mail já existir)
+    query = "SELECT * FROM Usuario WHERE email = ?";
+    params = [request.params.email];
     connection.query(query, params, (err, results) => {
-        if (results) {
-            response
-            .status(201)
-            .json({
-                success: true,
-                message: "Usuário cadastrado com sucesso!",
-                data: results
-            });
-        } else {
+        if (results && results.length > 0) {
             response
             .status(400)
             .json({
                 success: false,
-                message: "Erro ao cadastrar o usuário.",
+                message: "E-mail já cadastrado.",
                 data: err
             });
+            return;
         }
+
+        // Cadastrando o Usuário caso o e-mail não exista
+        query = "INSERT INTO Usuario (nome, email, senha, creditos, administrador) VALUES (?, ?, ?, ?, ?);";
+        params = [
+            request.body.nome,
+            request.body.email,
+            request.body.senha,
+            0,
+            0
+        ];
+
+        connection.query(query, params, (err, results) => {
+            if (results) {
+                response
+                .status(201)
+                .json({
+                    success: true,
+                    message: "Usuário cadastrado com sucesso!",
+                    data: results
+                });
+            } else {
+                response
+                .status(400)
+                .json({
+                    success: false,
+                    message: "Erro ao cadastrar o usuário.",
+                    data: err
+                });
+            }
+        });
     });
 });
 
@@ -96,45 +113,6 @@ app.post("/fazer_login", (request, response) => {
         });
     });
 });
-
-// function selecionarUsuario(email) {
-//     query = "SELECT idUsuario, nome FROM Usuario WHERE email = ?;";
-//     params = [email];
-//     connection.query(query, params, (err, results) => {
-//         if (results) {
-//             return {
-//                 success: true,
-//                 message: "Sucesso!",
-//                 data: results
-//             }
-//         }
-
-//         return {
-//             success: false,
-//             message: "Sem sucesso.",
-//             data: err
-//         }
-//     });
-// }
-
-// function deletarUsuario(email) {
-//     const query = "DELETE FROM Usuarios WHERE email = ?;";
-//     const params = [email];
-//     connection.query(query, params, (err, results) => {
-//         if (results) {
-//             return {
-//                 success: true,
-//                 message: "Usuário deletado!",
-//                 data: results
-//             }
-//         }
-//         return {
-//             success: false,
-//             message: "Houve um erro ao deletar o usuário.",
-//             data: err
-//         }
-//     });
-// }
 
 app.post("/cad_produto", (request, response) => {
     const query = "INSERT INTO Produto (nome, preco, descricao, imagem, quantidade) VALUES (?, ?, ?, ?, ?);";
@@ -252,5 +230,88 @@ app.put("/excluir_adm/:email", (request, response) => {
                 data: err
             });
         }
+    });
+});
+
+app.post("/adicionar_endereco", (request, response) => {
+    // Pegando o ID do usuário com base no e-mail
+    query = "SELECT idUsuario FROM Usuario WHERE email = ?";
+    params = [request.body.emailUsuario];
+    connection.query(query, params, (err, results) => {
+        if (!(results && results.length > 0)) {
+            response
+            .status(400)
+            .json({
+                success: false,
+                message: "E-mail não cadastrado.",
+                data: err
+            });
+            return;
+        }
+        idUsuario = results[0]["idUsuario"];
+
+        // Efetivamente inserindo o endereço
+        query = "INSERT INTO Endereco (nome, CEP, endereco, numeroResidencia, complemento, bairro, cidade, estado, idUsuario) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        params = [
+            request.body.nome,
+            request.body.CEP,
+            request.body.endereco,
+            request.body.numeroResidencia,
+            request.body.complemento,
+            request.body.bairro,
+            request.body.cidade,
+            request.body.estado,
+            idUsuario
+        ];
+
+        connection.query(query, params, (err, results) => {
+            if (results) {
+                if (request.body.enderecoPadrao) {
+                    idEnderecoPadrao = results.insertId;
+                    query = "UPDATE Usuario SET idEnderecoPadrao = ? WHERE idUsuario = ?;";
+                    params = [
+                        idEnderecoPadrao,
+                        idUsuario
+                    ];
+    
+                    connection.query(query, params, (err, results) => {
+                        if (results) {
+                            response
+                            .status(201)
+                            .json({
+                                success: true,
+                                message: "Endereço cadastrado e endereço padrão atualizado com sucesso!",
+                                data: results
+                            });
+                        } else {
+                            response
+                            .status(400)
+                            .json({
+                                success: false,
+                                message: "Endereço cadastrado, mas erro ao atualizar o endereço padrão.",
+                                data: err
+                            });
+                        }
+                    });
+                    return;
+                }
+                response
+                .status(201)
+                .json({
+                    success: true,
+                    message: "Endereço cadastrado com sucesso!",
+                    data: results
+                });
+            } else {
+                response
+                .status(400)
+                .json({
+                    success: false,
+                    message: "Erro ao cadastrar o endereço.",
+                    data: err
+                });
+                return;
+            }
+        });
     });
 });
