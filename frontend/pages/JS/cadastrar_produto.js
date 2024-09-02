@@ -17,17 +17,37 @@ verificarEstadoDeLogin();
 async function cadastrar(event) {
     event.preventDefault();
 
-    const imagem = document.getElementById("imagemInput").value;
+    const imagem = document.getElementById("imagemInput").files[0];
     const nome = document.getElementById("nomeInput").value;
     const preco = document.getElementById("precoInput").value;
     const quantidade = document.getElementById("quantidadeInput").value;
     const descricao = document.getElementById("descricaoInput").value;
 
+    const formData = new FormData();
+    formData.append("imagem", imagem);
+
+    const responseImg = await fetch("/uppar_imagem", {
+        method: "POST",
+        body: formData
+    })
+
+    const resultsImg = await responseImg.json();
+    let caminhoImagem = "";
+
+    if (resultsImg.success) {
+        alert(resultsImg.message);
+        caminhoImagem = resultsImg.filePath;
+        console.log("Caminho da imagem: " + caminhoImagem);
+    } else {
+        alert("Erro ao fazer o upload da imagem");
+        return;
+    }
+
     const data = {
         nome,
         preco,
         descricao,
-        imagem,
+        caminhoImagem,
         quantidade
     }
 

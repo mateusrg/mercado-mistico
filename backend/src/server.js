@@ -1,4 +1,5 @@
 const express = require("express");
+const multer = require("multer");
 const cors = require("cors");
 const path = require("path");
 const porta = 3000;
@@ -9,6 +10,20 @@ app.listen(porta, () => console.log(`Rodando na porta ${porta}!`));
 const connection = require("./db_config");
 
 app.use(express.static(path.join(__dirname, "..", "..", "frontend")));
+
+// Configuração do Multer para poder salvar as imagens dos produtos uppados pelos adms
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, path.join(__dirname, "..", "..", "frontend", "assets", "produtos")) // Pasta onde as imagens dos produtos serão salvas
+    },
+    filename: function (req, file, cb) {
+        const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
+        cb(null, uniqueSuffix + path.extname(file.originalname)); // Nome do arquivo (é mantido o original)
+    }
+});
+
+const upload = multer({ storage: storage });
+
 
 // Rotas de Navegação
 app.get("/", (req, response) => response.sendFile(path.join(__dirname, "..", "..", "frontend", "index.html")));
@@ -29,6 +44,18 @@ app.get("/usuario_adm", (req, response) => response.sendFile(path.join(__dirname
 app.get("/cadastrar_produto", (req, response) => response.sendFile(path.join(__dirname, "..", "..", "frontend", "pages", "HTML", "cadastrar_produto.html")));
 
 // Demais Rotas
+
+// Rota de upload de imagem
+app.post("/uppar_imagem", upload.single("imagem"), (request, response) => {
+    response
+    .status(201)
+    .json({
+        success: true,
+        message: "Imagem uppada com sucesso!",
+        filePath: path.join(__dirname, "..", "..", "frontend", "assets", "produtos", request.file.filename)
+    });
+});
+
 app.post("/usuario/cadastrar", (request, response) => {
     // Verificando se o e-mail existe (diferente das outras rotas, aqui retorna "false" se o e-mail já existir)
     query = "SELECT * FROM Usuario WHERE email = ?";
@@ -120,7 +147,7 @@ app.post("/cad_produto", (request, response) => {
         request.body.nome,
         request.body.preco,
         request.body.descricao,
-        request.body.imagem,
+        request.body.caminhoImagem,
         request.body.quantidade
     ];
 
