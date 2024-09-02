@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estoque - Mystic Market</title>
+    <link rel="stylesheet" href="./pages/CSS/style.css">
+    <link rel="stylesheet" href="./pages/CSS/estoque.css">
+    <script defer src="./pages/JS/estoque.js"></script>
+</head>
+<body>
+    <header>
+        <div id="header_esquerda">
+            <a href="/" class="auxHeader"><img src="../../assets/logo.png" alt="Logo" id="logo"></a>
+            <a href="/" id="nome_do_site">Mystic Market</h1></a>
+        </div>
+        <div id="botoes_header_direita_deslogado">
+            <form action="/cadastro"><button id="sign_up">Sign Up</button></form>
+            <form action="/login"><button id="login">Login</button></form>
+        </div>
+        <div id="botoes_header_direita_logado">
+            <a href="/favoritos" class="auxHeader"><img src="../../assets/coracao.png" alt="Coração" id="botao_logado_coracao"></a>
+            <a href="/carrinho" class="auxHeader"><img src="../../assets/carrinho.png" alt="Carrinho" id="botao_logado_carrinho"></a>
+            <a href="/usuario" class="auxHeader"><img src="../../assets/usuarioLogado.png" alt="Usuário Logado" id="botao_logado_usuario"></a>
+        </div>
+    </header>
+    <main>
+        <section id="secao_editar_produto">
+            <div id="divEditarTitulo">
+                <h3 id="tituloEditar">Editar produto</h3>
+                <img src="../../assets/fechar_amarelo.png" alt="Fechar" id="fechar" onclick="botaoFechar()">
+            </div>
+            <form action="/estoque" id="formProduto">
+                <div class="entradas">
+                    <label for="nome" class="labelEditar">Nome do produto*</label>
+                    <input type="text" class="inputNome" id="nomeInput" name="nome" placeholder="Nome do produto" maxlength="255" required>
+                </div>
+                <div class="entradas">
+                    <label for="preco" class="labelEditar">Preço*</label>
+                    <input type="text" class="inputPreco" id="precoInput" name="preco" placeholder="R$ 0000.00" oninput="formatarPreco(this)" required>
+                </div>
+                <div class="entradas">
+                    <label for="quantidade" class="labelEditar">Quantidade*</label>
+                    <input type="number" class="inputQuantidade" id="quantidadeInput" name="quantidade" required>
+                </div>
+                <div id="editar_div_inputDescricao">
+                    <label for="descricao" id="labelDescricao">Descrição:</label>
+                    <textarea type="text" class="editar_inputDescricao" id="editar_inputDescricao" name="descricao" placeholder="Descrição do produto"></textarea>
+                </div>
+                <button onclick="enviar(event)" type="submit" id="botaoOK">Ok</button>
+            </form>
+        </section>
+        <div id="divTitulo">
+            <img src="../../assets/seta_volta.png" alt="seta" class="seta_volta_com_titulo">
+            <h2 id="tituloEstoque">Estoque</h2>
+        </div>
+        <section id="secao_principal">
+            <section class="secao_produto">
+                <input type="file" class="inputImagem" id="imagemInput" name="imagem" accept="image/*" onchange="mostrarImagem(event)">
+                <div id="imagemPreview">Imagem</div>
+                <div class="div_info">
+                    <h3 id="nome">Nome do produto</h3>
+                    <h3 id="quant">Quantidade: 0</h3>
+                    <h3 id="preco">Preço: R$ 0.00</h3>
+                </div>
+                <div id="div_inputDescricao">
+                    <label for="descricao" id="labelDescricao">Descrição:</label>
+                    <textarea type="text" class="inputDescricao" id="inputDescricao" name="descricao" placeholder="Descrição aqui"></textarea>
+                </div>
+                <div class="div_editar" onclick="botaoEditar()">
+                    <img src="../../assets/criar.png" alt="Editar" id="imagemEditar">
+                    <h2 id="textoEditar">Editar</h2>
+                </div>
+                <div class="div_excluir">
+                    <img src="../../assets/lixo.png" alt="Excluir" id="imagemExcluir">
+                    <h2 id="textoExcluir">Excluir</h2>
+                </div>
+            </section>
+            <section class="secao_produto">
+                <input type="file" class="inputImagem" id="imagemInput" name="imagem" accept="image/*" onchange="mostrarImagem(event)">
+                <div id="imagemPreview">Imagem</div>
+                <div class="div_info">
+                    <h3 id="nome">Nome do produto</h3>
+                    <h3 id="quant">Quantidade: 0</h3>
+                    <h3 id="preco">Preço: R$ 0.00</h3>
+                </div>
+                <div id="div_inputDescricao">
+                    <label for="descricao" id="labelDescricao">Descrição:</label>
+                    <textarea type="text" class="inputDescricao" id="inputDescricao" name="descricao" placeholder="Descrição aqui"></textarea>
+                </div>
+                <div class="div_editar" onclick="botaoEditar()">
+                    <img src="../../assets/criar.png" alt="Editar" id="imagemEditar">
+                    <h2 id="textoEditar">Editar</h2>
+                </div>
+                <div class="div_excluir">
+                    <img src="../../assets/lixo.png" alt="Excluir" id="imagemExcluir">
+                    <h2 id="textoExcluir">Excluir</h2>
+                </div>
+            </section>
+            <section class="secao_produto">
+                <input type="file" class="inputImagem" id="imagemInput" name="imagem" accept="image/*" onchange="mostrarImagem(event)">
+                <div id="imagemPreview">Imagem</div>
+                <div class="div_info">
+                    <h3 id="nome">Nome do produto</h3>
+                    <h3 id="quant">Quantidade: 0</h3>
+                    <h3 id="preco">Preço: R$ 0.00</h3>
+                </div>
+                <div id="div_inputDescricao">
+                    <label for="descricao" id="labelDescricao">Descrição:</label>
+                    <textarea type="text" class="inputDescricao" id="inputDescricao" name="descricao" placeholder="Descrição aqui"></textarea>
+                </div>
+                <div class="div_editar" onclick="botaoEditar()">
+                    <img src="../../assets/criar.png" alt="Editar" id="imagemEditar">
+                    <h2 id="textoEditar">Editar</h2>
+                </div>
+                <div class="div_excluir">
+                    <img src="../../assets/lixo.png" alt="Excluir" id="imagemExcluir">
+                    <h2 id="textoExcluir">Excluir</h2>
+                </div>
+            </section>
+        </section>
+    </main>
+</body>
+</html>
