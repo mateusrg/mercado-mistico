@@ -153,29 +153,12 @@ input {
     padding: 2vh 4vw;
 }
 
-#imagemInput {
-    display: none; /* Oculta o input de arquivo */
-}
-
-#imagemPreview {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: "Inder";
-    font-weight: 400;
-    background-color: var(--ciano);
-    color: var(--branco);
-    font-size: 2vh;
+#imagemProduto {
     border-radius: 0.5vh;
-    padding: 7vh 3.5vw;
     cursor: pointer;
-    text-align: center;
-    background-size: 70%;
-    background-position: center;
-    background-repeat: no-repeat;
     aspect-ratio: 1 / 1; /* Mantém a proporção 1:1 (quadrado) */
-    width: 3vw; /* Largura fixa para o quadrado */
-    height: 3vw; /* Altura fixa para o quadrado */
+    width: 7.5vw; /* Largura fixa para o quadrado */
+    height: 7.5vw; /* Altura fixa para o quadrado */
 }
 
 .div_info {
