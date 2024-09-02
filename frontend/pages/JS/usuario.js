@@ -1,10 +1,25 @@
-function verificarEstadoDeLogin() {
+async function verificarEstadoDeLogin() {
     const nome = localStorage.getItem('nome');    
     if (nome) {
         // Usuário está logado, mostrar elementos do cabeçalho logado
         document.getElementById('botoes_header_direita_deslogado').style.display = 'none';
         document.getElementById('botoes_header_direita_logado').style.display = 'flex';
         document.getElementById('tituloBemVindo').innerText = 'Olá, ' + nome;
+
+        const email = localStorage.getItem("email");
+        const senha = localStorage.getItem("senha");
+        const response = await fetch(`/is_usuario_adm/${email}/${senha}`, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json"
+            }
+        });
+        
+        const results = await response.json();
+    
+        if (results.success && results.data === 1) {
+            window.location.href = "/usuario_adm";
+        }
     } else {
         // Usuário está deslogado, mostrar elementos do cabeçalho deslogado
         document.getElementById('botoes_header_direita_deslogado').style.display = 'flex';
@@ -35,6 +50,57 @@ function redefinirSenha() {
 
 function botaoFechar () {
     document.getElementById('secaoredefinirSenha').style.display = 'none';
-    document.querySelectorAll('#senhaAtual').forEach(input => input.value = '');
-    document.querySelectorAll('#senhaNova').forEach(input => input.value = '');
+    document.querySelector('#senhaAtual').value = '';
+    document.querySelector('#senhaNova').value = '';
+}
+
+async function enviarRedefinicaoSenha() {
+    const emailUsuario = localStorage.getItem("email");
+    const senhaAtual = document.getElementById("senhaAtual").value;
+    const senhaNova = document.getElementById("senhaNova").value;
+
+    const data = {
+        emailUsuario,
+        senhaAtual,
+        senhaNova
+    }
+
+    const response = await fetch("/redefinir_senha_usuario", {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+    });
+    const results = await response.json();
+
+    alert(results.message);
+    if (results.success) {
+        localStorage.setItem("senha", senhaNova);
+        window.location.href = "/usuario";
+    }
+}
+
+async function excluirConta() {
+    const email = localStorage.getItem("email");
+    const senha = localStorage.getItem("senha");
+
+    const data = {
+        email,
+        senha
+    }
+
+    const response = await fetch(`/excluir_conta_usuario/${email}/${senha}`, {
+        method: "DELETE",
+        headers: {
+            "Content-Type": "application/json"
+        }
+    });
+    
+    const results = await response.json();
+    
+    alert(results.message);
+    if (results.success) {
+        sairConta();
+    }
 }

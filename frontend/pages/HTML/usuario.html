@@ -25,22 +25,21 @@
         </div>
     </header>
     <main>
-        <!-- Verificar se está certo -->
         <section id="secaoredefinirSenha">
             <div id="divRedefinir">
                 <h3 id="tituloRedefinir">Redefinir senha</h3>
                 <img src="../../assets/fechar_amarelo.png" alt="Fechar" id="fechar" onclick="botaoFechar()">
             </div>
-            <form action="/usuario">
+            <form>
                 <div class="entradas">
                     <label for="senhaAtual">Senha atual</label>
                     <input type="password" id="senhaAtual" name="senhaAtual" placeholder="Insira sua senha atual" required>
                 </div>
                 <div class="entradas">
-                    <label for="senhaNova">Senha atual</label>
+                    <label for="senhaNova">Senha nova</label>
                     <input type="password" id="senhaNova" name="senhaNova" placeholder="Insira sua senha nova" required>
                 </div>
-                <button id="botaoRedefinir">Redefinir</button>
+                <button type="button" id="botaoRedefinir" onclick="enviarRedefinicaoSenha()">Redefinir</button>
             </form>
         </section>
         <section class="secaoPrincipal">
@@ -67,7 +66,7 @@
                 </a>
                 <div id="divSair">
                     <a href="#" onclick="sairConta()" id="sair">Sair</a>
-                    <a href="#" onclick="excluirConta()" id="excluir">Excluir</a>
+                    <a href="#" onclick="excluirConta()" id="excluir">Excluir Conta</a>
                 </div>
                 <div class="topicoDireita" id="creditos">
                     <h2 class="topicoDireita_Titulo">Créditos</h2>

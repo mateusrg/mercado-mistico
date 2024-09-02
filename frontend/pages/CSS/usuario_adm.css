@@ -17,6 +17,93 @@ main {
     position: relative;
 }
 
+#secaoredefinirSenha {
+    z-index: 5;
+    background-color: var(--verdeOpaco);
+    height: 45vh;
+    width: 25vw;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    padding: 4vh;
+    border-radius: 1.5vh;
+    border-bottom: 0.5vh solid var(--preto);
+}
+
+#divRedefinir {
+    width: 24vw;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#tituloRedefinir {
+    color: var(--amarelo);
+    font-family: "Inknut Antiqua";
+    font-weight: 400;
+    font-size: 3.125vh;
+}
+
+#fechar {
+    height: 5.5vh;
+}
+
+#fechar:hover {
+    cursor: pointer;
+    filter: brightness(120%);
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-between;
+    height: 32vh;
+}
+
+.entradas {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.5vh;
+    width: 24vw;
+    height: 12vh;
+}
+
+label {
+    color: var(--branco);
+    font-family: "Inder";
+    font-weight: 400;
+    font-size: 2.5vh;
+}
+
+.entradas > input {
+    background-color: var(--verdeMusgo);
+    color: var(--branco);
+    padding: 1vh 1vw;
+    width: 22vw;
+    font-size: 2.75vh;
+    height: 3.7vh;
+    border-bottom: 0.3 solid var(--preto);
+    border-radius: 1vh;
+}
+
+#botaoRedefinir {
+    background-color: var(--vermelhoAlaranjado);
+    border-radius: 1.5vh;
+    font-family: "Inder";
+    font-weight: 400;
+    font-size: 2.75vh;
+    color: var(--branco);
+    align-self: center;
+    padding: 1.5vh 1vw;
+}
+
 .secaoPrincipal {
     width: 83.08vw;
     display: flex;
@@ -56,7 +143,7 @@ main {
         "produtos vendas"
         "cupons vendas"
         "admins vendas"
-        "sair .";
+        "sair redefinir";
 }
 
 .topicosEsquerda {
@@ -136,6 +223,30 @@ main {
     grid-area: sair;
 }
 
+#excluir {
+    color: var(--branco);
+    font-family: "Inder";
+    font-weight: 400;
+    font-size: 3.125vh;
+    width: 3.8vw;
+}
+
+#divSair {
+    display: flex;
+    align-items: center;
+    gap: 3vw;
+    grid-area: sair;
+}
+
+#redefinir_senha {
+    grid-area: redefinir;
+    color: var(--branco);
+    font-family: "Inder";
+    font-weight: 400;
+    font-size: 3.125vh;
+    width: 8.5vw;
+}
+
 #estoque {
     grid-area: estoque;
 }
@@ -158,6 +269,16 @@ main {
 
 #sair:hover {
     border-bottom: 0.5vh solid var(--vermelhoAlaranjado);
+    cursor: pointer;
+}
+
+#excluir:hover {
+    border-bottom: 0.5vh solid var(--vermelhoAlaranjado);
+    cursor: pointer;
+}
+
+#redefinir_senha:hover {
+    border-bottom: 0.5vh solid var(--ciano);
     cursor: pointer;
 }
 

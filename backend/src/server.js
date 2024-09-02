@@ -759,3 +759,177 @@ app.delete("excluir_favorito/:emailUsuario/:idProduto", (request, response) => {
         });
     });
 });
+
+app.put("/redefinir_senha_usuario", (request, response) => {
+    // Pegando o ID do usuário com base no e-mail
+    query = "SELECT idUsuario FROM Usuario WHERE email = ?";
+    params = [request.body.emailUsuario];
+    connection.query(query, params, (err, results) => {
+        if (!(results && results.length > 0)) {
+            response
+            .status(400)
+            .json({
+                success: false,
+                message: "E-mail não cadastrado.",
+                data: err
+            });
+            return;
+        }
+        idUsuario = results[0]["idUsuario"];
+
+        // Verificando se a senha está correta
+        query = "SELECT senha FROM Usuario WHERE idUsuario = ?";
+        params = [idUsuario];
+        connection.query(query, params, (err, results) => {
+            if (results && results[0]["senha"] === request.body.senhaAtual) {
+                query = "UPDATE Usuario SET senha = ? WHERE idUsuario = ?";
+                params = [
+                    request.body.senhaNova,
+                    idUsuario
+                ];
+
+                connection.query(query, params, (err, results) => {
+                    if (results) {
+                        response
+                        .status(201)
+                        .json({
+                            success: true,
+                            message: "Senha alterada com sucesso!",
+                            data: results
+                        });
+                    } else {
+                        response
+                        .status(400)
+                        .json({
+                            success: false,
+                            message: "Erro ao alterar a senha do usuário.",
+                            data: err
+                        });
+                    }
+                });
+            } else {
+                response
+                .status(400)
+                .json({
+                    success: false,
+                    message: "Senha atual incorreta.",
+                    data: err
+                });
+            }
+        });
+    });
+});
+
+app.delete("/excluir_conta_usuario/:email/:senha", (request, response) => {
+    // Pegando o ID do usuário com base no e-mail
+    query = "SELECT idUsuario FROM Usuario WHERE email = ?";
+    params = [request.params.email];
+    connection.query(query, params, (err, results) => {
+        if (!(results && results.length > 0)) {
+            response
+            .status(400)
+            .json({
+                success: false,
+                message: "E-mail não cadastrado.",
+                data: err
+            });
+            return;
+        }
+        idUsuario = results[0]["idUsuario"];
+
+        // Verificando se a senha está correta
+        query = "SELECT senha FROM Usuario WHERE idUsuario = ?";
+        params = [idUsuario];
+        connection.query(query, params, (err, results) => {
+            if (results && results[0]["senha"] === request.params.senha) {
+                query = "DELETE FROM Usuario WHERE idUsuario = ?";
+                params = [idUsuario];
+
+                connection.query(query, params, (err, results) => {
+                    if (results) {
+                        response
+                        .status(201)
+                        .json({
+                            success: true,
+                            message: "Conta excluída com sucesso!",
+                            data: results
+                        });
+                    } else {
+                        response
+                        .status(400)
+                        .json({
+                            success: false,
+                            message: "Erro ao excluir a conta.",
+                            data: err
+                        });
+                    }
+                });
+            } else {
+                response
+                .status(400)
+                .json({
+                    success: false,
+                    message: "Senha incorreta.",
+                    data: err
+                });
+            }
+        });
+    });
+});
+
+app.get("/is_usuario_adm/:email/:senha", (request, response) => {
+    // Pegando o ID do usuário com base no e-mail
+    query = "SELECT idUsuario FROM Usuario WHERE email = ?";
+    params = [request.params.email];
+    connection.query(query, params, (err, results) => {
+        if (!(results && results.length > 0)) {
+            response
+            .status(400)
+            .json({
+                success: false,
+                message: "E-mail não cadastrado.",
+                data: err
+            });
+            return;
+        }
+        idUsuario = results[0]["idUsuario"];
+
+        // Verificando se a senha está correta
+        query = "SELECT senha FROM Usuario WHERE idUsuario = ?";
+        params = [idUsuario];
+        connection.query(query, params, (err, results) => {
+            if (results && results[0]["senha"] === request.params.senha) {
+                query = "SELECT administrador FROM Usuario WHERE idUsuario = ?";
+                params = [idUsuario];
+
+                connection.query(query, params, (err, results) => {
+                    if (results) {
+                        response
+                        .status(201)
+                        .json({
+                            success: true,
+                            message: "Verificação de adm feita com sucesso!",
+                            data: results[0]["administrador"].readUInt8(0)
+                        });
+                    } else {
+                        response
+                        .status(400)
+                        .json({
+                            success: false,
+                            message: "Erro ao fazer verificação de adm.",
+                            data: err
+                        });
+                    }
+                });
+            } else {
+                response
+                .status(400)
+                .json({
+                    success: false,
+                    message: "Senha incorreta.",
+                    data: err
+                });
+            }
+        });
+    });
+});

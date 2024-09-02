@@ -35,9 +35,7 @@ async function cadastrar(event) {
     let caminhoImagem = "";
 
     if (resultsImg.success) {
-        alert(resultsImg.message);
         caminhoImagem = resultsImg.filePath;
-        console.log("Caminho da imagem: " + caminhoImagem);
     } else {
         alert("Erro ao fazer o upload da imagem");
         return;

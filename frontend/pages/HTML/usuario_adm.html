@@ -25,6 +25,23 @@
         </div>
     </header>
     <main>
+        <section id="secaoredefinirSenha">
+            <div id="divRedefinir">
+                <h3 id="tituloRedefinir">Redefinir senha</h3>
+                <img src="../../assets/fechar_amarelo.png" alt="Fechar" id="fechar" onclick="botaoFechar()">
+            </div>
+            <form>
+                <div class="entradas">
+                    <label for="senhaAtual">Senha atual</label>
+                    <input type="password" id="senhaAtual" name="senhaAtual" placeholder="Insira sua senha atual" required>
+                </div>
+                <div class="entradas">
+                    <label for="senhaNova">Senha nova</label>
+                    <input type="password" id="senhaNova" name="senhaNova" placeholder="Insira sua senha nova" required>
+                </div>
+                <button type="button" id="botaoRedefinir" onclick="enviarRedefinicaoSenha()">Redefinir</button>
+            </form>
+        </section>
         <section class="secaoPrincipal">
             <div id="divTitulo">
                 <img src="../../assets/seta_volta.png" alt="seta" class="seta_volta_com_titulo">
@@ -35,7 +52,7 @@
                     <img src="../../assets/estoque.png" alt="caixa" class="imagens" id="estoque">
                     <h2 class="topicosEsquerda_Texto">Estoque</h2>
                 </a>
-                <a href="/cadastro_produto" class="topicosEsquerda" id="produtos">
+                <a href="/cadastrar_produto" class="topicosEsquerda" id="produtos">
                     <img src="../../assets/registro.png" alt="cupom" class="imagens">
                     <h2 class="topicosEsquerda_Texto">Cadastro de produtos</h2>
                 </a>
@@ -61,6 +78,7 @@
                         <h3 class="topicoDireita_Subtitulo_Branco">de lucro</h3>
                     </div>
                 </div>
+                <a href="#" onclick="redefinirSenha()" id="redefinir_senha">Redefinir senha</a>
             </section>
         </section>
     </main>
