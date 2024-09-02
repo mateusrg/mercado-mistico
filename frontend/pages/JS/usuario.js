@@ -28,3 +28,13 @@ function sairConta () {
 
     window.location.href = '/login';
 }
+
+function redefinirSenha() {
+    document.getElementById('secaoredefinirSenha').style.display = 'flex';
+}
+
+function botaoFechar () {
+    document.getElementById('secaoredefinirSenha').style.display = 'none';
+    document.querySelectorAll('#senhaAtual').forEach(input => input.value = '');
+    document.querySelectorAll('#senhaNova').forEach(input => input.value = '');
+}

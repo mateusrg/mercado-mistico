@@ -216,7 +216,7 @@ carrinho.forEach(produtoNoCarrinho => {
     <div class="interacoesProduto">
         <div class="excluirE">
             <img src="../../assets/lixo.png" alt="Excluir" class="excluir" onclick="excluir('p${idProduto}')">
-            <img src="../../assets/coracao_cheio.png" alt="Favoritar" class="favoritar">
+            <img src="../../assets/coracao_cheio.png" alt="Favoritar" class="favoritar" onclick="adicionarFavoritos()">
         </div>
     </div>
     `;
@@ -316,3 +316,21 @@ document.querySelector("#botaoFinalizarCompra").addEventListener("click", () => 
         window.location.href = '/finalizar_compra';
     }
 });
+
+// async function adicionarFavoritos() {
+//     const emailUsuario = localStorage.getItem("email");
+
+//     const response = await fetch(`/listar_favoritos/${emailUsuario}`, {
+//         method: "GET",
+//         headers: {
+//             "Content-Type": "application/json"
+//         }
+//     });
+//     const results = await response.json();
+
+//     if (results.success) {
+//         return results.data;
+//     }
+//     alert(results.message);
+//     return undefined;
+// }

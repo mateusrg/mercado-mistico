@@ -294,6 +294,7 @@ app.post("/adicionar_endereco", (request, response) => {
         connection.query(query, params, (err, results) => {
             if (results) {
                 if (request.body.enderecoPadrao) {
+                    console.error("Entrando no bloco de UPDATE");
                     idEnderecoPadrao = results.insertId;
                     query = "UPDATE Usuario SET idEnderecoPadrao = ? WHERE idUsuario = ?;";
                     params = [

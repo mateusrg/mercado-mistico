@@ -4,7 +4,7 @@ USE MysticMarket;
 CREATE TABLE Produto (
 	idProduto INT PRIMARY KEY AUTO_INCREMENT,
     nome VARCHAR(255) NOT NULL,
-    preco DECIMAL(2) NOT NULL,
+    preco DECIMAL(50, 2) NOT NULL,
     descricao TEXT,
     imagem VARCHAR(255) NOT NULL,
     quantidade INT

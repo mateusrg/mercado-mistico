@@ -81,16 +81,15 @@ async function enviar(event) {
     if(!results.success) {
         alert(results.message);
     } else {
-        nome = '';
-        CEP = '';
-        endereco = '';
-        numeroResidencia = '';
-        complemento = '';
-        bairro = '';
-        cidade = '';
-        estado = '';
+        document.getElementById("nomeInput").value = '';
+        document.getElementById("cepInput").value = '';
+        document.getElementById("enderecoInput").value = '';
+        document.getElementById("numeroInput").value = '';
+        document.getElementById("complementoInput").value = '';
+        document.getElementById("bairroInput").value = '';
+        document.getElementById("cidadeInput").value = '';
+        document.getElementById("estadoInput").value = '';
         document.getElementById('imagemCheckbox').src = "../../assets/checkbox_desmarcado.png";
-        enderecoPadrao = false;
     }
 }
 

@@ -14,8 +14,10 @@ function verificarEstadoDeLogin() {
 
 verificarEstadoDeLogin();
 
-async function listarProdutos() {
-    const response = await fetch("/listar_produtos", {
+async function selecionarFavoritos() {
+    const emailUsuario = localStorage.getItem("email");
+
+    const response = await fetch(`/listar_favoritos/${emailUsuario}`, {
         method: "GET",
         headers: {
             "Content-Type": "application/json"
