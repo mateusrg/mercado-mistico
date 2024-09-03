@@ -1,7 +1,6 @@
 function verificarEstadoDeLogin() {
-    const estaLogado = localStorage.getItem('estaLogado');
-    
-    if (estaLogado === 'true') {
+    const nome = localStorage.getItem('nome');    
+    if (nome) {
         // Usuário está logado, mostrar elementos do cabeçalho logado
         document.getElementById('botoes_header_direita_deslogado').style.display = 'none';
         document.getElementById('botoes_header_direita_logado').style.display = 'flex';
@@ -9,10 +8,13 @@ function verificarEstadoDeLogin() {
         // Usuário está deslogado, mostrar elementos do cabeçalho deslogado
         document.getElementById('botoes_header_direita_deslogado').style.display = 'flex';
         document.getElementById('botoes_header_direita_logado').style.display = 'none';
+        window.location.href = '/login';
     }
 }
 
 verificarEstadoDeLogin();
+exibirEnderecos();
+document.body.classList.add('no-scrollbar');
 
 function marcarCheckbox() {
     let img = document.getElementById('imagemCheckbox');
@@ -28,14 +30,12 @@ function marcarCheckbox() {
 function botaoAdicionar() {
     document.getElementById('secao_adicionar_endereco').style.display = 'flex';
     document.getElementById('adicionarEndereco').style.backgroundColor = 'var(--azulEscuro)';
-    document.body.classList.add('no-scrollbar');
 }
 
 function botaoFechar () {
     document.getElementById('secao_adicionar_endereco').style.display = 'none';
     document.querySelectorAll('.inputEndereco').forEach(input => input.value = '');
     document.getElementById('adicionarEndereco').style.backgroundColor = 'var(--vermelhoAlaranjado)';
-    document.body.classList.remove('no-scrollbar');
 }
 
 async function enviar(event) {
@@ -81,6 +81,8 @@ async function enviar(event) {
     if(!results.success) {
         alert(results.message);
     } else {
+        document.getElementById('adicionarEndereco').style.backgroundColor = 'var(--vermelhoAlaranjado)';
+        document.getElementById('secao_adicionar_endereco').style.display = 'none';
         document.getElementById("nomeInput").value = '';
         document.getElementById("cepInput").value = '';
         document.getElementById("enderecoInput").value = '';
@@ -90,7 +92,15 @@ async function enviar(event) {
         document.getElementById("cidadeInput").value = '';
         document.getElementById("estadoInput").value = '';
         document.getElementById('imagemCheckbox').src = "../../assets/checkbox_desmarcado.png";
+
+        removerEnderecos();
+        exibirEnderecos();
     }
+}
+
+function removerEnderecos() {
+    const divs = document.querySelectorAll('.divCaixa');
+    divs.forEach(div => div.remove());
 }
 
 function formatarCEP(campo) {
@@ -132,3 +142,65 @@ document.getElementById("cepInput").addEventListener("blur", async function() {
         alert("Erro ao buscar o CEP.");
     }
 });
+
+async function exibirEnderecos() {
+    const enderecos = await selecionarEnderecos();
+
+    const lista_enderecos = document.getElementById('secao_enderecos');
+    enderecos.forEach(endereco => {
+        let novoEndereco = document.createElement('div');
+        novoEndereco.innerHTML = `
+            <div class="subdivCaixa_cima">
+                <h4 class="textosMenores" id="nomeCompleto">${endereco.nome},</h4>
+                <h4 class="textosMenores" id="numeroResidencia">Número da residência: ${endereco.numeroResidencia}</h4>
+            </div>
+            <h4 class="textosMenores" id="endereco">${endereco.endereco}</h4>
+            <div class="subdivCaixa_baixo">
+                <h4 class="textosMenores" id="cep">CEP: ${endereco.CEP}</h4>
+                <div id="subdivBotao">
+                    <img src="../../assets/lixo.png" alt="Excluir" id="excluir" onclick="excluirEndereco(this.parentElement, ${endereco.idEndereco})">
+                    <h4 onclick="mudarTexto()" class="textosMenores" id="editar">Editar</h4>
+                </div>
+            </div>
+        `;
+
+        novoEndereco.className = 'divCaixa';
+        lista_enderecos.appendChild(novoEndereco);
+    });
+}
+
+async function selecionarEnderecos() {
+    const email = localStorage.getItem("email");
+    const response = await fetch(`/pegar_enderecos/${email}`, {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json"
+        }
+    });
+    const results = await response.json();
+
+    if (results.success) {
+        return results.data;
+    }
+    alert(results.message);
+    return undefined;
+}
+
+async function excluirEndereco(elemento, idEndereco) {
+    const id = idEndereco;
+    console.log("teste")
+    elemento.closest('.divCaixa').remove();
+
+    const response = await fetch(`/deletar_endereco/${id}`, {
+        method: "DELETE",
+        headers: {
+            "Content-Type": "application/json"
+        }
+    });
+
+    const results = await response.json();
+    
+    if (!results.success) {
+        alert(results.message);
+    }
+}
