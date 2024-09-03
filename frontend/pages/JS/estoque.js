@@ -1,7 +1,6 @@
 function verificarEstadoDeLogin() {
-    const estaLogado = localStorage.getItem('estaLogado');
-    
-    if (estaLogado === 'true') {
+    const nome = localStorage.getItem('nome');    
+    if (nome) {
         // Usuário está logado, mostrar elementos do cabeçalho logado
         document.getElementById('botoes_header_direita_deslogado').style.display = 'none';
         document.getElementById('botoes_header_direita_logado').style.display = 'flex';
@@ -9,11 +8,13 @@ function verificarEstadoDeLogin() {
         // Usuário está deslogado, mostrar elementos do cabeçalho deslogado
         document.getElementById('botoes_header_direita_deslogado').style.display = 'flex';
         document.getElementById('botoes_header_direita_logado').style.display = 'none';
+        window.location.href = '/login';
     }
 }
 
 document.body.classList.add('no-scrollbar');
 verificarEstadoDeLogin();
+exibirProdutos();
 
 function formatarPreco(campo) {
     let valor = campo.value.replace(/,/g, '.').replace(/[^0-9.]/g, '');
@@ -30,8 +31,19 @@ function formatarPreco(campo) {
     campo.value = valor;
 }
 
-function botaoEditar() {
+function botaoEditar(botao) {
     document.getElementById('secao_editar_produto').style.display = 'flex';
+    const secaoProduto = botao.closest('section');
+
+    const nome = secaoProduto.querySelector('.nome').textContent;
+    const preco = secaoProduto.querySelector('.preco').textContent.replace('Preço: R$ ', '');
+    const quantidade = secaoProduto.querySelector('.quant').textContent.replace('Quantidade: ', '');
+    const descricao = secaoProduto.querySelector('.inputDescricao').value;
+
+    document.getElementById('nomeInput').value = nome;
+    document.getElementById('precoInput').value = preco;
+    document.getElementById('quantidadeInput').value = quantidade;
+    document.getElementById('editar_inputDescricao').value = descricao;
 }
 
 function botaoFechar () {
@@ -48,23 +60,23 @@ async function exibirProdutos() {
     produtos.forEach(produto => {
         let novoProduto = document.createElement('section');
         novoProduto.innerHTML = `
-            <img src="${produto.imagem}" alt="Produto" id="imagemProduto">
+            <img src="${produto.imagem}" alt="Produto" class="imagemProduto">
             <div class="div_info">
-                <h3 id="nome">${produto.nome}</h3>
-                <h3 id="quant">Quantidade: ${produto.quantidade}</h3>
-                <h3 id="preco">Preço: R$ ${produto.preco}</h3>
+                <h3 class="nome">${produto.nome}</h3>
+                <h3 class="quant">Quantidade: ${produto.quantidade}</h3>
+                <h3 class="preco">Preço: R$ ${produto.preco}</h3>
             </div>
-            <div id="div_inputDescricao">
-                <label for="descricao" id="labelDescricao">Descrição:</label>
-                <textarea type="text" class="inputDescricao" id="inputDescricao" name="descricao" placeholder="Descrição aqui" textContent="${produto.descricao}" readonly></textarea>
+            <div class="div_inputDescricao">
+                <label for="descricao" class="labelDescricao">Descrição:</label>
+                <textarea type="text" class="inputDescricao" name="descricao" placeholder="Descrição aqui" readonly>${produto.descricao}</textarea>
             </div>
-            <div class="div_editar" onclick="botaoEditar()">
-                <img src="../../assets/criar.png" alt="Editar" id="imagemEditar">
-                <h2 id="textoEditar">Editar</h2>
+            <div class="div_editar" onclick="botaoEditar(this)">
+                <img src="../../assets/criar.png" alt="Editar" class="imagemEditar">
+                <h2 class="textoEditar">Editar</h2>
             </div>
-            <div class="div_excluir">
-                <img src="../../assets/lixo.png" alt="Excluir" id="imagemExcluir">
-                <h2 id="textoExcluir">Excluir</h2>
+            <div class="div_excluir" onclick="botaoExcluir(${produto.idProduto})">
+                <img src="../../assets/lixo.png" alt="Excluir" class="imagemExcluir">
+                <h2 class="textoExcluir">Excluir</h2>
             </div>
         `;
         novoProduto.className = 'secao_produto';
@@ -86,4 +98,21 @@ async function selecionarProdutos() {
     }
     alert(results.message);
     return undefined;
+}
+
+async function botaoExcluir (idProduto) {
+    const id = idProduto;
+
+    const response = await fetch(`/excluir_adm/${id}`, {
+        method: "DELETE",
+        headers: {
+            "Content-Type": "application/json"
+        }
+    });
+
+    const results = await response.json();
+    
+    if (!results.success) {
+        alert(results.message);
+    }
 }
