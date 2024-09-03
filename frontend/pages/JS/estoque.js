@@ -31,15 +31,18 @@ function formatarPreco(campo) {
     campo.value = valor;
 }
 
-function botaoEditar(botao) {
+function botaoEditar(elemento, id) {
     document.getElementById('secao_editar_produto').style.display = 'flex';
-    const secaoProduto = botao.closest('section');
+    const secaoProduto = elemento.closest('section');
 
+    
+    const idProduto = id;
     const nome = secaoProduto.querySelector('.nome').textContent;
     const preco = secaoProduto.querySelector('.preco').textContent.replace('Preço: R$ ', '');
     const quantidade = secaoProduto.querySelector('.quant').textContent.replace('Quantidade: ', '');
     const descricao = secaoProduto.querySelector('.inputDescricao').value;
 
+    document.getElementById("idProdutoHidden").value = idProduto;
     document.getElementById('nomeInput').value = nome;
     document.getElementById('precoInput').value = preco;
     document.getElementById('quantidadeInput').value = quantidade;
@@ -60,6 +63,7 @@ async function exibirProdutos() {
     produtos.forEach(produto => {
         let novoProduto = document.createElement('section');
         novoProduto.innerHTML = `
+            <p class="idIdentificador">${produto.idProduto}</p>
             <img src="${produto.imagem}" alt="Produto" class="imagemProduto">
             <div class="div_info">
                 <h3 class="nome">${produto.nome}</h3>
@@ -70,17 +74,28 @@ async function exibirProdutos() {
                 <label for="descricao" class="labelDescricao">Descrição:</label>
                 <textarea type="text" class="inputDescricao" name="descricao" placeholder="Descrição aqui" readonly>${produto.descricao}</textarea>
             </div>
-            <div class="div_editar" onclick="botaoEditar(this)">
+            <div class="div_editar" onclick="botaoEditar(this, ${produto.idProduto})">
                 <img src="../../assets/criar.png" alt="Editar" class="imagemEditar">
                 <h2 class="textoEditar">Editar</h2>
             </div>
-            <div class="div_excluir" onclick="botaoExcluir(${produto.idProduto})">
+            <div class="div_excluir" onclick="botaoExcluir(this.parentElement, ${produto.idProduto})">
                 <img src="../../assets/lixo.png" alt="Excluir" class="imagemExcluir">
                 <h2 class="textoExcluir">Excluir</h2>
             </div>
         `;
+
         novoProduto.className = 'secao_produto';
         lista_produtos.appendChild(novoProduto);
+    });
+    const sections = document.querySelectorAll('#secao_principal section');
+    sections.forEach((section, index) => {
+        const sectionCorClasse = index % 2 === 0 ? 'azulMaisEscuro' : 'azulEscuro';
+        const textareaCorClasse = index % 2 === 0 ? 'azulEscuro' : 'azulMaisEscuro';
+        
+        section.classList.add(sectionCorClasse);
+
+        const textarea = section.querySelector('.inputDescricao');
+        textarea.classList.add(textareaCorClasse);
     });
 }
 
@@ -100,10 +115,11 @@ async function selecionarProdutos() {
     return undefined;
 }
 
-async function botaoExcluir (idProduto) {
+async function botaoExcluir(elemento, idProduto) {
     const id = idProduto;
+    elemento.closest('.secao_produto').remove();
 
-    const response = await fetch(`/excluir_adm/${id}`, {
+    const response = await fetch(`/excluir_produto/${id}`, {
         method: "DELETE",
         headers: {
             "Content-Type": "application/json"
@@ -115,4 +131,71 @@ async function botaoExcluir (idProduto) {
     if (!results.success) {
         alert(results.message);
     }
+}
+
+async function editarProduto(event) {
+    event.preventDefault();
+
+    const nome = document.getElementById("nomeInput").value;
+    const preco = document.getElementById("precoInput").value;
+    const quantidade = document.getElementById("quantidadeInput").value;
+    const descricao = document.getElementById('editar_inputDescricao').value;
+    const idProduto = document.getElementById("idProdutoHidden").value;
+
+    const data = {
+        nome,
+        preco,
+        descricao,
+        quantidade,
+        idProduto
+    }
+
+    console.log(data);
+
+    const response = await fetch('/editar_produto', {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data)
+    })
+
+    const results = await response.json();
+
+    console.log(results)
+    if(results.success) {
+        console.log(response);
+        alert(results.message);
+
+        document.getElementById('secao_editar_produto').style.display = "none";
+
+        document.getElementById("nomeInput").value = '';
+        document.getElementById("precoInput").value = '';
+        document.getElementById("quantidadeInput").value = '';
+        document.getElementById('editar_inputDescricao').value = '';
+
+        atualizarProdutoNaTela(idProduto, data);
+    } else {
+        alert(results.message);
+    }
+}
+
+function atualizarProdutoNaTela(idProduto, dadosAtualizados) {
+    const produtos = document.querySelectorAll('#secao_principal .secao_produto');
+
+    produtos.forEach(produto => {
+        const idElemento = produto.querySelector('.idIdentificador').innerText;
+
+        if (idElemento == idProduto) {
+            const nomeProduto = produto.querySelector('.nome');
+            const precoProduto = produto.querySelector('.preco');
+            const quantProduto = produto.querySelector('.quant');
+            const descricaoProduto = produto.querySelector('.inputDescricao');
+
+            nomeProduto.innerText = dadosAtualizados.nome;
+            precoProduto.innerText = `Preço: R$ ${dadosAtualizados.preco}`;
+            quantProduto.innerText = `Quantidade: ${dadosAtualizados.quantidade}`;
+            descricaoProduto.value = dadosAtualizados.descricao;
+        }
+    });
 }
