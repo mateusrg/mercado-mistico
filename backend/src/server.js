@@ -52,7 +52,7 @@ app.post("/uppar_imagem", upload.single("imagem"), (request, response) => {
     .json({
         success: true,
         message: "Imagem uppada com sucesso!",
-        filePath: path.join(__dirname, "..", "..", "frontend", "assets", "produtos", request.file.filename)
+        filePath: path.join("assets", "produtos", request.file.filename)
     });
 });
 
