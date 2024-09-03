@@ -38,7 +38,7 @@ function botaoEditar(elemento, id) {
     
     const idProduto = id;
     const nome = secaoProduto.querySelector('.nome').textContent;
-    const preco = secaoProduto.querySelector('.preco').textContent.replace('Preço: R$ ', '');
+    const preco = secaoProduto.querySelector('.preco').textContent.replace('Preço: ', '');
     const quantidade = secaoProduto.querySelector('.quant').textContent.replace('Quantidade: ', '');
     const descricao = secaoProduto.querySelector('.inputDescricao').value;
 
@@ -68,7 +68,7 @@ async function exibirProdutos() {
             <div class="div_info">
                 <h3 class="nome">${produto.nome}</h3>
                 <h3 class="quant">Quantidade: ${produto.quantidade}</h3>
-                <h3 class="preco">Preço: R$ ${produto.preco}</h3>
+                <h3 class="preco">Preço: ${Number(produto.preco).toLocaleString("pt-BR", {style: "currency", currency: "BRL"})}</h3>
             </div>
             <div class="div_inputDescricao">
                 <label for="descricao" class="labelDescricao">Descrição:</label>
@@ -193,9 +193,11 @@ function atualizarProdutoNaTela(idProduto, dadosAtualizados) {
             const descricaoProduto = produto.querySelector('.inputDescricao');
 
             nomeProduto.innerText = dadosAtualizados.nome;
-            precoProduto.innerText = `Preço: R$ ${dadosAtualizados.preco}`;
+            precoProduto.innerText = `Preço: ${dadosAtualizados.preco}`;
             quantProduto.innerText = `Quantidade: ${dadosAtualizados.quantidade}`;
             descricaoProduto.value = dadosAtualizados.descricao;
+
+            precoProduto.innerText = `Preço: ${Number(precoProduto.innerText.replace('Preço: ', '')).toLocaleString("pt-BR", {style: "currency", currency: "BRL"})}`;
         }
     });
 }

@@ -101,7 +101,7 @@ label {
     font-weight: 400;
     background-color: var(--ciano);
     color: var(--branco);
-    width: 48vw;
+    width: 55vw;
     font-size: 2.5vh;
     height: 3vh;
     border-radius: 0.5vh;
@@ -113,7 +113,7 @@ label {
     font-weight: 400;
     background-color: var(--ciano);
     color: var(--branco);
-    width: 48vw;
+    width: 55vw;
     font-size: 2.5vh;
     border-radius: 0.5vh;
     padding: 1vh 1vw;
