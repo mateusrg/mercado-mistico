@@ -86,7 +86,7 @@ CREATE TABLE Cupom (
 
 CREATE TABLE CartaoPresente (
 	idCartaoPresente INT PRIMARY KEY AUTO_INCREMENT,
-    valor DECIMAL(2) NOT NULL,
+    valor DECIMAL(10, 2) NOT NULL,
     nomeDestinatario VARCHAR(80),
     idDestinatario INT NOT NULL,
     nomeRemetente VARCHAR(80),
@@ -98,7 +98,7 @@ CREATE TABLE CartaoPresente (
 CREATE TABLE Pedido (
 	idPedido INT PRIMARY KEY AUTO_INCREMENT,
     data DATE NOT NULL,
-    total DECIMAL(2) NOT NULL,
+    total DECIMAL(10, 2) NOT NULL,
     idEndereco INT NOT NULL,
     idUsuario INT NOT NULL,
     FOREIGN KEY (idEndereco) REFERENCES Endereco(idEndereco),
