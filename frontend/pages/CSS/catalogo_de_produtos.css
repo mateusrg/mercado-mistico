@@ -20,7 +20,8 @@ main {
     width: 90vw;
     margin-top: 2.5rem;
     display: flex;
-    gap: 3vh;
+    flex-direction: column;
+    gap: 5vh;
 }
 
 #titulo {
@@ -59,6 +60,7 @@ main {
     color: var(--amarelo);
     cursor: pointer;
     white-space: nowrap; /* Evita quebra de linha */
+    line-height: 1;
 }
 
 .precoProduto {
@@ -69,12 +71,11 @@ main {
     margin: -10px 0px 2rem 0px;
 }
 
-#subdiv_produto {
+.subdiv_produto {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     height: 25vh;
-    gap: 5vh;
 }
 
 .titulo_produto {
@@ -89,12 +90,25 @@ main {
 
 .coracao {
     height: 8.5vh;
-    width: 3.5vw;
     margin-top: 0.5vh;
     filter: saturate(0%);
 }
 
-#subdiv_produto_imagens {
+.emEstoque {
+    color: var(--vermelhoAlaranjado);
+    font-size: 1.25rem;
+    font-family: "Inder";
+    margin: 1.3vh 0px 3vh 0px;
+}
+
+.semEstoque {
+    color: var(--verdeMusgo);
+    font-size: 1.25rem;
+    font-family: "Inder";
+    margin: 1.3vh 0px 3vh 0px;
+}
+
+.subdiv_produto_imagens {
     display: flex;
     align-items: flex-start;
     gap: 2vw;

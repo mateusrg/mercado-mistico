@@ -173,6 +173,62 @@ app.post("/cad_produto", (request, response) => {
     });
 });
 
+app.put("/editar_produto", (request, response) => {
+    query = "UPDATE Produto SET nome = ?, preco = ?, descricao = ?, quantidade = ? WHERE idProduto = ?";
+    params = [
+        request.body.nome,
+        request.body.preco,
+        request.body.descricao,
+        request.body.quantidade,
+        request.body.idProduto
+    ];
+
+    connection.query(query, params, (err, results) => {
+        if (results) {
+            response
+            .status(201)
+            .json({
+                success: true,
+                message: "Produto alterado com sucesso!",
+                data: results
+            });
+        } else {
+            response
+            .status(400)
+            .json({
+                success: false,
+                message: "Erro ao alterar o produto.",
+                data: err
+            });
+        }
+    });
+});
+
+app.delete("/excluir_produto/:idProduto", (request, response) => {
+    query = "DELETE FROM Produto WHERE idProduto = ?";
+    params = [request.params.idProduto];
+
+    connection.query(query, params, (err, results) => {
+        if (results) {
+            response
+            .status(201)
+            .json({
+                success: true,
+                message: "Produto excluído com sucesso!",
+                data: results
+            });
+        } else {
+            response
+            .status(400)
+            .json({
+                success: false,
+                message: "Erro ao excluir o produto.",
+                data: err
+            });
+        }
+    });
+});
+
 app.get("/listar_adms", (request, response) => {
     const query = "SELECT * FROM Usuario WHERE administrador = ?";
     const params = [1];
