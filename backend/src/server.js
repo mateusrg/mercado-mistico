@@ -728,7 +728,7 @@ app.post("/add_favorito", (request, response) => {
     });
 });
 
-app.get("listar_favoritos/:emailUsuario", (request, response) => {
+app.get("/listar_favoritos/:emailUsuario", (request, response) => {
     // Pegando o ID do usuário com base no e-mail
     query = "SELECT idUsuario FROM Usuario WHERE email = ?";
     params = [request.params.emailUsuario];
