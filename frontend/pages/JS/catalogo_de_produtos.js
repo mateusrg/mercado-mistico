@@ -43,16 +43,40 @@ async function exibirCatalogo() {
                 <div class="subdiv_produto">
                     <a onclick="paginaProduto(${produto.idProduto})" class="nomeProduto">${produto.nome}</a>
                     ${produto.quantidade > 0 ? '<p class="emEstoque">em estoque</p>' : '<p class="semEstoque">sem estoque</p>'}
-                    <h6 class="precoProduto">Preço: ${produto.preco.toLocaleString("pt-BR", {style: "currency", currency: "BRL"})}</h6>
+                    <h6 class="precoProduto">Preço: ${Number(produto.preco).toLocaleString("pt-BR", {style: "currency", currency: "BRL"})}</h6>
                 </div>
                 <div class="subdiv_produto_imagens">
-                    <img src="../../assets/coracao.png" alt="Favoritar" class="coracao">
-                    <img src="../../assets/adicionar_carrinho.png" alt="Adicionar ao Carrinho" class="carrinho">
+                    <img src="../../assets/coracao.png" alt="Favoritar" class="coracao" onclick="favoritar(this, ${produto.idProduto})">
+                    <img src="../../assets/adicionar_carrinho.png" alt="Adicionar ao Carrinho" class="carrinho" onclick="addCarrinho(${produto.idProduto})">
                 </div>
             </div>
         </section>
         `;
     });
+}
+
+async function favoritar(elemento, idProduto) {
+    const emailUsuario = localStorage.getItem("email");
+    
+    data = {
+        emailUsuario,
+        idProduto
+    };
+
+    const response = await fetch("/add_favorito", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+    });
+    const results = await response.json();
+
+    if (results.success) {
+        elemento.src = "./assets/coracao_cheio.png";
+    } else {
+        alert(results.message);
+    }
 }
 
 exibirCatalogo();

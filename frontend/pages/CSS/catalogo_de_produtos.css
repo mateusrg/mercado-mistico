@@ -89,7 +89,7 @@ main {
 }
 
 .coracao {
-    height: 8.5vh;
+    height: 6.5vh;
     margin-top: 0.5vh;
     filter: saturate(0%);
 }
@@ -110,8 +110,9 @@ main {
 
 .subdiv_produto_imagens {
     display: flex;
-    align-items: flex-start;
+    align-items: center;
     gap: 2vw;
+    height: fit-content;
 }
 
 .carrinho:hover {
