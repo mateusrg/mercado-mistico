@@ -4,7 +4,7 @@ USE MysticMarket;
 CREATE TABLE Produto (
 	idProduto INT PRIMARY KEY AUTO_INCREMENT,
     nome VARCHAR(255) NOT NULL,
-    preco DECIMAL(50, 2) NOT NULL,
+    preco DECIMAL(10, 2) NOT NULL,
     descricao TEXT,
     imagem VARCHAR(255) NOT NULL,
     quantidade INT
@@ -74,9 +74,9 @@ CREATE TABLE TipoValidacao (
 
 CREATE TABLE Cupom (
 	idCupom INT PRIMARY KEY AUTO_INCREMENT,
-    valor DECIMAL(2) NOT NULL,
+    valor DECIMAL(3, 2) NOT NULL,
     porcentagem BIT NOT NULL,
-    valorValidacao DECIMAL(2) NOT NULL,
+    valorValidacao DECIMAL(10, 2) NOT NULL,
     idTipoValidacao INT NOT NULL,
     codigo VARCHAR(10) NOT NULL UNIQUE,
     dataInicio DATE,
