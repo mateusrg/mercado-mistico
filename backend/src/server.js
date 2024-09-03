@@ -771,7 +771,7 @@ app.get("/listar_favoritos/:emailUsuario", (request, response) => {
     });
 });
 
-app.delete("excluir_favorito/:emailUsuario/:idProduto", (request, response) => {
+app.delete("/excluir_favorito/:emailUsuario/:idProduto", (request, response) => {
     // Pegando o ID do usuário com base no e-mail
     query = "SELECT idUsuario FROM Usuario WHERE email = ?";
     params = [request.params.emailUsuario];
