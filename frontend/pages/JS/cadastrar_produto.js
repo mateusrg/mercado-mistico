@@ -85,8 +85,6 @@ document.getElementById('imagemPreview').addEventListener('click', () => {
     document.getElementById('imagemInput').click();
 });
 
-
-// Verificar se esta funcionando
 function formatarPreco(campo) {
     let valor = campo.value.replace(/,/g, '.').replace(/[^0-9.]/g, '');
 
