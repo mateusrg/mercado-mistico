@@ -123,6 +123,10 @@ input {
     align-self: flex-end;
 }
 
+.idIdentificador {
+    display: none;
+}
+
 #divTitulo {
     display: flex;
     align-items: center;
@@ -155,7 +159,6 @@ input {
 
 .imagemProduto {
     border-radius: 0.5vh;
-    cursor: pointer;
     aspect-ratio: 1 / 1; /* Mantém a proporção 1:1 (quadrado) */
     width: 7.5vw; /* Largura fixa para o quadrado */
     height: 7.5vw; /* Altura fixa para o quadrado */

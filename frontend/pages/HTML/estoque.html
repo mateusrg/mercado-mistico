@@ -31,6 +31,7 @@
                 <img src="../../assets/fechar_amarelo.png" alt="Fechar" id="fechar" onclick="botaoFechar()">
             </div>
             <form action="/estoque" id="formProduto">
+                <input type="hidden" id="idProdutoHidden" name="idProduto">
                 <div class="entradas">
                     <label for="nome" class="labelEditar">Nome do produto*</label>
                     <input type="text" class="inputNome" id="nomeInput" name="nome" placeholder="Nome do produto" maxlength="255" required>
@@ -47,7 +48,7 @@
                     <label for="descricao_editar" class="labelDescricao">Descrição:</label>
                     <textarea type="text" class="editar_inputDescricao" id="editar_inputDescricao" name="descricao_editar" placeholder="Descrição do produto"></textarea>
                 </div>
-                <button onclick="enviar(event)" type="submit" id="botaoOK">Ok</button>
+                <button onclick="editarProduto(event)" type="submit" id="botaoOK">Ok</button>
             </form>
         </section>
         <div id="divTitulo">
