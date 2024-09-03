@@ -62,7 +62,7 @@ app.post("/usuario/cadastrar", (request, response) => {
     query = "SELECT * FROM Usuario WHERE email = ?";
     params = [request.params.email];
     connection.query(query, params, (err, results) => {
-        if (results && results.length > 0) {
+        if (!(results && results.length > 0)) {
             response
             .status(400)
             .json({

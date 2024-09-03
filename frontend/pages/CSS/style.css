@@ -99,10 +99,11 @@ a {
     height: 100%;
     display: none;
     align-items: center;
+    gap: 1vw;
 }
 
 #botao_logado_coracao {
-    height: 45%;
+    height: 38%;
     cursor: pointer;
 }
 

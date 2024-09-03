@@ -27,21 +27,21 @@ main {
 #titulo {
     color: var(--amarelo);
     font-family: "Inknut Antiqua";
-    font-size: 40px;
+    font-size: 5vh;
     font-weight: 400;
 }
 
 #subtitulo {
     color: var(--branco);
     font-family: "Inder";
-    font-size: 20px;
+    font-size: 3vh;
     font-weight: 400;
     margin-top: -1rem;
 }
 
 .produto {
     position: relative;
-    margin-left: 3.5rem;
+    margin-left: 2vw;
     display: flex;
     width: 90vw;
     gap: 1.5vw;
@@ -96,7 +96,7 @@ main {
 
 .emEstoque {
     color: var(--vermelhoAlaranjado);
-    font-size: 1.25rem;
+    font-size: 3vh;
     font-family: "Inder";
     margin: 1.3vh 0px 3vh 0px;
 }

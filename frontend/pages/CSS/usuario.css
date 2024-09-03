@@ -21,7 +21,7 @@ main {
     z-index: 5;
     background-color: var(--verdeOpaco);
     height: 45vh;
-    width: 25vw;
+    width: 28vw;
     position: absolute;
     top: 50%;
     left: 50%;
@@ -298,7 +298,7 @@ label {
     font-family: "Inder";
     font-weight: 400;
     font-size: 3.125vh;
-    width: 3.8vw;
+    width: 8.5vw;
 }
 
 #divSair {
@@ -314,7 +314,7 @@ label {
     font-family: "Inder";
     font-weight: 400;
     font-size: 3.125vh;
-    width: 8.5vw;
+    width: 9.6vw;
 }
 
 #catalogoProdutos {
