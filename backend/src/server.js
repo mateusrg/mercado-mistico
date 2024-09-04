@@ -25,7 +25,7 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage });
 
 
-// Rotas de Navegação
+// Rotas de Navegação - Servem apenas para navegar entre as páginas, não são ROTAS de fato
 app.get("/", (req, response) => response.sendFile(path.join(__dirname, "..", "..", "frontend", "index.html")));
 app.get("/cadastro", (req, response) => response.sendFile(path.join(__dirname, "..", "..", "frontend", "pages", "HTML", "cadastro.html")));
 app.get("/catalogo", (req, response) => response.sendFile(path.join(__dirname, "..", "..", "frontend", "pages", "HTML", "catalogo_de_produtos.html")));
@@ -47,6 +47,8 @@ app.get("/cadastrar_produto", (req, response) => response.sendFile(path.join(__d
 // Demais Rotas
 
 // Rotas de Produto
+
+// Rota para cadastrar um novo produto
 app.post("/produto/cadastrar", (request, response) => {
     const query = "INSERT INTO Produto (nome, preco, descricao, imagem, quantidade) VALUES (?, ?, ?, ?, ?);";
     const params = [
@@ -78,6 +80,7 @@ app.post("/produto/cadastrar", (request, response) => {
     });
 });
 
+// Rota para listar os produtos cadastrados para serem exibidos no catálogo
 app.get("/produto/listar", (request, response) => {
     query = "SELECT * FROM Produto";
     connection.query(query, (err, results) => {
@@ -101,6 +104,7 @@ app.get("/produto/listar", (request, response) => {
     });
 });
 
+// Rota para selecionar um produto específico para ser exibido na página de produto
 app.get("/produto/selecionar/:idProduto", (request, response) => {
     query = "SELECT * FROM Produto WHERE idProduto = ?";
     params = [request.params.idProduto];
@@ -126,6 +130,7 @@ app.get("/produto/selecionar/:idProduto", (request, response) => {
     });
 });
 
+// Rota para uppar a imagem de um produto durante o seu cadastro pelo administrador
 app.post("/produto/uppar_imagem", upload.single("imagem"), (request, response) => {
     response
     .status(201)
@@ -167,6 +172,7 @@ app.put("/produto/editar", (request, response) => {
     });
 });
 
+// Rota para excluir um produto
 app.delete("/produto/excluir/:idProduto", (request, response) => {
     query = "DELETE FROM Produto WHERE idProduto = ?";
     params = [request.params.idProduto];
@@ -193,6 +199,8 @@ app.delete("/produto/excluir/:idProduto", (request, response) => {
 });
 
 // Rotas de Usuário
+
+// Rota para cadastrar um novo usuário
 app.post("/usuario/cadastrar", (request, response) => {
     // Verificando se o e-mail existe (diferente das outras rotas, aqui retorna "false" se o e-mail já existir)
     query = "SELECT * FROM Usuario WHERE email = ?";
@@ -241,6 +249,7 @@ app.post("/usuario/cadastrar", (request, response) => {
     });
 });
 
+// Rota para fazer login do usuário, verificando se o e-mail e a senha digitados por ele estão corretos
 app.post("/usuario/login", (request, response) => {
     const query = "SELECT idUsuario, nome, senha, email FROM Usuario WHERE email = ?;";
     const params = [request.body.email];
@@ -278,6 +287,7 @@ app.post("/usuario/login", (request, response) => {
     });
 });
 
+// Rota para editar o nome e a senha do usuário
 app.put("/usuario/editar", (request, response) => {
     // Pegando o ID do usuário com base no e-mail
     query = "SELECT idUsuario FROM Usuario WHERE email = ?";
@@ -339,6 +349,7 @@ app.put("/usuario/editar", (request, response) => {
     });
 });
 
+// Rota para excluir a conta do usuário
 app.delete("/usuario/excluir/:email/:senha", (request, response) => {
     // Pegando o ID do usuário com base no e-mail
     query = "SELECT idUsuario FROM Usuario WHERE email = ?";
@@ -397,6 +408,8 @@ app.delete("/usuario/excluir/:email/:senha", (request, response) => {
 });
 
 // Rotas de Administrador (também são usuários)
+
+// Rota para verificar se um usuário é ou não administrador (retorno: 1 para sim e 0 para não)
 app.get("/usuario/is_adm/:email/:senha", (request, response) => {
     // Pegando o ID do usuário com base no e-mail
     query = "SELECT idUsuario FROM Usuario WHERE email = ?";
@@ -454,6 +467,7 @@ app.get("/usuario/is_adm/:email/:senha", (request, response) => {
     });
 });
 
+// Rota para tornar um usuário administrador
 app.put("/usuario/tornar_adm/:email", (request, response) => {
     // Verificando se o e-mail existe
     query = "SELECT * FROM Usuario WHERE email = ?";
@@ -494,6 +508,7 @@ app.put("/usuario/tornar_adm/:email", (request, response) => {
     });
 });
 
+// Rota para listar os usuários administradores (usado na página de cadastro de administradores para poder cadastrar um novo ADM ou remover um já existente)
 app.get("/usuario/listar_adms", (request, response) => {
     const query = "SELECT * FROM Usuario WHERE administrador = ?";
     const params = [1];
@@ -518,6 +533,7 @@ app.get("/usuario/listar_adms", (request, response) => {
     });
 });
 
+// Rota para remover um administrador
 app.put("/usuario/remover_adm/:email", (request, response) => {
     const query = "UPDATE Usuario SET administrador = 0 WHERE email = ?";
     const params = [request.params.email];
@@ -543,6 +559,8 @@ app.put("/usuario/remover_adm/:email", (request, response) => {
 });
 
 // Rotas de Endereço
+
+// Rota para cadastrar um endereço
 app.post("/endereco/cadastrar", (request, response) => {
     // Pegando o ID do usuário com base no e-mail
     query = "SELECT idUsuario FROM Usuario WHERE email = ?";
@@ -627,6 +645,7 @@ app.post("/endereco/cadastrar", (request, response) => {
     });
 });
 
+// Rota para listar os endereços de um usuário
 app.get("/endereco/listar/:email", (request, response) => {
     // Pegando o ID do usuário com base no e-mail
     query = "SELECT idUsuario FROM Usuario WHERE email = ?";
@@ -702,6 +721,7 @@ app.get("/endereco/listar/:email", (request, response) => {
     });
 });
 
+// Rota para editar um endereço
 app.put("/endereco/editar", (request, response) => {
     query = "UPDATE Endereco SET nome = ?, CEP = ?, endereco = ?, numeroResidencia = ?, complemento = ?, bairro = ?, cidade = ?, estado = ? WHERE idEndereco = ?";
     params = [
@@ -737,6 +757,7 @@ app.put("/endereco/editar", (request, response) => {
     });
 });
 
+// Rota para excluir um endereço
 app.delete("/endereco/excluir/:idEndereco", (request, response) => {
     query = "UPDATE Usuario SET idEnderecoPadrao = null WHERE idEnderecoPadrao = ?";
     params = [request.params.idEndereco];
@@ -767,6 +788,8 @@ app.delete("/endereco/excluir/:idEndereco", (request, response) => {
 });
 
 // Rotas de Carrinho
+
+// Rota para cadastrar um item no carrinho
 app.post("/carrinho/cadastrar", (request, response) => {
     // Pegando o ID do usuário com base no e-mail
     query = "SELECT idUsuario FROM Usuario WHERE email = ?";
@@ -814,6 +837,7 @@ app.post("/carrinho/cadastrar", (request, response) => {
     });
 });
 
+// Rota para listar os itens no carrinho
 app.get("/carrinho/listar/:email", (request, response) => {
     // Pegando o ID do usuário com base no e-mail
     query = "SELECT idUsuario FROM Usuario WHERE email = ?";
@@ -856,6 +880,7 @@ app.get("/carrinho/listar/:email", (request, response) => {
     });
 });
 
+// Rota para editar a quantidade de um item no carrinho
 app.put("/carrinho/editar", (request, response) => {
     query = "UPDATE ItemCarrinho SET quantidade = ? WHERE idItemCarrinho = ?";
     params = [
@@ -884,6 +909,7 @@ app.put("/carrinho/editar", (request, response) => {
     });
 });
 
+// Rota para excluir um item do carrinho
 app.delete("/carrinho/excluir/:idItemCarrinho", (request, response) => {
     query = "DELETE FROM ItemCarrinho WHERE idItemCarrinho = ?";
     params = [request.params.idItemCarrinho];
@@ -910,6 +936,8 @@ app.delete("/carrinho/excluir/:idItemCarrinho", (request, response) => {
 });
 
 // Rotas de Favorito
+
+// Rota para cadastrar um item na lista de favoritos de um usuário
 app.post("/favorito/cadastrar", (request, response) => {
     // Pegando o ID do usuário com base no e-mail
     query = "SELECT idUsuario FROM Usuario WHERE email = ?";
@@ -956,6 +984,7 @@ app.post("/favorito/cadastrar", (request, response) => {
     });
 });
 
+// Rota para listar os itens na lista de favoritos de um usuário
 app.get("/favorito/listar/:emailUsuario", (request, response) => {
     // Pegando o ID do usuário com base no e-mail
     query = "SELECT idUsuario FROM Usuario WHERE email = ?";
@@ -999,6 +1028,7 @@ app.get("/favorito/listar/:emailUsuario", (request, response) => {
     });
 });
 
+// Rota para excluir um item da lista de favoritos de um usuário
 app.delete("/favorito/excluir/:emailUsuario/:idProduto", (request, response) => {
     // Pegando o ID do usuário com base no e-mail
     query = "SELECT idUsuario FROM Usuario WHERE email = ?";
