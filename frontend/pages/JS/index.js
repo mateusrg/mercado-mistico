@@ -1,9 +1,8 @@
 const checarProduto = localStorage.setItem('produtoSelecionado', 'nulo');
 
 function verificarEstadoDeLogin() {
-    const estaLogado = localStorage.getItem('estaLogado');
-    
-    if (estaLogado === 'true') {
+    const nome = localStorage.getItem('nome');    
+    if (nome) {
         // Usuário está logado, mostrar elementos do cabeçalho logado
         document.getElementById('botoes_header_direita_deslogado').style.display = 'none';
         document.getElementById('botoes_header_direita_logado').style.display = 'flex';
@@ -14,13 +13,12 @@ function verificarEstadoDeLogin() {
     }
 }
 
+verificarEstadoDeLogin();
+
 // Se o carrinho não existir no localStorage, ele cria
 if (localStorage.getItem("carrinho") === null) {
     localStorage.setItem("carrinho", JSON.stringify({"carrinho": []}));
 };
-
-verificarEstadoDeLogin();
-
 
 let dados;
 fetch("localhost:3000")
