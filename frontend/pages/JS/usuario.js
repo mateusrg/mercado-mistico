@@ -44,28 +44,32 @@ function sairConta () {
     window.location.href = '/login';
 }
 
-function redefinirSenha() {
-    document.getElementById('secaoredefinirSenha').style.display = 'flex';
+function editarUsuario() {
+    document.getElementById('secaoeditarUsuario').style.display = 'flex';
+    document.querySelector('#nomeInput').value = `${localStorage.getItem('nome')}`;
 }
 
 function botaoFechar () {
-    document.getElementById('secaoredefinirSenha').style.display = 'none';
+    document.getElementById('secaoeditarUsuario').style.display = 'none';
+    document.querySelector('#nomeInput').value = '';
     document.querySelector('#senhaAtual').value = '';
     document.querySelector('#senhaNova').value = '';
 }
 
-async function enviarRedefinicaoSenha() {
+async function enviarNovoUsuario() {
     const emailUsuario = localStorage.getItem("email");
+    const nome = document.getElementById("nomeInput").value;
     const senhaAtual = document.getElementById("senhaAtual").value;
     const senhaNova = document.getElementById("senhaNova").value;
 
     const data = {
         emailUsuario,
+        nome,
         senhaAtual,
         senhaNova
     }
 
-    const response = await fetch("/redefinir_senha_usuario", {
+    const response = await fetch("/usuario/editar", {
         method: "PUT",
         headers: {
             "Content-Type": "application/json"
@@ -76,6 +80,7 @@ async function enviarRedefinicaoSenha() {
 
     alert(results.message);
     if (results.success) {
+        localStorage.setItem("nome", nome);
         localStorage.setItem("senha", senhaNova);
         window.location.href = "/usuario";
     }
@@ -90,7 +95,7 @@ async function excluirConta() {
         senha
     }
 
-    const response = await fetch(`/excluir_conta_usuario/${email}/${senha}`, {
+    const response = await fetch(`/usuario/excluir/${email}/${senha}`, {
         method: "DELETE",
         headers: {
             "Content-Type": "application/json"

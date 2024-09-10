@@ -17,10 +17,10 @@ main {
     position: relative;
 }
 
-#secaoredefinirSenha {
+#secaoeditarUsuario {
     z-index: 5;
     background-color: var(--verdeOpaco);
-    height: 45vh;
+    height: 50vh;
     width: 28vw;
     position: absolute;
     top: 50%;
@@ -35,14 +35,14 @@ main {
     border-bottom: 0.5vh solid var(--preto);
 }
 
-#divRedefinir {
+#divEditar {
     width: 24vw;
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
 
-#tituloRedefinir {
+#tituloEditar {
     color: var(--amarelo);
     font-family: "Inknut Antiqua";
     font-weight: 400;
@@ -63,7 +63,7 @@ form {
     flex-direction: column;
     align-items: flex-start;
     justify-content: space-between;
-    height: 32vh;
+    height: 44vh;
 }
 
 .entradas {
@@ -93,7 +93,7 @@ label {
     border-radius: 1vh;
 }
 
-#botaoRedefinir {
+#botaoEditar {
     background-color: var(--vermelhoAlaranjado);
     border-radius: 1.5vh;
     font-family: "Inder";
@@ -143,7 +143,7 @@ label {
         "cupons creditos"
         "enderecos desejo"
         "cartao desejo"
-        "sair redefinir";
+        "sair editar";
 }
 
 .topicosEsquerda {
@@ -308,13 +308,13 @@ label {
     grid-area: sair;
 }
 
-#redefinir_senha {
-    grid-area: redefinir;
+#editar_usuario {
+    grid-area: editar;
     color: var(--branco);
     font-family: "Inder";
     font-weight: 400;
     font-size: 3.125vh;
-    width: 9.6vw;
+    width: 9vw;
 }
 
 #catalogoProdutos {
@@ -360,7 +360,7 @@ label {
     cursor: pointer;
 }
 
-#redefinir_senha:hover {
+#editar_usuario:hover {
     border-bottom: 0.5vh solid var(--ciano);
     cursor: pointer;
 }

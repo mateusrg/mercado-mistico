@@ -31,7 +31,7 @@ async function cadastrarUsuario(event) {
         senha
     }
 
-    const responseLogin = await fetch('/fazer_login', {
+    const responseLogin = await fetch('/usuario/login', {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
