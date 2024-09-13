@@ -26,7 +26,7 @@ async function cadastrar(event) {
     const formData = new FormData();
     formData.append("imagem", imagem);
 
-    const responseImg = await fetch("/uppar_imagem", {
+    const responseImg = await fetch("/produto/uppar_imagem", {
         method: "POST",
         body: formData
     })
@@ -49,7 +49,7 @@ async function cadastrar(event) {
         quantidade
     }
 
-    const response = await fetch('/cad_produto', {
+    const response = await fetch('/produto/cadastrar', {
         method: "POST",
         headers: {
             "Content-Type": "application/json"

@@ -8,12 +8,7 @@ async function verificarEstadoDeLogin() {
 
         const email = localStorage.getItem("email");
         const senha = localStorage.getItem("senha");
-        const response = await fetch(`/is_usuario_adm/${email}/${senha}`, {
-            method: "GET",
-            headers: {
-                "Content-Type": "application/json"
-            }
-        });
+        const response = await fetch(`/usuario/is_adm/${email}/${senha}`);
         
         const results = await response.json();
     

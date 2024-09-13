@@ -8,12 +8,7 @@ async function verificarEstadoDeLogin() {
 
         const email = localStorage.getItem("email");
         const senha = localStorage.getItem("senha");
-        const response = await fetch(`/is_usuario_adm/${email}/${senha}`, {
-            method: "GET",
-            headers: {
-                "Content-Type": "application/json"
-            }
-        });
+        const response = await fetch(`/usuario/is_adm/${email}/${senha}`);
         
         const results = await response.json();
     
@@ -54,18 +49,20 @@ function botaoFechar () {
     document.querySelector('#senhaNova').value = '';
 }
 
-async function enviarRedefinicaoSenha() {
+async function enviarNovoUsuario() {
     const emailUsuario = localStorage.getItem("email");
+    const nome = document.getElementById("nomeInput").value;
     const senhaAtual = document.getElementById("senhaAtual").value;
     const senhaNova = document.getElementById("senhaNova").value;
 
     const data = {
         emailUsuario,
+        nome,
         senhaAtual,
         senhaNova
     }
 
-    const response = await fetch("/redefinir_senha_usuario", {
+    const response = await fetch("/usuario/editar", {
         method: "PUT",
         headers: {
             "Content-Type": "application/json"
@@ -90,7 +87,7 @@ async function excluirConta() {
         senha
     }
 
-    const response = await fetch(`/excluir_conta_usuario/${email}/${senha}`, {
+    const response = await fetch(`/usuario/excluir/${email}/${senha}`, {
         method: "DELETE",
         headers: {
             "Content-Type": "application/json"

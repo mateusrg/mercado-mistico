@@ -9,7 +9,7 @@ async function realizarLogin(event) {
         senha
     }
 
-    const response = await fetch('/fazer_login', {
+    const response = await fetch('/usuario/login', {
         method: "POST",
         headers: {
             "Content-Type": "application/json"

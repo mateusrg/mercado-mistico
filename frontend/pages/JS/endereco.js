@@ -68,7 +68,7 @@ async function enviar(event) {
         emailUsuario
     }
 
-    const response = await fetch('/adicionar_endereco', {
+    const response = await fetch('/endereco/cadastrar', {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
@@ -171,12 +171,7 @@ async function exibirEnderecos() {
 
 async function selecionarEnderecos() {
     const email = localStorage.getItem("email");
-    const response = await fetch(`/pegar_enderecos/${email}`, {
-        method: "GET",
-        headers: {
-            "Content-Type": "application/json"
-        }
-    });
+    const response = await fetch(`/endereco/listar/${email}`);
     const results = await response.json();
 
     if (results.success) {
@@ -191,7 +186,7 @@ async function excluirEndereco(elemento, idEndereco) {
     console.log("teste")
     elemento.closest('.divCaixa').remove();
 
-    const response = await fetch(`/deletar_endereco/${id}`, {
+    const response = await fetch(`/endereco/excluir/${id}`, {
         method: "DELETE",
         headers: {
             "Content-Type": "application/json"
