@@ -100,12 +100,7 @@ async function exibirProdutos() {
 }
 
 async function selecionarProdutos() {
-    const response = await fetch("/listar_produtos", {
-        method: "GET",
-        headers: {
-            "Content-Type": "application/json"
-        }
-    });
+    const response = await fetch("/produto/listar");
     const results = await response.json();
 
     if (results.success) {
@@ -119,7 +114,7 @@ async function botaoExcluir(elemento, idProduto) {
     const id = idProduto;
     elemento.closest('.secao_produto').remove();
 
-    const response = await fetch(`/excluir_produto/${id}`, {
+    const response = await fetch(`/produto/excluir/${id}`, {
         method: "DELETE",
         headers: {
             "Content-Type": "application/json"
@@ -152,7 +147,7 @@ async function editarProduto(event) {
 
     console.log(data);
 
-    const response = await fetch('/editar_produto', {
+    const response = await fetch('/produto/editar', {
         method: "PUT",
         headers: {
             "Content-Type": "application/json",

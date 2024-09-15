@@ -17,7 +17,7 @@ main {
     position: relative;
 }
 
-#secaoredefinirSenha {
+#secaoeditarUsuario {
     z-index: 5;
     background-color: var(--verdeOpaco);
     height: 45vh;
@@ -35,14 +35,14 @@ main {
     border-bottom: 0.5vh solid var(--preto);
 }
 
-#divRedefinir {
+#divEditar {
     width: 24vw;
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
 
-#tituloRedefinir {
+#tituloEditar {
     color: var(--amarelo);
     font-family: "Inknut Antiqua";
     font-weight: 400;
@@ -93,7 +93,7 @@ label {
     border-radius: 1vh;
 }
 
-#botaoRedefinir {
+#botaoEditar {
     background-color: var(--vermelhoAlaranjado);
     border-radius: 1.5vh;
     font-family: "Inder";
@@ -143,7 +143,7 @@ label {
         "produtos vendas"
         "cupons vendas"
         "admins vendas"
-        "sair redefinir";
+        "sair editar";
 }
 
 .topicosEsquerda {
@@ -219,7 +219,6 @@ label {
     font-family: "Inder";
     font-weight: 400;
     font-size: 3.125vh;
-    width: 2.7vw;
     grid-area: sair;
 }
 
@@ -228,7 +227,6 @@ label {
     font-family: "Inder";
     font-weight: 400;
     font-size: 3.125vh;
-    width: 8.5vw;
 }
 
 #divSair {
@@ -238,13 +236,15 @@ label {
     grid-area: sair;
 }
 
-#redefinir_senha {
-    grid-area: redefinir;
+#editar_usuario {
     color: var(--branco);
     font-family: "Inder";
     font-weight: 400;
     font-size: 3.125vh;
-    width: 9.6vw;
+}
+
+#div_editar_usuario {
+    grid-area: editar;
 }
 
 #estoque {
@@ -277,7 +277,7 @@ label {
     cursor: pointer;
 }
 
-#redefinir_senha:hover {
+#editar_usuario:hover {
     border-bottom: 0.5vh solid var(--ciano);
     cursor: pointer;
 }

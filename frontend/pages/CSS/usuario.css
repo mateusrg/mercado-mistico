@@ -237,19 +237,19 @@ label {
 
 #produto_um {
     display: flex;
-    height: 13vh;
+    width: 100%;
     grid-area: produto1;
 }
 
 #produto_dois {
     display: flex;
-    height: 13vh;
+    width: 100%;
     grid-area: produto2;
 }
 
 #produto_tres {
     display: flex;
-    height: 13vh;
+    width: 100%;
     grid-area: produto3;
 }
 
@@ -290,7 +290,6 @@ label {
     font-family: "Inder";
     font-weight: 400;
     font-size: 3.125vh;
-    width: 2.3vw;
 }
 
 #excluir {
@@ -298,7 +297,6 @@ label {
     font-family: "Inder";
     font-weight: 400;
     font-size: 3.125vh;
-    width: 8.5vw;
 }
 
 #divSair {
@@ -309,12 +307,14 @@ label {
 }
 
 #editar_usuario {
-    grid-area: editar;
     color: var(--branco);
     font-family: "Inder";
     font-weight: 400;
     font-size: 3.125vh;
-    width: 9vw;
+}
+
+#div_editar_usuario {
+    grid-area: editar;
 }
 
 #catalogoProdutos {

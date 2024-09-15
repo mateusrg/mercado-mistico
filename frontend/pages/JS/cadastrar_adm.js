@@ -63,7 +63,7 @@ async function adicionarADM() {
         if (email) {
             let listaAdm = document.getElementById('lista_adm');
             // Código do Mateus: adiciona adm ao banco de dados (só o principal rs)        
-            const response = await fetch(`/adicionar_adm/${email}`, {
+            const response = await fetch(`/usuario/tornar_adm/${email}`, {
                 // Apesar de estar "adicionando" um adm, ele não cria nenhum registro novo. só altera a coluna "administrador" de 0 para 1, por isso PUT e n POST
                 method: "PUT",
                 headers: {
@@ -108,12 +108,7 @@ async function adicionarADM() {
 }
 
 async function selecionarADMs() {
-    const response = await fetch("/listar_adms", {
-        method: "GET",
-        headers: {
-            "Content-Type": "application/json"
-        }
-    });
+    const response = await fetch("/usuario/listar_adms");
     const results = await response.json();
 
     if (results.success) {
