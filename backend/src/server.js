@@ -62,20 +62,20 @@ app.post("/produto/cadastrar", (request, response) => {
     connection.query(query, params, (err, results) => {
         if (results) {
             response
-            .status(201)
-            .json({
-                success: true,
-                message: "Produto cadastrado com sucesso!",
-                data: results
-            });
+                .status(201)
+                .json({
+                    success: true,
+                    message: "Produto cadastrado com sucesso!",
+                    data: results
+                });
         } else {
             response
-            .status(500)
-            .json({
-                success: false,
-                message: "Erro ao cadastrar o produto.",
-                data: err
-            });
+                .status(500)
+                .json({
+                    success: false,
+                    message: "Erro ao cadastrar o produto.",
+                    data: err
+                });
         }
     });
 });
@@ -86,20 +86,20 @@ app.get("/produto/listar", (request, response) => {
     connection.query(query, (err, results) => {
         if (results) {
             response
-            .status(200)
-            .json({
-                success: true,
-                message: "Produtos selecionados com sucesso!",
-                data: results
-            });
+                .status(200)
+                .json({
+                    success: true,
+                    message: "Produtos selecionados com sucesso!",
+                    data: results
+                });
         } else {
             response
-            .status(500)
-            .json({
-                success: false,
-                message: "Erro ao selecionar os produtos.",
-                data: err
-            });
+                .status(500)
+                .json({
+                    success: false,
+                    message: "Erro ao selecionar os produtos.",
+                    data: err
+                });
         }
     });
 });
@@ -112,20 +112,20 @@ app.get("/produto/selecionar/:idProduto", (request, response) => {
     connection.query(query, params, (err, results) => {
         if (results) {
             response
-            .status(200)
-            .json({
-                success: true,
-                message: "Produto selecionado com sucesso!",
-                data: results
-            });
+                .status(200)
+                .json({
+                    success: true,
+                    message: "Produto selecionado com sucesso!",
+                    data: results
+                });
         } else {
             response
-            .status(404)
-            .json({
-                success: false,
-                message: "Erro ao selecionar o produto.",
-                data: err
-            });
+                .status(404)
+                .json({
+                    success: false,
+                    message: "Erro ao selecionar o produto.",
+                    data: err
+                });
         }
     });
 });
@@ -133,12 +133,12 @@ app.get("/produto/selecionar/:idProduto", (request, response) => {
 // Rota para uppar a imagem de um produto durante o seu cadastro pelo administrador
 app.post("/produto/uppar_imagem", upload.single("imagem"), (request, response) => {
     response
-    .status(201)
-    .json({
-        success: true,
-        message: "Imagem uppada com sucesso!",
-        filePath: path.join("assets", "produtos", request.file.filename)
-    });
+        .status(201)
+        .json({
+            success: true,
+            message: "Imagem uppada com sucesso!",
+            filePath: path.join("assets", "produtos", request.file.filename)
+        });
 });
 
 app.put("/produto/editar", (request, response) => {
@@ -154,20 +154,20 @@ app.put("/produto/editar", (request, response) => {
     connection.query(query, params, (err, results) => {
         if (results) {
             response
-            .status(200)
-            .json({
-                success: true,
-                message: "Produto alterado com sucesso!",
-                data: results
-            });
+                .status(200)
+                .json({
+                    success: true,
+                    message: "Produto alterado com sucesso!",
+                    data: results
+                });
         } else {
             response
-            .status(404)
-            .json({
-                success: false,
-                message: "Erro ao alterar o produto.",
-                data: err
-            });
+                .status(404)
+                .json({
+                    success: false,
+                    message: "Erro ao alterar o produto.",
+                    data: err
+                });
         }
     });
 });
@@ -180,20 +180,20 @@ app.delete("/produto/excluir/:idProduto", (request, response) => {
     connection.query(query, params, (err, results) => {
         if (results) {
             response
-            .status(200)
-            .json({
-                success: true,
-                message: "Produto excluído com sucesso!",
-                data: results
-            });
+                .status(200)
+                .json({
+                    success: true,
+                    message: "Produto excluído com sucesso!",
+                    data: results
+                });
         } else {
             response
-            .status(404)
-            .json({
-                success: false,
-                message: "Erro ao excluir o produto.",
-                data: err
-            });
+                .status(404)
+                .json({
+                    success: false,
+                    message: "Erro ao excluir o produto.",
+                    data: err
+                });
         }
     });
 });
@@ -208,12 +208,12 @@ app.post("/usuario/cadastrar", (request, response) => {
     connection.query(query, params, (err, results) => {
         if (results && results.length > 0) {
             response
-            .status(409)
-            .json({
-                success: false,
-                message: "E-mail já cadastrado.",
-                data: err
-            });
+                .status(409)
+                .json({
+                    success: false,
+                    message: "E-mail já cadastrado.",
+                    data: err
+                });
             return;
         }
 
@@ -230,20 +230,20 @@ app.post("/usuario/cadastrar", (request, response) => {
         connection.query(query, params, (err, results) => {
             if (results) {
                 response
-                .status(201)
-                .json({
-                    success: true,
-                    message: "Usuário cadastrado com sucesso!",
-                    data: results
-                });
+                    .status(201)
+                    .json({
+                        success: true,
+                        message: "Usuário cadastrado com sucesso!",
+                        data: results
+                    });
             } else {
                 response
-                .status(500)
-                .json({
-                    success: false,
-                    message: "Erro ao cadastrar o usuário.",
-                    data: err
-                });
+                    .status(500)
+                    .json({
+                        success: false,
+                        message: "Erro ao cadastrar o usuário.",
+                        data: err
+                    });
             }
         });
     });
@@ -257,33 +257,33 @@ app.post("/usuario/login", (request, response) => {
     connection.query(query, params, (err, results) => {
         if (err || results.length === 0) {
             response
-            .status(404)
-            .json({
-                success: false,
-                message: "E-mail não encontrado."
-            });
+                .status(404)
+                .json({
+                    success: false,
+                    message: "E-mail não encontrado."
+                });
             return;
         }
 
         const usuario = results[0];
         const senhaValida = request.body.senha == usuario.senha;
 
-        if(!senhaValida) {
+        if (!senhaValida) {
             response
-            .status(401)
-            .json({
-                success: false,
-                message: "Senha incorreta."
-            });
+                .status(401)
+                .json({
+                    success: false,
+                    message: "Senha incorreta."
+                });
             return;
         }
         response
-        .status(200)
-        .json({
-            success: true,
-            message: "Usuário Logado!",
-            data: usuario
-        });
+            .status(200)
+            .json({
+                success: true,
+                message: "Usuário Logado!",
+                data: usuario
+            });
     });
 });
 
@@ -295,12 +295,12 @@ app.put("/usuario/editar", (request, response) => {
     connection.query(query, params, (err, results) => {
         if (!(results && results.length > 0)) {
             response
-            .status(404)
-            .json({
-                success: false,
-                message: "E-mail não cadastrado.",
-                data: err
-            });
+                .status(404)
+                .json({
+                    success: false,
+                    message: "E-mail não cadastrado.",
+                    data: err
+                });
             return;
         }
         idUsuario = results[0]["idUsuario"];
@@ -320,30 +320,30 @@ app.put("/usuario/editar", (request, response) => {
                 connection.query(query, params, (err, results) => {
                     if (results) {
                         response
-                        .status(200)
-                        .json({
-                            success: true,
-                            message: "Informações do usuário alteradas com sucesso!",
-                            data: results
-                        });
+                            .status(200)
+                            .json({
+                                success: true,
+                                message: "Informações do usuário alteradas com sucesso!",
+                                data: results
+                            });
                     } else {
                         response
-                        .status(500)
-                        .json({
-                            success: false,
-                            message: "Erro ao alterar as informações do usuário.",
-                            data: err
-                        });
+                            .status(500)
+                            .json({
+                                success: false,
+                                message: "Erro ao alterar as informações do usuário.",
+                                data: err
+                            });
                     }
                 });
             } else {
                 response
-                .status(401)
-                .json({
-                    success: false,
-                    message: "Senha atual incorreta.",
-                    data: err
-                });
+                    .status(401)
+                    .json({
+                        success: false,
+                        message: "Senha atual incorreta.",
+                        data: err
+                    });
             }
         });
     });
@@ -357,12 +357,12 @@ app.delete("/usuario/excluir/:email/:senha", (request, response) => {
     connection.query(query, params, (err, results) => {
         if (!(results && results.length > 0)) {
             response
-            .status(400)
-            .json({
-                success: false,
-                message: "E-mail não cadastrado.",
-                data: err
-            });
+                .status(400)
+                .json({
+                    success: false,
+                    message: "E-mail não cadastrado.",
+                    data: err
+                });
             return;
         }
         idUsuario = results[0]["idUsuario"];
@@ -378,30 +378,30 @@ app.delete("/usuario/excluir/:email/:senha", (request, response) => {
                 connection.query(query, params, (err, results) => {
                     if (results) {
                         response
-                        .status(200)
-                        .json({
-                            success: true,
-                            message: "Conta excluída com sucesso!",
-                            data: results
-                        });
+                            .status(200)
+                            .json({
+                                success: true,
+                                message: "Conta excluída com sucesso!",
+                                data: results
+                            });
                     } else {
                         response
-                        .status(500)
-                        .json({
-                            success: false,
-                            message: "Erro ao excluir a conta.",
-                            data: err
-                        });
+                            .status(500)
+                            .json({
+                                success: false,
+                                message: "Erro ao excluir a conta.",
+                                data: err
+                            });
                     }
                 });
             } else {
                 response
-                .status(401)
-                .json({
-                    success: false,
-                    message: "Senha incorreta.",
-                    data: err
-                });
+                    .status(401)
+                    .json({
+                        success: false,
+                        message: "Senha incorreta.",
+                        data: err
+                    });
             }
         });
     });
@@ -417,12 +417,12 @@ app.get("/usuario/is_adm/:email/:senha", (request, response) => {
     connection.query(query, params, (err, results) => {
         if (!(results && results.length > 0)) {
             response
-            .status(404)
-            .json({
-                success: false,
-                message: "E-mail não cadastrado.",
-                data: err
-            });
+                .status(404)
+                .json({
+                    success: false,
+                    message: "E-mail não cadastrado.",
+                    data: err
+                });
             return;
         }
         idUsuario = results[0]["idUsuario"];
@@ -438,30 +438,30 @@ app.get("/usuario/is_adm/:email/:senha", (request, response) => {
                 connection.query(query, params, (err, results) => {
                     if (results) {
                         response
-                        .status(200)
-                        .json({
-                            success: true,
-                            message: "Verificação de adm feita com sucesso!",
-                            data: results[0]["administrador"].readUInt8(0)
-                        });
+                            .status(200)
+                            .json({
+                                success: true,
+                                message: "Verificação de adm feita com sucesso!",
+                                data: results[0]["administrador"].readUInt8(0)
+                            });
                     } else {
                         response
-                        .status(500)
-                        .json({
-                            success: false,
-                            message: "Erro ao fazer verificação de adm.",
-                            data: err
-                        });
+                            .status(500)
+                            .json({
+                                success: false,
+                                message: "Erro ao fazer verificação de adm.",
+                                data: err
+                            });
                     }
                 });
             } else {
                 response
-                .status(401)
-                .json({
-                    success: false,
-                    message: "Senha incorreta.",
-                    data: err
-                });
+                    .status(401)
+                    .json({
+                        success: false,
+                        message: "Senha incorreta.",
+                        data: err
+                    });
             }
         });
     });
@@ -475,12 +475,12 @@ app.put("/usuario/tornar_adm/:email", (request, response) => {
     connection.query(query, params, (err, results) => {
         if (!(results && results.length > 0)) {
             response
-            .status(404)
-            .json({
-                success: false,
-                message: "E-mail não cadastrado.",
-                data: err
-            });
+                .status(404)
+                .json({
+                    success: false,
+                    message: "E-mail não cadastrado.",
+                    data: err
+                });
             return;
         }
 
@@ -489,20 +489,20 @@ app.put("/usuario/tornar_adm/:email", (request, response) => {
         connection.query(query, params, (err, results) => {
             if (results) {
                 response
-                .status(200)
-                .json({
-                    success: true,
-                    message: "Administrador adicionado com sucesso!",
-                    data: results
-                });
+                    .status(200)
+                    .json({
+                        success: true,
+                        message: "Administrador adicionado com sucesso!",
+                        data: results
+                    });
             } else {
                 response
-                .status(500)
-                .json({
-                    success: false,
-                    message: "Erro ao adicionar o administrador.",
-                    data: err
-                });
+                    .status(500)
+                    .json({
+                        success: false,
+                        message: "Erro ao adicionar o administrador.",
+                        data: err
+                    });
             }
         });
     });
@@ -515,20 +515,20 @@ app.get("/usuario/listar_adms", (request, response) => {
     connection.query(query, params, (err, results) => {
         if (results) {
             response
-            .status(200)
-            .json({
-                success: true,
-                message: "ADMs consultados com sucesso!",
-                data: results
-            });
+                .status(200)
+                .json({
+                    success: true,
+                    message: "ADMs consultados com sucesso!",
+                    data: results
+                });
         } else {
             response
-            .status(500)
-            .json({
-                success: false,
-                message: "Erro ao consultar os ADMs.",
-                data: err
-            });
+                .status(500)
+                .json({
+                    success: false,
+                    message: "Erro ao consultar os ADMs.",
+                    data: err
+                });
         }
     });
 });
@@ -540,20 +540,20 @@ app.put("/usuario/remover_adm/:email", (request, response) => {
     connection.query(query, params, (err, results) => {
         if (results) {
             response
-            .status(200)
-            .json({
-                success: true,
-                message: "Administrador removido com sucesso!",
-                data: results
-            });
+                .status(200)
+                .json({
+                    success: true,
+                    message: "Administrador removido com sucesso!",
+                    data: results
+                });
         } else {
             response
-            .status(500)
-            .json({
-                success: false,
-                message: "Erro ao remover o administrador.",
-                data: err
-            });
+                .status(500)
+                .json({
+                    success: false,
+                    message: "Erro ao remover o administrador.",
+                    data: err
+                });
         }
     });
 });
@@ -568,12 +568,12 @@ app.post("/endereco/cadastrar", (request, response) => {
     connection.query(query, params, (err, results) => {
         if (!(results && results.length > 0)) {
             response
-            .status(404)
-            .json({
-                success: false,
-                message: "E-mail não cadastrado.",
-                data: err
-            });
+                .status(404)
+                .json({
+                    success: false,
+                    message: "E-mail não cadastrado.",
+                    data: err
+                });
             return;
         }
         idUsuario = results[0]["idUsuario"];
@@ -602,43 +602,43 @@ app.post("/endereco/cadastrar", (request, response) => {
                         idEnderecoPadrao,
                         idUsuario
                     ];
-    
+
                     connection.query(query, params, (err, results) => {
                         if (results) {
                             response
-                            .status(200)
-                            .json({
-                                success: true,
-                                message: "Endereço cadastrado e endereço padrão atualizado com sucesso!",
-                                data: results
-                            });
+                                .status(200)
+                                .json({
+                                    success: true,
+                                    message: "Endereço cadastrado e endereço padrão atualizado com sucesso!",
+                                    data: results
+                                });
                         } else {
                             response
-                            .status(500)
-                            .json({
-                                success: false,
-                                message: "Endereço cadastrado, mas erro ao atualizar o endereço padrão.",
-                                data: err
-                            });
+                                .status(500)
+                                .json({
+                                    success: false,
+                                    message: "Endereço cadastrado, mas erro ao atualizar o endereço padrão.",
+                                    data: err
+                                });
                         }
                     });
                     return;
                 }
                 response
-                .status(201)
-                .json({
-                    success: true,
-                    message: "Endereço cadastrado com sucesso!",
-                    data: results
-                });
+                    .status(201)
+                    .json({
+                        success: true,
+                        message: "Endereço cadastrado com sucesso!",
+                        data: results
+                    });
             } else {
                 response
-                .status(500)
-                .json({
-                    success: false,
-                    message: "Erro ao cadastrar o endereço.",
-                    data: err
-                });
+                    .status(500)
+                    .json({
+                        success: false,
+                        message: "Erro ao cadastrar o endereço.",
+                        data: err
+                    });
                 return;
             }
         });
@@ -653,12 +653,12 @@ app.get("/endereco/listar/:email", (request, response) => {
     connection.query(query, params, (err, results) => {
         if (!(results && results.length > 0)) {
             response
-            .status(404)
-            .json({
-                success: false,
-                message: "E-mail não cadastrado.",
-                data: err
-            });
+                .status(404)
+                .json({
+                    success: false,
+                    message: "E-mail não cadastrado.",
+                    data: err
+                });
             return;
         }
         idUsuario = results[0]["idUsuario"];
@@ -670,22 +670,22 @@ app.get("/endereco/listar/:email", (request, response) => {
         connection.query(query, params, (err, results) => {
             if (err) {
                 response
-                .status(500)
-                .json({
-                    success: false,
-                    message: "Erro ao buscar o idEnderecoPadrao.",
-                    data: err
-                });
+                    .status(500)
+                    .json({
+                        success: false,
+                        message: "Erro ao buscar o idEnderecoPadrao.",
+                        data: err
+                    });
                 return;
             }
 
             if (results.length === 0) {
                 response
-                .status(404)
-                .json({
-                    success: false,
-                    message: "Usuário não encontrado.",
-                });
+                    .status(404)
+                    .json({
+                        success: false,
+                        message: "Usuário não encontrado.",
+                    });
                 return;
             }
 
@@ -696,12 +696,12 @@ app.get("/endereco/listar/:email", (request, response) => {
             connection.query(query, params, (err, enderecos) => {
                 if (err) {
                     response
-                    .status(500)
-                    .json({
-                        success: false,
-                        message: "Erro ao buscar os endereços do usuário.",
-                        data: err
-                    });
+                        .status(500)
+                        .json({
+                            success: false,
+                            message: "Erro ao buscar os endereços do usuário.",
+                            data: err
+                        });
                     return;
                 }
 
@@ -739,20 +739,20 @@ app.put("/endereco/editar", (request, response) => {
     connection.query(query, params, (err, results) => {
         if (results) {
             response
-            .status(200)
-            .json({
-                success: true,
-                message: "Endereço editado com sucesso!",
-                data: results
-            });
+                .status(200)
+                .json({
+                    success: true,
+                    message: "Endereço editado com sucesso!",
+                    data: results
+                });
         } else {
             response
-            .status(500)
-            .json({
-                success: false,
-                message: "Erro ao editar o endereço.",
-                data: err
-            });
+                .status(500)
+                .json({
+                    success: false,
+                    message: "Erro ao editar o endereço.",
+                    data: err
+                });
         }
     });
 });
@@ -769,20 +769,20 @@ app.delete("/endereco/excluir/:idEndereco", (request, response) => {
     connection.query(query, params, (err, results) => {
         if (results) {
             response
-            .status(200)
-            .json({
-                success: true,
-                message: "Endereço removido com sucesso!",
-                data: results
-            });
+                .status(200)
+                .json({
+                    success: true,
+                    message: "Endereço removido com sucesso!",
+                    data: results
+                });
         } else {
             response
-            .status(500)
-            .json({
-                success: false,
-                message: "Erro ao remover o endereço.",
-                data: err
-            });
+                .status(500)
+                .json({
+                    success: false,
+                    message: "Erro ao remover o endereço.",
+                    data: err
+                });
         }
     });
 });
@@ -797,12 +797,12 @@ app.post("/carrinho/cadastrar", (request, response) => {
     connection.query(query, params, (err, results) => {
         if (!(results && results.length > 0)) {
             response
-            .status(400)
-            .json({
-                success: false,
-                message: "E-mail não cadastrado.",
-                data: err
-            });
+                .status(400)
+                .json({
+                    success: false,
+                    message: "E-mail não cadastrado.",
+                    data: err
+                });
             return;
         }
         idUsuario = results[0]["idUsuario"];
@@ -818,20 +818,20 @@ app.post("/carrinho/cadastrar", (request, response) => {
         connection.query(query, params, (err, results) => {
             if (results) {
                 response
-                .status(201)
-                .json({
-                    success: true,
-                    message: "Produto adicionado ao carrinho com sucesso!",
-                    data: results
-                });
+                    .status(201)
+                    .json({
+                        success: true,
+                        message: "Produto adicionado ao carrinho com sucesso!",
+                        data: results
+                    });
             } else {
                 response
-                .status(400)
-                .json({
-                    success: false,
-                    message: "Erro ao adicionar o produto ao carrinho.",
-                    data: err
-                });
+                    .status(400)
+                    .json({
+                        success: false,
+                        message: "Erro ao adicionar o produto ao carrinho.",
+                        data: err
+                    });
             }
         });
     });
@@ -845,36 +845,36 @@ app.get("/carrinho/listar/:email", (request, response) => {
     connection.query(query, params, (err, results) => {
         if (!(results && results.length > 0)) {
             response
-            .status(400)
-            .json({
-                success: false,
-                message: "E-mail não cadastrado.",
-                data: err
-            });
+                .status(400)
+                .json({
+                    success: false,
+                    message: "E-mail não cadastrado.",
+                    data: err
+                });
             return;
         }
         idUsuario = results[0]["idUsuario"];
 
         // Listando os produtos no carrinho com base no ID do usuário
         query = "SELECT * FROM ItemCarrinho WHERE idUsuario = ?";
-        params  = [idUsuario];
+        params = [idUsuario];
         connection.query(query, params, (err, results) => {
             if (results) {
                 response
-                .status(200)
-                .json({
-                    success: true,
-                    message: "Itens do carrinho selecionados com sucesso!",
-                    data: results
-                });
+                    .status(200)
+                    .json({
+                        success: true,
+                        message: "Itens do carrinho selecionados com sucesso!",
+                        data: results
+                    });
             } else {
                 response
-                .status(400)
-                .json({
-                    success: false,
-                    message: "Erro ao selecionar os itens do carrinho.",
-                    data: err
-                });
+                    .status(400)
+                    .json({
+                        success: false,
+                        message: "Erro ao selecionar os itens do carrinho.",
+                        data: err
+                    });
             }
         });
     });
@@ -891,20 +891,20 @@ app.put("/carrinho/editar", (request, response) => {
     connection.query(query, params, (err, results) => {
         if (results) {
             response
-            .status(200)
-            .json({
-                success: true,
-                message: "Quantidade do item no carrinho atualizada com sucesso!",
-                data: results
-            });
+                .status(200)
+                .json({
+                    success: true,
+                    message: "Quantidade do item no carrinho atualizada com sucesso!",
+                    data: results
+                });
         } else {
             response
-            .status(400)
-            .json({
-                success: false,
-                message: "Erro ao atualizar a quantidade do item no carrinho.",
-                data: err
-            });
+                .status(400)
+                .json({
+                    success: false,
+                    message: "Erro ao atualizar a quantidade do item no carrinho.",
+                    data: err
+                });
         }
     });
 });
@@ -917,20 +917,20 @@ app.delete("/carrinho/excluir/:idItemCarrinho", (request, response) => {
     connection.query(query, params, (err, results) => {
         if (results) {
             response
-            .status(200)
-            .json({
-                success: true,
-                message: "Produto excluído do carrinho com sucesso!",
-                data: results
-            });
+                .status(200)
+                .json({
+                    success: true,
+                    message: "Produto excluído do carrinho com sucesso!",
+                    data: results
+                });
         } else {
             response
-            .status(400)
-            .json({
-                success: false,
-                message: "Erro ao excluir o produto do carrinho.",
-                data: err
-            });
+                .status(400)
+                .json({
+                    success: false,
+                    message: "Erro ao excluir o produto do carrinho.",
+                    data: err
+                });
         }
     });
 });
@@ -945,16 +945,16 @@ app.post("/favorito/cadastrar", (request, response) => {
     connection.query(query, params, (err, results) => {
         if (!(results && results.length > 0)) {
             response
-            .status(400)
-            .json({
-                success: false,
-                message: "E-mail não cadastrado.",
-                data: err
-            });
+                .status(400)
+                .json({
+                    success: false,
+                    message: "E-mail não cadastrado.",
+                    data: err
+                });
             return;
         }
         idUsuario = results[0]["idUsuario"];
-        
+
         // Adicionando item aos favoritos
         query = "INSERT INTO ListaFavoritos (idUsuario, idProduto) VALUES (?, ?)";
         params = [
@@ -965,20 +965,20 @@ app.post("/favorito/cadastrar", (request, response) => {
         connection.query(query, params, (err, results) => {
             if (results) {
                 response
-                .status(201)
-                .json({
-                    success: true,
-                    message: "Produto adicionado à lista de favoritos do usuário com sucesso!",
-                    data: results
-                });
+                    .status(201)
+                    .json({
+                        success: true,
+                        message: "Produto adicionado à lista de favoritos do usuário com sucesso!",
+                        data: results
+                    });
             } else {
                 response
-                .status(400)
-                .json({
-                    success: false,
-                    message: "Erro ao adicionar o produto à lista de favoritos do usuário.",
-                    data: err
-                });
+                    .status(400)
+                    .json({
+                        success: false,
+                        message: "Erro ao adicionar o produto à lista de favoritos do usuário.",
+                        data: err
+                    });
             }
         });
     });
@@ -986,45 +986,29 @@ app.post("/favorito/cadastrar", (request, response) => {
 
 // Rota para listar os itens na lista de favoritos de um usuário
 app.get("/favorito/listar/:emailUsuario", (request, response) => {
-    // Pegando o ID do usuário com base no e-mail
-    query = "SELECT idUsuario FROM Usuario WHERE email = ?";
+    query = `SELECT * FROM Produto WHERE idProduto in
+        (SELECT idProduto FROM ListaFavoritos WHERE idUsuario =
+        (SELECT idUsuario FROM Usuario WHERE email = ?));`;
     params = [request.params.emailUsuario];
+
     connection.query(query, params, (err, results) => {
-        if (!(results && results.length > 0)) {
+        if (results) {
             response
-            .status(400)
-            .json({
-                success: false,
-                message: "E-mail não cadastrado.",
-                data: err
-            });
-            return;
-        }
-        idUsuario = results[0]["idUsuario"];
-
-        // Listando os produtos na Lista de Favoritos do usuário com base no seu ID
-        query = "SELECT * FROM ListaFavoritos WHERE idUsuario = ?";
-        params = [idUsuario];
-
-        connection.query(query, params, (err, results) => {
-            if (results) {
-                response
                 .status(200)
                 .json({
                     success: true,
                     message: "Lista de favoritos do usuário selecionada com sucesso!",
                     data: results
                 });
-            } else {
-                response
+        } else {
+            response
                 .status(400)
                 .json({
                     success: false,
                     message: "Erro ao selecionar a lista de favoritos do usuário.",
                     data: err
                 });
-            }
-        });
+        }
     });
 });
 
@@ -1036,12 +1020,12 @@ app.delete("/favorito/excluir/:emailUsuario/:idProduto", (request, response) => 
     connection.query(query, params, (err, results) => {
         if (!(results && results.length > 0)) {
             response
-            .status(400)
-            .json({
-                success: false,
-                message: "E-mail não cadastrado.",
-                data: err
-            });
+                .status(400)
+                .json({
+                    success: false,
+                    message: "E-mail não cadastrado.",
+                    data: err
+                });
             return;
         }
         idUsuario = results[0]["idUsuario"];
@@ -1056,20 +1040,20 @@ app.delete("/favorito/excluir/:emailUsuario/:idProduto", (request, response) => 
         connection.query(query, params, (err, results) => {
             if (results) {
                 response
-                .status(200)
-                .json({
-                    success: true,
-                    message: "Produto excluído da lista de favoritos do usuário com sucesso!",
-                    data: results
-                });
+                    .status(200)
+                    .json({
+                        success: true,
+                        message: "Produto excluído da lista de favoritos do usuário com sucesso!",
+                        data: results
+                    });
             } else {
                 response
-                .status(400)
-                .json({
-                    success: false,
-                    message: "Erro ao excluir produto da lista de favoritos do usuário.",
-                    data: err
-                });
+                    .status(400)
+                    .json({
+                        success: false,
+                        message: "Erro ao excluir produto da lista de favoritos do usuário.",
+                        data: err
+                    });
             }
         });
     });

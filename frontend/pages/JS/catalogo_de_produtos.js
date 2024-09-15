@@ -15,12 +15,7 @@ function verificarEstadoDeLogin() {
 verificarEstadoDeLogin();
 
 async function listarProdutos() {
-    const response = await fetch("/listar_produtos", {
-        method: "GET",
-        headers: {
-            "Content-Type": "application/json"
-        }
-    });
+    const response = await fetch("/produto/listar");
     const results = await response.json();
 
     if (results.success) {
@@ -63,7 +58,7 @@ async function favoritar(elemento, idProduto) {
         idProduto
     };
 
-    const response = await fetch("/add_favorito", {
+    const response = await fetch("/favorito/cadastrar", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"

@@ -7,7 +7,7 @@ body {
 }
 
 main {
-    padding: 1.5vh 3vw;
+    padding: 1.5vh 3vw 0px 3vw;
 }
 
 #secao_titulo {
@@ -68,13 +68,13 @@ main {
     font-family: "Inder";
     font-weight: 400;
     color: var(--branco);
-    margin: -10px 0px 2rem 0px;
+    margin-top: auto;
+    margin-bottom: 3px;
 }
 
 .subdiv_produto {
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
     height: 25vh;
 }
 
@@ -85,11 +85,11 @@ main {
 }
 
 .carrinho {
-    height: 9vh;
+    height: 6.5vh;
 }
 
 .coracao {
-    height: 6.5vh;
+    height: 5vh;
     margin-top: 0.5vh;
     filter: saturate(0%);
 }
@@ -113,6 +113,8 @@ main {
     align-items: center;
     gap: 2vw;
     height: fit-content;
+    margin-top: auto;
+    margin-bottom: 5px;
 }
 
 .carrinho:hover {

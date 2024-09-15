@@ -1,5 +1,5 @@
 function verificarEstadoDeLogin() {
-    const nome = localStorage.getItem('nome');    
+    const nome = localStorage.getItem('nome');
     if (nome) {
         // Usuário está logado, mostrar elementos do cabeçalho logado
         document.getElementById('botoes_header_direita_deslogado').style.display = 'none';
