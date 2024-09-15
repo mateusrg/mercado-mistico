@@ -1,8 +1,11 @@
+body {
+    background-color: var(--azulEscuro);
+}
+
 main {
-    height: auto;
+    height: 76vh;
     padding-top: 16vh;
     padding-bottom: 8vh;
-    background-color: var(--azulEscuro);
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -20,9 +23,22 @@ main {
     padding-top: 15vh;
 }
 
+#divAuxImagem {
+    height: 60vh;
+    aspect-ratio: 1/0.9;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 #imagemProduto {
-    height: 59.77vh;
+    height: auto;
+    width: auto;
+    max-height: 100%;
+    max-width: 100%;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     border-radius: 10px;
+    object-fit: contain;
 }
 
 #secaoMeio {
@@ -42,11 +58,11 @@ main {
     line-height: 1;
 }
 
-#slogan {
+#descricao {
     font-family: "Inder";
     font-weight: 400;
     font-size: 2vh;
-    color: var(--amarelo);
+    color: var(--branco);
 }
 
 #botaoSubmit {
@@ -97,89 +113,4 @@ main {
     font-size: 2.5vh;
     color: var(--vermelhoAlaranjado);
     text-align: center;
-}
-
-#secaoAvaliacao {
-    display: flex;
-    flex-direction: column;
-    align-self: flex-start;
-    padding-left: 6vw;
-    gap: 4vh;
-}
-
-#tituloAvaliacao {
-    font-family: "Inknut Antiqua";
-    font-weight: 400;
-    font-size: 3.5vh;
-    color: var(--amarelo);
-    line-height: 1;
-}
-
-#notaAvaliacao {
-    width: 14vw;
-    background-color: var(--azulMaisEscuro);
-    display: flex;
-    align-items: center;
-    gap: 2vw;
-    padding: 5vh;
-    border-radius: 1.5vh;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
-}
-
-#notaTexto {
-    font-family: "Inder";
-    font-weight: 400;
-    font-size: 5.3vh;
-    color: var(--branco);
-}
-
-.divAvaliacao {
-    width: 85.5vw;
-    background-color: var(--azulMaisEscuro);
-    display: flex;
-    flex-direction: column;
-    padding: 3vh;
-    border-radius: 1.5vh;
-    gap: 2vh;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
-}
-
-.subdivAvaliacao {
-    display: flex;
-    align-items: center;
-    gap: 1vw;
-}
-
-.textoAvaliacao {
-    font-family: "Inder";
-    font-weight: 400;
-    font-size: 1.6vh;
-    color: var(--branco);
-}
-
-#imagemEstrela {
-    height: 2vh;
-}
-
-.dataAvaliacao {
-    font-family: "Inder";
-    font-weight: 400;
-    font-size: 1.6vh;
-    color: var(--verdeMusgo);
-}
-
-.botaoUtil {
-    background-color: var(--verdeMusgo);
-    color: var(--amarelo);
-    font-size: 1.6vh;
-    height: 4vh;
-    width: 3vw;
-    border-radius: 4vh;
-}
-
-.textoUtil {
-    font-family: "Inder";
-    font-weight: 400;
-    font-size: 0.8vh;
-    color: var(--branco);
 }

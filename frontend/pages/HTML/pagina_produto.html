@@ -1,13 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Página do Produto - Mystic Market</title>
-    <link rel="stylesheet" href="./pages/CSS/style.css">
-    <link rel="stylesheet" href="./pages/CSS/pagina_produto.css">
-    <script defer src="./pages/JS/pagina_produto.js"></script>
+    <link rel="stylesheet" href="../pages/CSS/style.css">
+    <link rel="stylesheet" href="../pages/CSS/pagina_produto.css">
+    <script defer src="../pages/JS/pagina_produto.js"></script>
 </head>
+
 <body>
     <header>
         <div id="header_esquerda">
@@ -19,59 +21,32 @@
             <form action="/login"><button id="login">Login</button></form>
         </div>
         <div id="botoes_header_direita_logado">
-            <a href="/favoritos" class="auxHeader"><img src="../../assets/coracao.png" alt="Coração" id="botao_logado_coracao"></a>
-            <a href="/carrinho" class="auxHeader"><img src="../../assets/carrinho.png" alt="Carrinho" id="botao_logado_carrinho"></a>
-            <a href="/usuario" class="auxHeader"><img src="../../assets/usuarioLogado.png" alt="Usuário Logado" id="botao_logado_usuario"></a>
+            <a href="/favoritos" class="auxHeader"><img src="../../assets/coracao.png" alt="Coração"
+                    id="botao_logado_coracao"></a>
+            <a href="/carrinho" class="auxHeader"><img src="../../assets/carrinho.png" alt="Carrinho"
+                    id="botao_logado_carrinho"></a>
+            <a href="/usuario" class="auxHeader"><img src="../../assets/usuarioLogado.png" alt="Usuário Logado"
+                    id="botao_logado_usuario"></a>
         </div>
     </header>
     <main>
         <img src="../../assets/seta_volta.png" alt="seta" class="seta_volta_sem_titulo">
         <section class="secaoPrincipal">
-            <img src="../../assets/produtos/tapete.png" alt="tapete" id="imagemProduto">
+            <div id="divAuxImagem"><img id="imagemProduto"></div>
             <section id="secaoMeio">
-                <h3 id="tituloProduto">Tapete Voador</h3>
-                <p id="slogan">Voe para qualquer lugar a qualquer hora, com todo o conforto que você merece</p>
+                <h3 id="tituloProduto"></h3>
+                <p id="descricao"></p>
             </section>
             <section id="secaoDireita">
                 <div id="divValor">
                     <h4 id="tituloTotal">Total:</h4>
-                    <h4 id="valorTotal">R$ 0000,00</h4>
+                    <h4 id="valorTotal"></h4>
                 </div>
                 <p id="entregaPrazo">Entrega Imediata</p>
                 <button id="botaoSubmit" onclick="adicionarAoCarrinho()">Adicionar ao carrinho</button>
             </section>
         </section>
-        <section id="secaoAvaliacao">
-            <h3 id="tituloAvaliacao">Avaliações</h3>
-            <div id="notaAvaliacao">
-                <p id="notaTexto">4.01</p>
-                <div id="divEstrela">
-                    <img src="../../assets/estrela.png" alt="estrela">
-                    <img src="../../assets/estrela.png" alt="estrela">
-                    <img src="../../assets/estrela.png" alt="estrela">
-                    <img src="../../assets/estrela.png" alt="estrela">
-                    <img src="../../assets/estrela_vazia.png" alt="estrela">
-                </div>
-            </div>
-            <div class="divAvaliacao">
-                <div class="subdivAvaliacao">
-                    <p class="textoAvaliacao">Nome do usuário</p>
-                    <div id="divEstrela">
-                        <img src="../../assets/estrela.png" alt="estrela" id="imagemEstrela">
-                        <img src="../../assets/estrela.png" alt="estrela" id="imagemEstrela">
-                        <img src="../../assets/estrela.png" alt="estrela" id="imagemEstrela">
-                        <img src="../../assets/estrela.png" alt="estrela" id="imagemEstrela">
-                        <img src="../../assets/estrela.png" alt="estrela" id="imagemEstrela">
-                    </div>
-                </div>
-                <p class="dataAvaliacao">Avaliado em 24/07/2024</p>
-                <p class="textoAvaliacao">Amei!!! Extremamente útil, nunca mais tive que andar a pé!</p>
-                <div class="subdivAvaliacao">
-                    <button class="botaoUtil">Útl</button>
-                    <p class="textoUtil">15 usuários acharam esse cometário útil</p>
-                </div>
-            </div>
-        </section>
     </main>
 </body>
+
 </html>

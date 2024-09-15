@@ -31,9 +31,7 @@ async function exibirCatalogo() {
     produtos.forEach(produto => {
         document.getElementById("principal").innerHTML += `
         <section class="produto">
-            <a onclick="paginaProduto(${produto.idProduto})">
-                <img src="${produto.imagem}" alt="${produto.nome}" class="imagemProduto">
-            </a>
+            <div class="divAuxImagem" onclick="paginaProduto(${produto.idProduto})"><img src="${produto.imagem}" alt="${produto.nome}" class="imagemProduto"></div>
             <div class="titulo_produto">
                 <div class="subdiv_produto">
                     <a onclick="paginaProduto(${produto.idProduto})" class="nomeProduto">${produto.nome}</a>
@@ -72,6 +70,10 @@ async function favoritar(elemento, idProduto) {
     } else {
         alert(results.message);
     }
+}
+
+function paginaProduto(idProduto) {
+    window.location.href = `/p/${idProduto}`;
 }
 
 exibirCatalogo();
