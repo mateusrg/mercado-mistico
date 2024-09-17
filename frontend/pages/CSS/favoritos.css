@@ -32,79 +32,97 @@ main {
     padding-left: 1vw;
 }
 
-.divProduto {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 80vw;
-    height: 16vh;
-}
-
-.secaoProduto {
+.produto {
     position: relative;
-    width: 88.75vw;
+    margin-left: 2vw;
     display: flex;
-    align-items: center;
+    width: 90vw;
+    gap: 1.5vw;
 }
 
-#subdivProduto {
+.divAuxImagem {
+    height: 25vh;
+    aspect-ratio: 1/1;
     display: flex;
-    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    overflow: hidden;
 }
 
 .imagemProduto {
-    height: 14vh;
-    border-radius: 5px;
-    margin: 0px 1.5rem 0px 1rem;
-}
-
-.direitaImagem {
-    height: 12vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+    height: auto;
+    width: auto;
+    max-height: 100%;
+    max-width: 100%;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 0.5vh;
+    object-fit: contain;
 }
 
 .nomeProduto {
+    font-size: 3.5vh;
     font-family: "Inknut Antiqua";
-    font-size: 4vh;
+    color: var(--amarelo);
+    cursor: pointer;
+    white-space: nowrap; /* Evita quebra de linha */
+    line-height: 1;
+}
+
+.precoProduto {
+    font-size: 2.5vh;
+    font-family: "Inder";
+    font-weight: 400;
     color: var(--branco);
-    line-height: 1; /* Faz caixa ficar colada no texto!!!!!!!!!! */
+    margin-top: auto;
+    margin-bottom: 3px;
+}
+
+.subdiv_produto {
+    display: flex;
+    flex-direction: column;
+    height: 25vh;
+}
+
+.titulo_produto {
+    display: flex;
+    justify-content: space-between;
+    width: 77vw;
+}
+
+.carrinho {
+    height: 6.5vh;
+}
+
+.coracao {
+    height: 5vh;
+    margin-top: 0.5vh;
+    filter: saturate(0%);
 }
 
 .emEstoque {
     color: var(--vermelhoAlaranjado);
-    font-size: 2vh;
+    font-size: 3vh;
     font-family: "Inder";
-    font-weight: 400;
-    margin-top: 4px;
+    margin: 1.3vh 0px 3vh 0px;
 }
 
-.preco {
-    color: var(--branco);
-    font-size: 2.5vh;
-    font-family: "Inknut Antiqua";
-    line-height: 1;
+.semEstoque {
+    color: var(--verdeMusgo);
+    font-size: 1.25rem;
+    font-family: "Inder";
+    margin: 1.3vh 0px 3vh 0px;
 }
 
-.carrinho {
-    height: 7vh;
-    cursor: pointer;
-}
-
-.favoritar {
-    height: 5.4vh;
-    cursor: pointer;
-}
-
-.interacoesProduto {
+.subdiv_produto_imagens {
     display: flex;
-    gap: 2vw;
     align-items: center;
-    justify-self: flex-end;
+    gap: 2vw;
+    height: fit-content;
+    margin-top: auto;
+    margin-bottom: 5px;
 }
 
-.favoritar:hover, .carrinho:hover {
+.coracao:hover, .carrinho:hover {
     cursor: pointer;
     filter: invert(57%) sepia(74%) saturate(498%) hue-rotate(5deg) brightness(153%) contrast(84%);
 }
