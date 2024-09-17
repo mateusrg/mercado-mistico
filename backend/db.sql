@@ -32,7 +32,7 @@ CREATE TABLE Endereco (
     cidade VARCHAR(100) NOT NULL,
     estado VARCHAR(2) NOT NULL,
     idUsuario INT NOT NULL,
-    FOREIGN KEY (idUsuario) REFERENCES Usuario(idUsuario)
+    FOREIGN KEY (idUsuario) REFERENCES Usuario(idUsuario) ON DELETE CASCADE
 );
 
 -- Agora que a tabela Endereco já existe, o idEnderecoPadrao no Usuario é transformado em FK
@@ -48,14 +48,14 @@ CREATE TABLE Avaliacao (
     data DATE,
     util INT NOT NULL,
     idProduto INT NOT NULL,
-    FOREIGN KEY (idProduto) REFERENCES Produto(idProduto)
+    FOREIGN KEY (idProduto) REFERENCES Produto(idProduto) ON DELETE CASCADE
 );
 
 CREATE TABLE ListaFavoritos (
 	idUsuario INT NOT NULL,
     idProduto INT NOT NULL,
-    FOREIGN KEY (idUsuario) REFERENCES Usuario(idUsuario),
-    FOREIGN KEY (idProduto) REFERENCES Produto(idProduto)
+    FOREIGN KEY (idUsuario) REFERENCES Usuario(idUsuario) ON DELETE CASCADE,
+    FOREIGN KEY (idProduto) REFERENCES Produto(idProduto) ON DELETE CASCADE
 );
 
 CREATE TABLE ItemCarrinho (
@@ -63,8 +63,8 @@ CREATE TABLE ItemCarrinho (
 	idUsuario INT NOT NULL,
     idProduto INT NOT NULL,
     quantidade INT NOT NULL DEFAULT 1,
-    FOREIGN KEY (idUsuario) REFERENCES Usuario(idUsuario),
-    FOREIGN KEY (idProduto) REFERENCES Produto(idProduto)
+    FOREIGN KEY (idUsuario) REFERENCES Usuario(idUsuario) ON DELETE CASCADE,
+    FOREIGN KEY (idProduto) REFERENCES Produto(idProduto) ON DELETE CASCADE
 );
 
 CREATE TABLE TipoValidacao (
@@ -92,7 +92,7 @@ CREATE TABLE CartaoPresente (
     nomeRemetente VARCHAR(80),
     emailRemetente VARCHAR(80),
     mensagem TEXT,
-    FOREIGN KEY (idDestinatario) REFERENCES Usuario(idUsuario)
+    FOREIGN KEY (idDestinatario) REFERENCES Usuario(idUsuario) ON DELETE CASCADE --provisório
 );
 
 CREATE TABLE Pedido (
@@ -101,8 +101,8 @@ CREATE TABLE Pedido (
     total DECIMAL(10, 2) NOT NULL,
     idEndereco INT NOT NULL,
     idUsuario INT NOT NULL,
-    FOREIGN KEY (idEndereco) REFERENCES Endereco(idEndereco),
-    FOREIGN KEY (idUsuario) REFERENCES Usuario(idUsuario)
+    FOREIGN KEY (idEndereco) REFERENCES Endereco(idEndereco) ON DELETE CASCADE, --provisório
+    FOREIGN KEY (idUsuario) REFERENCES Usuario(idUsuario) ON DELETE CASCADE
 );
 
 CREATE TABLE StatusDevolucao (
