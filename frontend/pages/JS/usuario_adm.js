@@ -39,12 +39,14 @@ function sairConta () {
     window.location.href = '/login';
 }
 
-function redefinirSenha() {
-    document.getElementById('secaoredefinirSenha').style.display = 'flex';
+function editarUsuario() {
+    document.getElementById('secaoeditarUsuario').style.display = 'flex';
+    document.querySelector('#nomeInput').value = `${localStorage.getItem('nome')}`;
 }
 
 function botaoFechar () {
-    document.getElementById('secaoredefinirSenha').style.display = 'none';
+    document.getElementById('secaoeditarUsuario').style.display = 'none';
+    document.querySelector('#nomeInput').value = '';
     document.querySelector('#senhaAtual').value = '';
     document.querySelector('#senhaNova').value = '';
 }
@@ -73,8 +75,9 @@ async function enviarNovoUsuario() {
 
     alert(results.message);
     if (results.success) {
+        localStorage.setItem("nome", nome);
         localStorage.setItem("senha", senhaNova);
-        window.location.href = "/usuario_adm";
+        window.location.href = "/usuario";
     }
 }
 

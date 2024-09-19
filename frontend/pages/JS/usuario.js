@@ -24,6 +24,7 @@ async function verificarEstadoDeLogin() {
 }
 
 verificarEstadoDeLogin();
+// mostrarFavoritos();
 
 function sairConta () {
     // Usuário deslogou, mostrar elementos do cabeçalho deslogado
@@ -104,3 +105,52 @@ async function excluirConta() {
         sairConta();
     }
 }
+
+// let favoritos = [];
+
+// async function listarFavoritos() {
+//     const emailUsuario = localStorage.getItem("email");
+
+//     const response = await fetch(`/favorito/listar/${emailUsuario}`);
+//     const results = await response.json();
+
+//     if (results.success) {
+//         const listaVazia = document.getElementById('listaVazia');
+//         const produtosFavoritos = document.getElementById('produtosFavoritos');
+
+//         console.log(favoritos)
+//         favoritos = results.data;
+//         console.log(favoritos)
+
+
+//         if (favoritos.length === 0) {
+//             listaVazia.style.display = "block";
+//             produtosFavoritos.style.display = "none";
+//         } else {
+//             listaVazia.style.display = "none";
+//             produtosFavoritos.style.display = "flex";
+
+//             mostrarFavoritos();
+//         }
+//     } else {
+//         alert(results.message);
+//     }
+// }
+
+// async function mostrarFavoritos() {
+//     const produtos = await listarFavoritos();
+
+//     console.log(favoritos)
+
+//     const produtoImagens = document.getElementById('produtosFavoritos').querySelectorAll('img');
+
+//     for (let i = 0; i <= 3; i++) {
+//         const produto = favoritos[currentIndex + (i - 1)];
+//         if (produto) {
+//             produtoImagens[i].src = produto.imagem;
+//             produtoImagens[i].style.display = "block";
+//         } else {
+//             produtoImagens[i].style.display = "none";
+//         }
+//     }
+// }

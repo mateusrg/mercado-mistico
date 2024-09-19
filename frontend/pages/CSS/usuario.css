@@ -227,48 +227,57 @@ label {
 /* Lista de produtos presentes nos favoritos */
 
 #produtosFavoritos {
-    display: grid;
+    display: flex;
     align-items: center;
-    grid-template-rows: 13vh;
-    grid-template-columns: 5vw 5vw 5vw 5vw 5vw;
-    grid-template-areas: "seta_produto_esquerda produto1 produto2 produto3 seta_produto_direita";
-    column-gap: 0.9vw;
+    overflow: hidden; /* Para ocultar os produtos fora da exibição */
+    gap: 0.9vw;
+    justify-content: center;
+    position: relative;
 }
 
 #produto_um {
     display: flex;
-    width: 100%;
-    grid-area: produto1;
+    width: 19%;
 }
 
 #produto_dois {
     display: flex;
-    width: 100%;
+    width: 19%;
     grid-area: produto2;
 }
 
 #produto_tres {
     display: flex;
-    width: 100%;
+    width: 19%;
     grid-area: produto3;
+}
+
+#seta_produto_esquerda, #seta_produto_direita {
+    cursor: pointer;
+    position: absolute;
+    z-index: 1;
 }
 
 #seta_produto_direita {
     display: flex;
     justify-self: center;
-    height: 6vh;
+    width: 3vw;
     grid-area: seta_produto_direita;
     rotate: -90deg;
     filter: invert(100%);
+    right: 0;
+    margin-right: 1vw;
 }
 
 #seta_produto_esquerda {
     display: flex;
     justify-self: center;
-    height: 6vh;
+    width: 3vw;
     grid-area: seta_produto_esquerda;
     rotate: 90deg;
     filter: invert(100%);
+    left: 0;
+    margin-left: 1vw;
 }
 
 #produto_um:hover, #produto_dois:hover, #produto_tres:hover {
