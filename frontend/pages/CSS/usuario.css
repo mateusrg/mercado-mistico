@@ -226,13 +226,20 @@ label {
 
 /* Lista de produtos presentes nos favoritos */
 
+#secaoFavoritos {
+    display: flex;
+    align-items: center;
+    gap: 0.9vw;
+    justify-content: center;
+    position: relative;
+}
+
 #produtosFavoritos {
     display: flex;
     align-items: center;
     overflow: hidden; /* Para ocultar os produtos fora da exibição */
     gap: 0.9vw;
     justify-content: center;
-    position: relative;
 }
 
 #produto_um {
@@ -267,6 +274,7 @@ label {
     filter: invert(100%);
     right: 0;
     margin-right: 1vw;
+    opacity: 20%;
 }
 
 #seta_produto_esquerda {
@@ -278,6 +286,7 @@ label {
     filter: invert(100%);
     left: 0;
     margin-left: 1vw;
+    opacity: 20%;
 }
 
 #produto_um:hover, #produto_dois:hover, #produto_tres:hover {

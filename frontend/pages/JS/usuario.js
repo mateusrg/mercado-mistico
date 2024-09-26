@@ -24,7 +24,6 @@ async function verificarEstadoDeLogin() {
 }
 
 verificarEstadoDeLogin();
-// mostrarFavoritos();
 
 function sairConta () {
     // Usuário deslogou, mostrar elementos do cabeçalho deslogado
@@ -106,51 +105,76 @@ async function excluirConta() {
     }
 }
 
-// let favoritos = [];
+let favoritos;
 
-// async function listarFavoritos() {
-//     const emailUsuario = localStorage.getItem("email");
+async function listarFavoritos() {
+    const emailUsuario = localStorage.getItem("email");
 
-//     const response = await fetch(`/favorito/listar/${emailUsuario}`);
-//     const results = await response.json();
+    const response = await fetch(`/favorito/listar/${emailUsuario}`);
+    const results = await response.json();
 
-//     if (results.success) {
-//         const listaVazia = document.getElementById('listaVazia');
-//         const produtosFavoritos = document.getElementById('produtosFavoritos');
+    if (results.success) {
+        const listaVazia = document.getElementById('listaVazia');
+        const produtosFavoritos = document.getElementById('produtosFavoritos');
+        favoritos = results.data;
+        
+        if (favoritos.length === 0) {
+            listaVazia.style.display = "block";
+            produtosFavoritos.style.display = "none";
+        } else {
+            listaVazia.style.display = "none";
+            produtosFavoritos.style.display = "flex";
+            document.getElementById("seta_produto_direita").style.opacity = favoritos.length <= 3 ? "20%" : "100%";
 
-//         console.log(favoritos)
-//         favoritos = results.data;
-//         console.log(favoritos)
+            listaProdutosExibidos = [favoritos[0], favoritos[1], favoritos[2]]
+            mostrarFavoritos();
+        }
+    } else {
+        alert(results.message);
+    }
+}
+let listaProdutosExibidos;
 
+function mostrarFavoritos() {
+    let produtos = "";
 
-//         if (favoritos.length === 0) {
-//             listaVazia.style.display = "block";
-//             produtosFavoritos.style.display = "none";
-//         } else {
-//             listaVazia.style.display = "none";
-//             produtosFavoritos.style.display = "flex";
+    switch (listaProdutosExibidos.length) {
+        case 1:
+            produtos = `<img src="${listaProdutosExibidos[0].imagem}" alt="produto1" id="produto_um">`;
+            break;
+        case 2:
+            produtos = `
+            <img src="${listaProdutosExibidos[0].imagem}" alt="produto1" id="produto_um">
+            <img src="${listaProdutosExibidos[1].imagem}" alt="produto2" id="produto_dois">
+            `;
+            break;
+        default:
+            produtos = `
+            <img src="${listaProdutosExibidos[0].imagem}" alt="produto1" id="produto_um">
+            <img src="${listaProdutosExibidos[1].imagem}" alt="produto2" id="produto_dois">
+            <img src="${listaProdutosExibidos[2].imagem}" alt="produto3" id="produto_tres">
+            `;
+    }
+    document.getElementById("produtosFavoritos").innerHTML = `
+    ${produtos}
+    `;
+}
 
-//             mostrarFavoritos();
-//         }
-//     } else {
-//         alert(results.message);
-//     }
-// }
+function clicaSeta(frente) {
+    document.getElementById("seta_produto_esquerda").style.opacity = favoritos[0] === listaProdutosExibidos[0] ? "100%" : "20%";
+    document.getElementById("seta_produto_direita").style.opacity = favoritos[favoritos.length - 1] === listaProdutosExibidos[listaProdutosExibidos.length - 1] ? "100%" : "20%";
 
-// async function mostrarFavoritos() {
-//     const produtos = await listarFavoritos();
+    if (frente) {
+        listaProdutosExibidos.splice(0, 1);
+        const indice = favoritos.indexOf(listaProdutosExibidos[listaProdutosExibidos.length - 1]) + 1;
+        listaProdutosExibidos.push(favoritos[indice]);
+        mostrarFavoritos();
+    } else {
+        listaProdutosExibidos.pop();
+        const indice = favoritos.indexOf(listaProdutosExibidos[0]) - 1;
+        listaProdutosExibidos.unshift(favoritos[indice]);
+        mostrarFavoritos();
+    }
+}
 
-//     console.log(favoritos)
-
-//     const produtoImagens = document.getElementById('produtosFavoritos').querySelectorAll('img');
-
-//     for (let i = 0; i <= 3; i++) {
-//         const produto = favoritos[currentIndex + (i - 1)];
-//         if (produto) {
-//             produtoImagens[i].src = produto.imagem;
-//             produtoImagens[i].style.display = "block";
-//         } else {
-//             produtoImagens[i].style.display = "none";
-//         }
-//     }
-// }
+listarFavoritos();
