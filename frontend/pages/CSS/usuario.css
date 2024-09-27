@@ -221,13 +221,13 @@ label {
     font-family: "Inder";
     font-weight: 400;
     font-size: 2.743vh;
-    display: none;
+    display: flex;
 }
 
 /* Lista de produtos presentes nos favoritos */
 
 #secaoFavoritos {
-    display: flex;
+    display: none;
     align-items: center;
     gap: 0.9vw;
     justify-content: center;

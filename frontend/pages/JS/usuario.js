@@ -115,7 +115,7 @@ async function listarFavoritos() {
 
     if (results.success) {
         const listaVazia = document.getElementById('listaVazia');
-        const produtosFavoritos = document.getElementById('produtosFavoritos');
+        const produtosFavoritos = document.getElementById('secaoFavoritos');
         favoritos = results.data;
         
         if (favoritos.length === 0) {
@@ -125,8 +125,22 @@ async function listarFavoritos() {
             listaVazia.style.display = "none";
             produtosFavoritos.style.display = "flex";
             document.getElementById("seta_produto_direita").style.opacity = favoritos.length <= 3 ? "20%" : "100%";
+            if (favoritos.length > 3) {
+                document.getElementById("seta_produto_direita").setAttribute("onclick", "clicaSeta(true)");
+            } else {
+                document.getElementById("seta_produto_direita").setAttribute("onclick", "");
+            }
 
-            listaProdutosExibidos = [favoritos[0], favoritos[1], favoritos[2]]
+            switch (favoritos.length) {
+                case 1:
+                    listaProdutosExibidos = [favoritos[0]];
+                    break;
+                case 2:
+                    listaProdutosExibidos = [favoritos[0], favoritos[1]];
+                    break;
+                default:
+                    listaProdutosExibidos = [favoritos[0], favoritos[1], favoritos[2]];
+            }
             mostrarFavoritos();
         }
     } else {
@@ -162,7 +176,17 @@ function mostrarFavoritos() {
 
 function clicaSeta(frente) {
     document.getElementById("seta_produto_esquerda").style.opacity = favoritos[0] === listaProdutosExibidos[0] ? "100%" : "20%";
+    if (favoritos[0] === listaProdutosExibidos[0]) {
+        document.getElementById("seta_produto_esquerda").setAttribute("onclick", "clicaSeta(false)");
+    } else {
+        document.getElementById("seta_produto_esquerda").setAttribute("onclick", "");
+    }
     document.getElementById("seta_produto_direita").style.opacity = favoritos[favoritos.length - 1] === listaProdutosExibidos[listaProdutosExibidos.length - 1] ? "100%" : "20%";
+    if (favoritos[favoritos.length - 1] === listaProdutosExibidos[listaProdutosExibidos.length - 1]) {
+        document.getElementById("seta_produto_direita").setAttribute("onclick", "clicaSeta(true)");
+    } else {
+        document.getElementById("seta_produto_direita").setAttribute("onclick", "");
+    }
 
     if (frente) {
         listaProdutosExibidos.splice(0, 1);
