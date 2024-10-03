@@ -275,6 +275,7 @@ label {
     right: 0;
     margin-right: 1vw;
     opacity: 20%;
+    pointer-events: none;
 }
 
 #seta_produto_esquerda {
@@ -287,6 +288,7 @@ label {
     left: 0;
     margin-left: 1vw;
     opacity: 20%;
+    pointer-events: none;
 }
 
 #produto_um:hover, #produto_dois:hover, #produto_tres:hover {

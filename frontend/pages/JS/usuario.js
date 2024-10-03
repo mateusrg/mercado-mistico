@@ -125,6 +125,7 @@ async function listarFavoritos() {
             listaVazia.style.display = "none";
             produtosFavoritos.style.display = "flex";
             document.getElementById("seta_produto_direita").style.opacity = favoritos.length <= 3 ? "20%" : "100%";
+            document.getElementById("seta_produto_direita").style.pointerEvents = favoritos.length <= 3 ? "none" : "auto";
             if (favoritos.length > 3) {
                 document.getElementById("seta_produto_direita").setAttribute("onclick", "clicaSeta(true)");
             } else {
@@ -175,30 +176,42 @@ function mostrarFavoritos() {
 }
 
 function clicaSeta(frente) {
-    document.getElementById("seta_produto_esquerda").style.opacity = favoritos[0] === listaProdutosExibidos[0] ? "100%" : "20%";
-    if (favoritos[0] === listaProdutosExibidos[0]) {
-        document.getElementById("seta_produto_esquerda").setAttribute("onclick", "clicaSeta(false)");
+    if (frente) {
+        const indiceAtual = favoritos.indexOf(listaProdutosExibidos[listaProdutosExibidos.length - 1]);
+        if (indiceAtual + 1 < favoritos.length) {
+            listaProdutosExibidos.shift();
+            listaProdutosExibidos.push(favoritos[indiceAtual + 1]);
+            mostrarFavoritos();
+        }
     } else {
-        document.getElementById("seta_produto_esquerda").setAttribute("onclick", "");
-    }
-    document.getElementById("seta_produto_direita").style.opacity = favoritos[favoritos.length - 1] === listaProdutosExibidos[listaProdutosExibidos.length - 1] ? "100%" : "20%";
-    if (favoritos[favoritos.length - 1] === listaProdutosExibidos[listaProdutosExibidos.length - 1]) {
-        document.getElementById("seta_produto_direita").setAttribute("onclick", "clicaSeta(true)");
-    } else {
-        document.getElementById("seta_produto_direita").setAttribute("onclick", "");
+        const indiceAtual = favoritos.indexOf(listaProdutosExibidos[0]);
+        if (indiceAtual - 1 >= 0) {
+            listaProdutosExibidos.pop();
+            listaProdutosExibidos.unshift(favoritos[indiceAtual - 1]);
+            mostrarFavoritos();
+        }
     }
 
-    if (frente) {
-        listaProdutosExibidos.splice(0, 1);
-        const indice = favoritos.indexOf(listaProdutosExibidos[listaProdutosExibidos.length - 1]) + 1;
-        listaProdutosExibidos.push(favoritos[indice]);
-        mostrarFavoritos();
+    if (favoritos[0] === listaProdutosExibidos[0]) {
+        document.getElementById("seta_produto_esquerda").style.opacity = "20%";
+        document.getElementById("seta_produto_esquerda").style.pointerEvents = "none";
+        document.getElementById("seta_produto_esquerda").setAttribute("onclick", "");
     } else {
-        listaProdutosExibidos.pop();
-        const indice = favoritos.indexOf(listaProdutosExibidos[0]) - 1;
-        listaProdutosExibidos.unshift(favoritos[indice]);
-        mostrarFavoritos();
+        document.getElementById("seta_produto_esquerda").style.opacity = "100%";
+        document.getElementById("seta_produto_esquerda").style.pointerEvents = "auto";
+        document.getElementById("seta_produto_esquerda").setAttribute("onclick", "clicaSeta(false)");
+    }
+    
+    if (favoritos[favoritos.length - 1] === listaProdutosExibidos[listaProdutosExibidos.length - 1]) {
+        document.getElementById("seta_produto_direita").style.opacity = "20%";
+        document.getElementById("seta_produto_direita").style.pointerEvents = "none";
+        document.getElementById("seta_produto_direita").setAttribute("onclick", "");
+    } else {
+        document.getElementById("seta_produto_direita").style.opacity = "100%";
+        document.getElementById("seta_produto_direita").style.pointerEvents = "auto";
+        document.getElementById("seta_produto_direita").setAttribute("onclick", "clicaSeta(true)");
     }
 }
+
 
 listarFavoritos();
