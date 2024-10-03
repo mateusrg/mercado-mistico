@@ -183,7 +183,6 @@ async function selecionarEnderecos() {
 
 async function excluirEndereco(elemento, idEndereco) {
     const id = idEndereco;
-    console.log("teste")
     elemento.closest('.divCaixa').remove();
 
     const response = await fetch(`/endereco/excluir/${id}`, {

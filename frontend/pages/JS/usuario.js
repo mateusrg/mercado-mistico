@@ -155,19 +155,19 @@ function mostrarFavoritos() {
 
     switch (listaProdutosExibidos.length) {
         case 1:
-            produtos = `<img src="${listaProdutosExibidos[0].imagem}" alt="produto1" id="produto_um">`;
+            produtos = `<img src="${listaProdutosExibidos[0].imagem}" onclick="paginaProduto(${listaProdutosExibidos[0].idProduto})" alt="produto1" id="produto_um">`;
             break;
         case 2:
             produtos = `
-            <img src="${listaProdutosExibidos[0].imagem}" alt="produto1" id="produto_um">
-            <img src="${listaProdutosExibidos[1].imagem}" alt="produto2" id="produto_dois">
+            <img src="${listaProdutosExibidos[0].imagem}" onclick="paginaProduto(${listaProdutosExibidos[0].idProduto})" alt="produto1" id="produto_um">
+            <img src="${listaProdutosExibidos[1].imagem}" onclick="paginaProduto(${listaProdutosExibidos[1].idProduto})" alt="produto2" id="produto_dois">
             `;
             break;
         default:
             produtos = `
-            <img src="${listaProdutosExibidos[0].imagem}" alt="produto1" id="produto_um">
-            <img src="${listaProdutosExibidos[1].imagem}" alt="produto2" id="produto_dois">
-            <img src="${listaProdutosExibidos[2].imagem}" alt="produto3" id="produto_tres">
+            <img src="${listaProdutosExibidos[0].imagem}" onclick="paginaProduto(${listaProdutosExibidos[0].idProduto})" alt="produto1" id="produto_um">
+            <img src="${listaProdutosExibidos[1].imagem}" onclick="paginaProduto(${listaProdutosExibidos[1].idProduto})" alt="produto2" id="produto_dois">
+            <img src="${listaProdutosExibidos[2].imagem}" onclick="paginaProduto(${listaProdutosExibidos[2].idProduto})" alt="produto3" id="produto_tres">
             `;
     }
     document.getElementById("produtosFavoritos").innerHTML = `
@@ -213,5 +213,8 @@ function clicaSeta(frente) {
     }
 }
 
+function paginaProduto(idProduto) {
+    window.location.href = `/p/${idProduto}`;
+}
 
 listarFavoritos();
