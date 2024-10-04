@@ -156,6 +156,15 @@ label {
     padding: 1vh 3vw;
 }
 
+.divCaixaPadrao {
+    width: 50vw;
+    display: flex;
+    flex-direction: column;
+    border: 2px solid var(--ciano);
+    border-radius: 5px;
+    padding: 1vh 3vw;
+}
+
 .subdivCaixa_cima {
     display: flex;
     justify-content: flex-start;
@@ -203,6 +212,12 @@ label {
 #excluir:hover {
     filter: invert(57%) sepia(74%) saturate(498%) hue-rotate(5deg) brightness(153%) contrast(84%);
     cursor: pointer;
+}
+
+#editar:hover {
+    filter: invert(57%) sepia(74%) saturate(498%) hue-rotate(5deg) brightness(153%) contrast(84%);
+    cursor: pointer;
+    user-select: none;
 }
 
 #fechar:hover {

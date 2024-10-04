@@ -30,6 +30,8 @@ function marcarCheckbox() {
 function botaoAdicionar() {
     document.getElementById('secao_adicionar_endereco').style.display = 'flex';
     document.getElementById('adicionarEndereco').style.backgroundColor = 'var(--azulEscuro)';
+    document.getElementById('tituloAdicionar').innerText = 'Adicionar endereço';
+    document.getElementById("botaoEnviar").setAttribute("onclick", `enviar(event)`);
 }
 
 function botaoFechar () {
@@ -149,6 +151,9 @@ async function exibirEnderecos() {
     const lista_enderecos = document.getElementById('secao_enderecos');
     enderecos.forEach(endereco => {
         let novoEndereco = document.createElement('div');
+
+        novoEndereco.className = endereco.isPadrao ? 'divCaixaPadrao' : 'divCaixa';
+
         novoEndereco.innerHTML = `
             <div class="subdivCaixa_cima">
                 <h4 class="textosMenores" id="nomeCompleto">${endereco.nome},</h4>
@@ -159,12 +164,10 @@ async function exibirEnderecos() {
                 <h4 class="textosMenores" id="cep">CEP: ${endereco.CEP}</h4>
                 <div id="subdivBotao">
                     <img src="../../assets/lixo.png" alt="Excluir" id="excluir" onclick="excluirEndereco(this.parentElement, ${endereco.idEndereco})">
-                    <h4 onclick="mudarTexto()" class="textosMenores" id="editar">Editar</h4>
+                    <h4 onclick="botaoEditar(${endereco.idEndereco})" class="textosMenores" id="editar">Editar</h4>
                 </div>
             </div>
         `;
-
-        novoEndereco.className = 'divCaixa';
         lista_enderecos.appendChild(novoEndereco);
     });
 }
@@ -183,7 +186,6 @@ async function selecionarEnderecos() {
 
 async function excluirEndereco(elemento, idEndereco) {
     const id = idEndereco;
-    console.log("teste")
     elemento.closest('.divCaixa').remove();
 
     const response = await fetch(`/endereco/excluir/${id}`, {
@@ -197,5 +199,87 @@ async function excluirEndereco(elemento, idEndereco) {
     
     if (!results.success) {
         alert(results.message);
+    }
+}
+
+async function botaoEditar (idEndereco) {
+    const email = localStorage.getItem('email');
+    const id = idEndereco;
+
+    document.getElementById('secao_adicionar_endereco').style.display = 'flex';
+    document.getElementById('tituloAdicionar').innerText = 'Editar endereço';
+    document.getElementById("botaoEnviar").setAttribute("onclick", `editarEndereco(${id})`);
+    document.getElementById('adicionarEndereco').style.backgroundColor = 'var(--vermelhoAlaranjado)';
+
+    const response = await fetch(`/endereco/${email}/${id}`);
+    const results = await response.json();
+
+    if (results.success) {
+        document.getElementById('nomeInput').value = results.data.nome;
+        document.getElementById('enderecoInput').value = results.data.endereco;
+        document.getElementById('numeroInput').value = results.data.numeroResidencia;
+        document.getElementById('complementoInput').value = results.data.complemento;
+        document.getElementById('cepInput').value = results.data.CEP;
+        document.getElementById('bairroInput').value = results.data.bairro;
+        document.getElementById('cidadeInput').value = results.data.cidade;
+        document.getElementById('estadoInput').value = results.data.estado
+
+        if (results.data.isPadrao) {
+            document.getElementById('imagemCheckbox').src = "../../assets/checkbox_marcado.png";
+        }
+    } else {
+        alert(results.message);
+    }
+}
+
+async function editarEndereco(idEndereco) {
+    const nome = document.getElementById("nomeInput").value;
+    const CEP = document.getElementById("cepInput").value;
+    const endereco = document.getElementById("enderecoInput").value;
+    const numeroResidencia = document.getElementById("numeroInput").value;
+    const complemento = document.getElementById("complementoInput").value;
+    const bairro = document.getElementById("bairroInput").value;
+    const cidade = document.getElementById("cidadeInput").value;
+    const estado = document.getElementById("estadoInput").value;
+
+    const data = {
+        nome,
+        CEP,
+        endereco,
+        numeroResidencia,
+        complemento,
+        bairro,
+        cidade,
+        estado,
+        idEndereco
+    };
+
+    const response = await fetch('/endereco/editar', {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data)
+    });
+
+    const results = await response.json();
+
+    if (!results.success) {
+        alert(results.message);
+    } else {
+        document.getElementById('secao_adicionar_endereco').style.display = 'none';
+
+        document.getElementById("nomeInput").value = '';
+        document.getElementById("cepInput").value = '';
+        document.getElementById("enderecoInput").value = '';
+        document.getElementById("numeroInput").value = '';
+        document.getElementById("complementoInput").value = '';
+        document.getElementById("bairroInput").value = '';
+        document.getElementById("cidadeInput").value = '';
+        document.getElementById("estadoInput").value = '';
+        document.getElementById('imagemCheckbox').src = "../../assets/checkbox_desmarcado.png";
+
+        removerEnderecos();
+        exibirEnderecos();
     }
 }
