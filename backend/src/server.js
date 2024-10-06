@@ -608,14 +608,73 @@ app.get("/endereco/listar/:email", (request, response) => {
                 // Adiciona uma propriedade em todos os endereços se eles são ou não padrão. no caso, só um vai receber "true"
                 const enderecosComIndicacao = enderecos.map(endereco => ({
                     ...endereco,
-                    isPadrao: endereco.id === idEnderecoPadrao
-                }));
+                    isPadrao: endereco.idEndereco === idEnderecoPadrao
+                }));                
 
                 response.status(200).json({
                     success: true,
                     message: "Endereços do usuário encontrados!",
                     data: enderecosComIndicacao
                 });
+            });
+        });
+    });
+});
+
+// Rota para buscar um endereço pelo idEndereco
+app.get('/endereco/:email/:id', (request, response) => {
+    const email = request.params.email;
+    const idEndereco = request.params.id;
+
+    const queryUsuario = "SELECT idUsuario, idEnderecoPadrao FROM Usuario WHERE email = ?";
+    const paramsUsuario = [email];
+    
+    connection.query(queryUsuario, paramsUsuario, (err, userResults) => {
+        if (err) {
+            return response.status(500).json({
+                success: false,
+                message: "Erro ao buscar o usuário.",
+                data: err
+            });
+        }
+
+        if (userResults.length === 0) {
+            return response.status(404).json({ 
+                success: false,
+                message: "E-mail não cadastrado."
+            });
+        }
+
+        const idUsuario = userResults[0].idUsuario;
+        const idEnderecoPadrao = userResults[0].idEnderecoPadrao;
+
+        const queryEndereco = "SELECT * FROM Endereco WHERE idEndereco = ? AND idUsuario = ?";
+        const paramsEndereco = [idEndereco, idUsuario];
+
+        connection.query(queryEndereco, paramsEndereco, (err, enderecoResults) => {
+            if (err) {
+                return response.status(500).json({
+                    success: false,
+                    message: "Erro ao buscar o endereço.",
+                    data: err
+                });
+            }
+
+            if (enderecoResults.length === 0) {
+                return response.status(404).json({
+                    success: false,
+                    message: "Endereço não encontrado."
+                });
+            }
+
+            const isPadrao = enderecoResults[0].idEndereco === idEnderecoPadrao;
+
+            response.json({
+                success: true,
+                data: {
+                    ...enderecoResults[0],
+                    isPadrao
+                }
             });
         });
     });
