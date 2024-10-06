@@ -146,6 +146,7 @@ document.getElementById("cepInput").addEventListener("blur", async function() {
 });
 
 async function exibirEnderecos() {
+    removerEnderecos();
     const enderecos = await selecionarEnderecos();
 
     const lista_enderecos = document.getElementById('secao_enderecos');
@@ -186,7 +187,11 @@ async function selecionarEnderecos() {
 
 async function excluirEndereco(elemento, idEndereco) {
     const id = idEndereco;
-    elemento.closest('.divCaixa').remove();
+    try {
+        elemento.closest('.divCaixa').remove();
+    } catch {
+        elemento.closest('.divCaixaPadrao').remove();
+    }
 
     const response = await fetch(`/endereco/excluir/${id}`, {
         method: "DELETE",

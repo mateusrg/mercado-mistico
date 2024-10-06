@@ -28,7 +28,7 @@
         <img src="../../assets/seta_volta.png" alt="seta" class="seta_volta_sem_titulo">
         <section id="secaoSelecionarEFinalizar">
             <div id="divSelecionarTodosEsquerda"><p id="todosItens">Todos os itens</p></div>
-            <button id="botaoFinalizarCompra" onclick="window.location.href = '/finalizar_compra'">Finalizar compra</button>
+            <button id="botaoFinalizarCompra" onclick="document.querySelector('#listaProdutos').childElementCount > 0 ? window.location.href = '/finalizar_compra' : ''">Finalizar compra</button>
         </section>
         <section id="listaProdutos"></section>
     </main>

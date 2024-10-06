@@ -498,29 +498,46 @@ app.post("/endereco/cadastrar", (request, response) => {
         if (results) {
             if (request.body.enderecoPadrao) {
                 idEnderecoPadrao = results.insertId;
-                query = "UPDATE Usuario SET idEnderecoPadrao = ? WHERE idUsuario = (SELECT idUsuario FROM Usuario WHERE email = ?)";
-                params = [
-                    idEnderecoPadrao,
-                    request.body.emailUsuario
-                ];
-
+                query = "SELECT idUsuario FROM Usuario WHERE email = ?";
+                params = [request.body.emailUsuario];
                 connection.query(query, params, (err, results) => {
                     if (results) {
-                        response
-                            .status(200)
-                            .json({
-                                success: true,
-                                message: "Endereço cadastrado e endereço padrão atualizado com sucesso!",
-                                data: results
-                            });
+                        const idUsuario = results[0]["idUsuario"];
+                        query = "UPDATE Usuario SET idEnderecoPadrao = ? WHERE idUsuario = ?";
+                        params = [
+                            idEnderecoPadrao,
+                            idUsuario
+                        ];
+
+                        connection.query(query, params, (err, results) => {
+                            if (results) {
+                                response
+                                    .status(200)
+                                    .json({
+                                        success: true,
+                                        message: "Endereço cadastrado e endereço padrão atualizado com sucesso!",
+                                        data: results
+                                    });
+                            } else {
+                                response
+                                    .status(500)
+                                    .json({
+                                        success: false,
+                                        message: "Endereço cadastrado, mas erro ao atualizar o endereço padrão.",
+                                        data: err
+                                    });
+                            }
+                        });
+                        return;
                     } else {
                         response
                             .status(500)
                             .json({
                                 success: false,
-                                message: "Endereço cadastrado, mas erro ao atualizar o endereço padrão.",
+                                message: "Erro ao encontrar o id do usuário.",
                                 data: err
                             });
+                        return;
                     }
                 });
                 return;
@@ -609,7 +626,7 @@ app.get("/endereco/listar/:email", (request, response) => {
                 const enderecosComIndicacao = enderecos.map(endereco => ({
                     ...endereco,
                     isPadrao: endereco.idEndereco === idEnderecoPadrao
-                }));                
+                }));
 
                 response.status(200).json({
                     success: true,
@@ -628,7 +645,7 @@ app.get('/endereco/:email/:id', (request, response) => {
 
     const queryUsuario = "SELECT idUsuario, idEnderecoPadrao FROM Usuario WHERE email = ?";
     const paramsUsuario = [email];
-    
+
     connection.query(queryUsuario, paramsUsuario, (err, userResults) => {
         if (err) {
             return response.status(500).json({
@@ -639,7 +656,7 @@ app.get('/endereco/:email/:id', (request, response) => {
         }
 
         if (userResults.length === 0) {
-            return response.status(404).json({ 
+            return response.status(404).json({
                 success: false,
                 message: "E-mail não cadastrado."
             });
@@ -1000,4 +1017,13 @@ app.delete("/favorito/excluir/:emailUsuario/:idProduto", (request, response) => 
             }
         });
     });
+});
+
+query = "SELECT EXISTS (SELECT * FROM Usuario WHERE administrador = 1) AS Resultado";
+connection.query(query, (err, results) => {
+    if (results[0]["Resultado"] == 0) {
+        query = `INSERT INTO Usuario (nome, email, senha, creditos, administrador)
+        VALUES ('Administrador', 'adm@adm.com', '123', 0, 1)`;
+        connection.query(query);
+    }
 });
