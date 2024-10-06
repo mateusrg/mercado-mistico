@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,6 +9,7 @@
     <link rel="stylesheet" href="./pages/CSS/style.css">
     <script defer src="./pages/JS/login.js"></script>
 </head>
+
 <body>
     <header>
         <div id="header_esquerda">
@@ -19,9 +21,12 @@
             <form action="/login"><button id="login">Login</button></form>
         </div>
         <div id="botoes_header_direita_logado">
-            <a href="/favoritos" class="auxHeader"><img src="../../assets/coracao.png" alt="Coração" id="botao_logado_coracao"></a>
-            <a href="/carrinho" class="auxHeader"><img src="../../assets/carrinho.png" alt="Carrinho" id="botao_logado_carrinho"></a>
-            <a href="/usuario" class="auxHeader"><img src="../../assets/usuarioLogado.png" alt="Usuário Logado" id="botao_logado_usuario"></a>
+            <a href="/favoritos" class="auxHeader"><img src="../../assets/coracao.png" alt="Coração"
+                    id="botao_logado_coracao"></a>
+            <a href="/carrinho" class="auxHeader"><img src="../../assets/carrinho.png" alt="Carrinho"
+                    id="botao_logado_carrinho"></a>
+            <a href="/usuario" class="auxHeader"><img src="../../assets/usuarioLogado.png" alt="Usuário Logado"
+                    id="botao_logado_usuario"></a>
         </div>
     </header>
     <main>
@@ -48,24 +53,9 @@
                     <p id="slogan">Esqueceu a senha?</p>
                 </div>
                 <button onclick="realizarLogin(event)" type="submit" id="buttonSubmit">Conecte-se</button>
-            </form>        
-            <!-- Dropdown -->
-            <div class="dropdown">
-                <button id="botaoQuantidade" class="botao-quantidade" onclick="abrirDropdown()">Quantidade: 1 <img src="../../assets/seta.svg" alt="Seta" id="seta"></button>
-                <div id="itensDropdown" class="itens-dropdown">
-                    <a href="#" onclick="selecionarQuantidade(1)">1</a>
-                    <a href="#" onclick="selecionarQuantidade(2)">2</a>
-                    <a href="#" onclick="selecionarQuantidade(3)">3</a>
-                    <a href="#" onclick="selecionarQuantidade(4)">4</a>
-                    <a href="#" onclick="selecionarQuantidade(5)">5</a>
-                    <a href="#" onclick="selecionarQuantidade(6)">6</a>
-                    <a href="#" onclick="selecionarQuantidade(7)">7</a>
-                    <a href="#" onclick="selecionarQuantidade(8)">8</a>
-                    <a href="#" onclick="selecionarQuantidade(9)">9</a>
-                    <a href="#" onclick="selecionarQuantidade(10)">10</a>
-                </div>
-            </div>
+            </form>
         </section>
     </main>
 </body>
+
 </html>

@@ -43,6 +43,7 @@
                     <h4 id="valorTotal"></h4>
                 </div>
                 <p id="entregaPrazo">Entrega Imediata</p>
+                <input pattern="\d*" oninput="Number(this.value) < 1 ? this.value = '' : this.value = this.value.replace(/[^0-9]/g, '')" id="quantidade" placeholder="Digite a quantidade">
                 <button id="botaoSubmit" onclick="adicionarAoCarrinho()">Adicionar ao carrinho</button>
             </section>
         </section>

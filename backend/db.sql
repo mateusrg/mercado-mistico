@@ -92,7 +92,7 @@ CREATE TABLE CartaoPresente (
     nomeRemetente VARCHAR(80),
     emailRemetente VARCHAR(80),
     mensagem TEXT,
-    FOREIGN KEY (idDestinatario) REFERENCES Usuario(idUsuario) ON DELETE CASCADE --provisório
+    FOREIGN KEY (idDestinatario) REFERENCES Usuario(idUsuario) ON DELETE CASCADE
 );
 
 CREATE TABLE Pedido (
@@ -101,7 +101,7 @@ CREATE TABLE Pedido (
     total DECIMAL(10, 2) NOT NULL,
     idEndereco INT NOT NULL,
     idUsuario INT NOT NULL,
-    FOREIGN KEY (idEndereco) REFERENCES Endereco(idEndereco) ON DELETE CASCADE, --provisório
+    FOREIGN KEY (idEndereco) REFERENCES Endereco(idEndereco) ON DELETE CASCADE,
     FOREIGN KEY (idUsuario) REFERENCES Usuario(idUsuario) ON DELETE CASCADE
 );
 

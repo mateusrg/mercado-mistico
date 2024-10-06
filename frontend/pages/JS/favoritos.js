@@ -94,31 +94,20 @@ async function favoritar(elemento, idProduto) {
             alert(results.message);
         }
     }
-    
 }
 
 async function adicionarCarrinho(idProduto) {
-    const emailUsuario = localStorage.getItem("email");
-    const quantidade = 1;
-
-    data = {
-        emailUsuario,
-        idProduto,
-        quantidade
-    };
-
-    const response = await fetch("/carrinho/cadastrar", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify(data)
-    });
-    const results = await response.json();
-
-    if (results.success) {
-        alert(results.message);
-    } else {
-        alert(results.message);
+    let carrinho = JSON.parse(localStorage.getItem("carrinho"));
+    
+    if (!carrinho) {
+        localStorage.setItem("carrinho", "[]");
     }
+
+    const produto = {
+        "idProduto": idProduto,
+        "quantidade": 1
+    }
+
+    carrinho.push(produto);
+    localStorage.setItem("carrinho", JSON.stringify(carrinho));
 }

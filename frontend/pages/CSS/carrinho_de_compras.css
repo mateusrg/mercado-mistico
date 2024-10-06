@@ -69,77 +69,121 @@ main {
     padding-bottom: 1rem;
 }
 
-.secaoProduto {
-    position: relative;
-    width: 88.75vw;
-    display: flex;
-    align-items: center;
-}
-
-.imagemProduto {
-    height: 14vh;
-    border-radius: 5px;
-    margin: 0px 1.5rem 0px 1rem;
-}
-
-.direitaImagem {
-    height: 100%;
-}
-
-.nomeProduto {
-    font-family: "Inknut Antiqua";
-    font-size: 4vh;
-    color: var(--branco);
-    line-height: 1; /* Faz caixa ficar colada no texto!!!!!!!!!! */
-}
-
-.emEstoque {
-    color: var(--vermelhoAlaranjado);
-    font-size: 2vh;
-    font-family: "Inder";
-    font-weight: 400;
-    margin-top: 4px;
-}
-
-.preco {
-    color: var(--branco);
-    font-size: 2.5vh;
-    font-family: "Inknut Antiqua";
-    line-height: 1;
-    position: absolute;
-    bottom: 0;
-}
-
-
-.excluir {
-    height: 5vh;
-    cursor: pointer;
-}
-
-.favoritar {
-    height: 5.4vh;
-    cursor: pointer;
-}
-
-.excluirE {
-    display: flex;
-    gap: 2vw;
-    align-items: center;
-}
-
-.interacoesProduto {
-    display: flex;
-    gap: 2rem;
-    align-items: center;
-    position: absolute;
-    right: 0;
-    bottom: 0;
-}
-
 .escondido {
     display: none;
 }
 
 .secaoDesmarcada {    
     filter: opacity(0.5);
+}
+
+.produto {
+    position: relative;
+    margin-left: 2vw;
+    display: flex;
+    width: 90vw;
+    gap: 1.5vw;
+}
+
+.divAuxImagem {
+    height: 25vh;
+    aspect-ratio: 1/1;
+    display: flex;
+    justify-content: center;
+    cursor: pointer;
+    overflow: hidden;
+}
+
+.imagemProduto {
+    height: auto;
+    width: auto;
+    max-height: 100%;
+    max-width: 100%;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 0.5vh;
+    object-fit: contain;
+}
+
+.nomeProduto {
+    font-size: 3.5vh;
+    font-family: "Inknut Antiqua";
+    color: var(--amarelo);
+    cursor: pointer;
+    white-space: nowrap; /* Evita quebra de linha */
+    line-height: 1;
+}
+
+.precoProduto {
+    font-size: 2.5vh;
+    font-family: "Inder";
+    font-weight: 400;
+    color: var(--branco);
+    margin-top: auto;
+    margin-bottom: 3px;
+}
+
+.subdiv_produto {
+    display: flex;
+    flex-direction: column;
+    height: 25vh;
+}
+
+.titulo_produto {
+    display: flex;
+    justify-content: space-between;
+    width: 77vw;
+}
+
+.excluir {
+    height: 5vh;
+}
+
+.coracao {
+    height: 5vh;
+    margin-top: 0.5vh;
+    filter: saturate(0%);
+}
+
+.emEstoque {
+    color: var(--vermelhoAlaranjado);
+    font-size: 3vh;
+    font-family: "Inder";
+    margin: 1.3vh 0px 3vh 0px;
+}
+
+.semEstoque {
+    color: var(--verdeMusgo);
+    font-size: 1.25rem;
+    font-family: "Inder";
+    margin: 1.3vh 0px 3vh 0px;
+}
+
+.subdiv_produto_imagens {
+    display: flex;
+    align-items: center;
+    gap: 2vw;
+    height: fit-content;
+    margin-top: auto;
+    margin-bottom: 5px;
+}
+
+.excluir:hover {
+    cursor: pointer;
+    filter: invert(57%) sepia(74%) saturate(498%) hue-rotate(5deg) brightness(153%) contrast(84%);
+}
+
+.coracao:hover {
+    cursor: pointer;
+    filter: invert(57%) sepia(74%) saturate(498%) hue-rotate(5deg) brightness(153%) contrast(84%);
+}
+
+.qtd {
+    padding: 0.5rem 1rem;
+    border-radius: 50px;
+    color: var(--branco);
+    font-family: "Inder";
+    background-color: var(--vermelhoAlaranjado);
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

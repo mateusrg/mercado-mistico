@@ -59,36 +59,3 @@ function verificarEstadoDeLogin() {
 }
 
 verificarEstadoDeLogin();
-
-// Dropdown
-function abrirDropdown() {
-    document.getElementById("itensDropdown").classList.toggle("show");
-    document.getElementById("botaoQuantidade").style.borderBottomRightRadius = "0";
-    document.getElementById("botaoQuantidade").style.borderBottomLeftRadius = "0";
-}
-
-function selecionarQuantidade(quantidade) {
-    // Atualiza o texto do botão com a quantidade selecionada
-    document.getElementById("botaoQuantidade").innerHTML = `Quantidade: ${quantidade} <img src="../../assets/seta.svg" alt="Seta" id="seta">`;
-    // Fecha o dropdown após a seleção
-    document.getElementById("itensDropdown").classList.remove("show");
-
-    document.getElementById("botaoQuantidade").style.borderBottomRightRadius = "1.5vh";
-    document.getElementById("botaoQuantidade").style.borderBottomLeftRadius = "1.5vh";
-}
-
-// Fechar o dropdown se o usuário clicar fora dele
-window.onclick = function(event) {
-    if (!event.target.matches('.botao-quantidade')) {
-        let dropdowns = document.getElementsByClassName("itens-dropdown");
-        for (i = 0; i < dropdowns.length; i++) {
-            let openDropdown = dropdowns[i];
-            if (openDropdown.classList.contains('show')) {
-                openDropdown.classList.remove('show');
-
-                document.getElementById("botaoQuantidade").style.borderBottomRightRadius = "1.5vh";
-                document.getElementById("botaoQuantidade").style.borderBottomLeftRadius = "1.5vh";
-            }
-        }
-    }
-}

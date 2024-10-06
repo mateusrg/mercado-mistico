@@ -12,8 +12,9 @@ function verificarEstadoDeLogin() {
     }
 }
 
+const idProduto = window.location.pathname.split("/").pop();
+
 async function selecionarProduto() {
-    const idProduto = window.location.pathname.split("/").pop();
     const response = await fetch(`/produto/selecionar/${idProduto}`);
     const results = await response.json();
     if (!results.success) {
@@ -27,6 +28,28 @@ async function selecionarProduto() {
     document.getElementById("tituloProduto").innerHTML = produto.nome;
     document.getElementById("descricao").innerHTML = produto.descricao;
     document.getElementById("valorTotal").innerHTML = Number(produto.preco).toLocaleString("pt-BR", {style: "currency", currency: "BRL"});
+}
+
+async function adicionarAoCarrinho() {
+    const email = localStorage.getItem("email");
+    const quantidade = document.getElementById("quantidade").value == "" ? 1 : document.getElementById("quantidade").value;
+
+    const data = {
+        email,
+        quantidade,
+        idProduto
+    };
+
+    const response = await fetch("/carrinho/cadastrar", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+    });
+    const results = await response.json();
+    const mensagem = results.message;
+    alert(mensagem);
 }
 
 verificarEstadoDeLogin();

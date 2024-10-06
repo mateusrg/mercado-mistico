@@ -114,3 +114,19 @@ main {
     color: var(--vermelhoAlaranjado);
     text-align: center;
 }
+
+#quantidade {
+    padding: 1vh;
+    height: 3vh;
+    width: 90%;
+    border-radius: 10px;
+    background-color: var(--ciano);
+    color: rgba(255, 255, 255, 0.8);
+    font-family: "Inder";
+    font-size: 110%;
+}
+
+#quantidade::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+    font-family: "Inder";
+}

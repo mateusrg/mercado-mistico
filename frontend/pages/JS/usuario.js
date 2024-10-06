@@ -7,8 +7,7 @@ async function verificarEstadoDeLogin() {
         document.getElementById('tituloBemVindo').innerText = 'Olá, ' + nome;
 
         const email = localStorage.getItem("email");
-        const senha = localStorage.getItem("senha");
-        const response = await fetch(`/usuario/is_adm/${email}/${senha}`);
+        const response = await fetch(`/usuario/is_adm/${email}`);
         
         const results = await response.json();
     
@@ -84,11 +83,6 @@ async function enviarNovoUsuario() {
 async function excluirConta() {
     const email = localStorage.getItem("email");
     const senha = localStorage.getItem("senha");
-
-    const data = {
-        email,
-        senha
-    }
 
     const response = await fetch(`/usuario/excluir/${email}/${senha}`, {
         method: "DELETE",
