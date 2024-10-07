@@ -12,133 +12,159 @@ function verificarEstadoDeLogin() {
     }
 }
 
-function exibirProdutosCarrinho() {
-    const carrinho = JSON.parse(localStorage.getItem('carrinho')).carrinho || [];
-    const listaImagens = document.getElementById('listaImagens');
-    listaImagens.innerHTML = '';
+verificarEstadoDeLogin();
 
-    // Adiciona as 4 primeiras imagens
-    const indiceProdutosSelecionados = JSON.parse(localStorage.getItem("indiceProdutosSelecionados"));
-    let contador = 1;
-    indiceProdutosSelecionados.forEach(i => {
-        if (contador <= 4) {
-            const nomeProduto = carrinho[i]['nome do produto'];
-            const img = document.createElement('img');
-            img.src = getImagemProduto(nomeProduto);
-            img.alt = nomeProduto;
-            img.classList.add("imagem"); // Adicionando a classe "imagem"
-            listaImagens.appendChild(img);
-            contador++;
+let produtosCarrinho;
+let valor = 0;
+
+async function listarProdutos() {
+    const emailUsuario = localStorage.getItem("email");
+
+    const response = await fetch(`/carrinho/listar/${emailUsuario}`);
+    const results = await response.json();
+
+    if (results.success) {
+        produtosCarrinho = results.data;
+        
+        if (produtosCarrinho.length === 0) {
+            window.location.href = `/carrinho`;
+        } else {
+            produtosCarrinho.forEach(produto => {
+                const textoValor = document.getElementById('preco_total');
+
+                valor = valor + (produto.preco * produto.quantCarrinho)
+
+                textoValor.innerHTML = `${Number(valor).toLocaleString("pt-BR", { style: "currency", currency: "BRL" })}`
+            });
+
+            document.getElementById("seta_produto_direita").style.opacity = produtosCarrinho.length <= 3 ? "20%" : "100%";
+            document.getElementById("seta_produto_direita").style.pointerEvents = produtosCarrinho.length <= 3 ? "none" : "auto";
+            if (produtosCarrinho.length > 3) {
+                document.getElementById("seta_produto_direita").setAttribute("onclick", "clicaSeta(true)");
+            } else {
+                document.getElementById("seta_produto_direita").setAttribute("onclick", "");
+            }
+
+            switch (produtosCarrinho.length) {
+                case 1:
+                    listaProdutos = [produtosCarrinho[0]];
+                    break;
+                case 2:
+                    listaProdutos = [produtosCarrinho[0], produtosCarrinho[1]];
+                    break;
+                default:
+                    listaProdutos = [produtosCarrinho[0], produtosCarrinho[1], produtosCarrinho[2]];
+            }
+            exibirProdutos();
         }
-    });
-
-    // Exibe o ícone "mais" se houver mais de 4 produtos no carrinho
-    if (indiceProdutosSelecionados.length > 4) {
-        document.getElementById('iconMais').style.display = 'inline';
     } else {
-        document.getElementById('iconMais').style.display = 'none';
+        alert(results.message);
     }
 }
 
-function getImagemProduto(nomeProduto) {
-    switch (nomeProduto) {
-        case "tapete voador":
-            return "../../assets/produtos/tapete.png";
-        case "frasco de ar da lua":
-            return "../../assets/produtos/frasco.png";
-        case "bota de supervelocidade":
-            return "../../assets/produtos/bota.png";
-        case "pocao da saude":
-            return "../../assets/produtos/pocao.png";
-        case "anel de teletransporte":
-            return "../../assets/produtos/anel.png";
-        case "borracha apaga-tudo":
-            return "../../assets/produtos/borracha.png";
+let listaProdutos;
+
+function exibirProdutos() {
+    let produtos = "";
+
+    switch (listaProdutos.length) {
+        case 1:
+            produtos = `<img src="${listaProdutos[0].imagem}" onclick="paginaProduto(${listaProdutos[0].idProduto})" alt="produto1" id="produto_um">`;
+            break;
+        case 2:
+            produtos = `
+            <img src="${listaProdutos[0].imagem}" onclick="paginaProduto(${listaProdutos[0].idProduto})" alt="produto1" id="produto_um">
+            <img src="${listaProdutos[1].imagem}" onclick="paginaProduto(${listaProdutos[1].idProduto})" alt="produto2" id="produto_dois">
+            `;
+            break;
         default:
-            return "../../assets/produtos/default.png";
+            produtos = `
+            <img src="${listaProdutos[0].imagem}" onclick="paginaProduto(${listaProdutos[0].idProduto})" alt="produto1" id="produto_um">
+            <img src="${listaProdutos[1].imagem}" onclick="paginaProduto(${listaProdutos[1].idProduto})" alt="produto2" id="produto_dois">
+            <img src="${listaProdutos[2].imagem}" onclick="paginaProduto(${listaProdutos[2].idProduto})" alt="produto3" id="produto_tres">
+            `;
     }
+    document.getElementById("produtosCarrinho").innerHTML = `
+    ${produtos}
+    `;
 }
 
-let valorInputNumeroCelular = '';
-let valorInputEndereco = '';
-let valorInputCep = '';
-
-let textoOriginalNumeroCelular = '';
-let textoOriginalEndereco = '';
-let textoOriginalCep = '';
-
-function mudarTexto() {
-    if (document.getElementById("editar").innerText === "Salvar") {
-        document.getElementById("editar").innerText = "Editar";
-
-        // Capturar os novos valores dos campos de entrada
-        valorInputNumeroCelular = document.getElementById("numeroCelular").value;
-        valorInputEndereco = document.getElementById("endereco").value;
-        valorInputCep = document.getElementById("cep").value;
-
-        // Substituir os campos de entrada pelos elementos h4 com os novos valores
-        const novoH4NumeroCelular = document.createElement("h4");
-        novoH4NumeroCelular.className = "textosMenores";
-        novoH4NumeroCelular.id = "numeroCelular";
-        novoH4NumeroCelular.innerText = valorInputNumeroCelular || textoOriginalNumeroCelular;
-        document.getElementById("numeroCelular").replaceWith(novoH4NumeroCelular);
-
-        const novoH4Endereco = document.createElement("h4");
-        novoH4Endereco.className = "textosMenores";
-        novoH4Endereco.id = "endereco";
-        novoH4Endereco.innerText = valorInputEndereco || textoOriginalEndereco;
-        document.getElementById("endereco").replaceWith(novoH4Endereco);
-
-        const novoH4Cep = document.createElement("h4");
-        novoH4Cep.className = "textosMenores";
-        novoH4Cep.id = "cep";
-        novoH4Cep.innerText = valorInputCep || textoOriginalCep;
-        document.getElementById("cep").replaceWith(novoH4Cep);
-
+function clicaSeta(frente) {
+    if (frente) {
+        const indiceAtual = produtosCarrinho.indexOf(listaProdutos[listaProdutos.length - 1]);
+        if (indiceAtual + 1 < produtosCarrinho.length) {
+            listaProdutos.shift();
+            listaProdutos.push(produtosCarrinho[indiceAtual + 1]);
+            exibirProdutos();
+        }
     } else {
-        document.getElementById("editar").innerText = "Salvar";
+        const indiceAtual = produtosCarrinho.indexOf(listaProdutos[0]);
+        if (indiceAtual - 1 >= 0) {
+            listaProdutos.pop();
+            listaProdutos.unshift(produtosCarrinho[indiceAtual - 1]);
+            exibirProdutos();
+        }
+    }
 
-        textoOriginalNumeroCelular = document.getElementById("numeroCelular").innerText;
-        textoOriginalEndereco = document.getElementById("endereco").innerText;
-        textoOriginalCep = document.getElementById("cep").innerText;
-
-        const novoInputNumeroCelular = document.createElement("input");
-        novoInputNumeroCelular.className = "textosMenores inputEditar"; // Adicionando a classe inputEditar
-        novoInputNumeroCelular.id = "numeroCelular";
-        novoInputNumeroCelular.placeholder = textoOriginalNumeroCelular || valorInputNumeroCelular;
-        novoInputNumeroCelular.type = "number"; // Definindo o tipo como "number" para aceitar apenas números
-        document.getElementById("numeroCelular").replaceWith(novoInputNumeroCelular);
-
-        const novoInputEndereco = document.createElement("input");
-        novoInputEndereco.className = "textosMenores inputEditar"; // Adicionando a classe inputEditar
-        novoInputEndereco.id = "endereco";
-        novoInputEndereco.placeholder = textoOriginalEndereco || valorInputEndereco;
-        document.getElementById("endereco").replaceWith(novoInputEndereco);
-
-        const novoInputCep = document.createElement("input");
-        novoInputCep.className = "textosMenores inputEditar"; // Adicionando a classe inputEditar
-        novoInputCep.id = "cep";
-        novoInputCep.placeholder = textoOriginalCep || valorInputCep;
-        novoInputCep.type = "number"; // Definindo o tipo como "number" para aceitar apenas números
-        document.getElementById("cep").replaceWith(novoInputCep);
+    if (produtosCarrinho[0] === listaProdutos[0]) {
+        document.getElementById("seta_produto_esquerda").style.opacity = "20%";
+        document.getElementById("seta_produto_esquerda").style.pointerEvents = "none";
+        document.getElementById("seta_produto_esquerda").setAttribute("onclick", "");
+    } else {
+        document.getElementById("seta_produto_esquerda").style.opacity = "100%";
+        document.getElementById("seta_produto_esquerda").style.pointerEvents = "auto";
+        document.getElementById("seta_produto_esquerda").setAttribute("onclick", "clicaSeta(false)");
+    }
+    
+    if (produtosCarrinho[produtosCarrinho.length - 1] === listaProdutos[listaProdutos.length - 1]) {
+        document.getElementById("seta_produto_direita").style.opacity = "20%";
+        document.getElementById("seta_produto_direita").style.pointerEvents = "none";
+        document.getElementById("seta_produto_direita").setAttribute("onclick", "");
+    } else {
+        document.getElementById("seta_produto_direita").style.opacity = "100%";
+        document.getElementById("seta_produto_direita").style.pointerEvents = "auto";
+        document.getElementById("seta_produto_direita").setAttribute("onclick", "clicaSeta(true)");
     }
 }
 
-document.addEventListener('DOMContentLoaded', function() {
-    verificarEstadoDeLogin();
-    exibirProdutosCarrinho();
-});
-
-let precoTotal = Number(localStorage.getItem("precoTotal")).toLocaleString("pt-br", {style: "currency", currency: "BRL"});
-console.log(precoTotal);
-document.querySelector("#preco_total").innerText = precoTotal;
-
-function finalizarCompra() {
-    const itensCarrinhos = JSON.parse(localStorage.getItem("carrinho"))["carrinho"];
-    const idsParaExcluir = JSON.parse(localStorage.getItem("indiceProdutosSelecionados"));
-    console.log(idsParaExcluir)
-    const itensNaoSelecionados = itensCarrinhos.filter(produto => !idsParaExcluir.includes(itensCarrinhos.indexOf(produto)));
-    console.log(itensNaoSelecionados);
-    localStorage.setItem("carrinho", JSON.stringify({carrinho: itensNaoSelecionados}));
-    window.location.href = "/usuario";
+function paginaProduto(idProduto) {
+    window.location.href = `/p/${idProduto}`;
 }
+
+async function atualizarEndereco() {
+    const enderecoPadrao = await selecionarEndereco();
+    
+    if (enderecoPadrao) {
+        document.getElementById('divEndereco').style.display = "flex";
+        document.getElementById('divEnderecoErro').style.display = "none";
+
+        document.getElementById('nomeCompleto').innerText = `${enderecoPadrao.nome},`;
+        document.getElementById('numeroResidencia').innerText = `Número da Residência: ${enderecoPadrao.numeroResidencia}`;
+        document.getElementById('endereco').innerText = enderecoPadrao.endereco;
+        document.getElementById('cep').innerText = `CEP: ${enderecoPadrao.CEP}`;
+    } else {
+        document.getElementById('divEndereco').style.display = "none";
+        document.getElementById('divEnderecoErro').style.display = "flex";
+    }
+}
+
+async function selecionarEndereco() {
+    const email = localStorage.getItem("email");
+    const response = await fetch(`/endereco/listar/${email}`);
+    const results = await response.json();
+
+    if (results.success) {
+        const enderecoPadrao = results.data.find(endereco => endereco.isPadrao === true);
+
+        if (enderecoPadrao) {
+            return enderecoPadrao;
+        } else {
+            alert("Nenhum endereço padrão encontrado.");
+        }
+    } else {
+        alert(results.message);
+    }
+}
+
+listarProdutos();
+atualizarEndereco();

@@ -48,12 +48,15 @@
             <section id="secaoSecundaria">
                 <section id="secaoEsquerda">
                     <h4 class="textosMenores" id="resumo">Resumo do Pedido</h4>
-                    <div id="listaProdutos">
-                        <div id="listaImagens">
-                            <!-- Aqui irá aparecer as imagens dos produtos presentes no carrinho -->
+                    <section id="listaProdutos">
+                        <img src="../../assets/seta.svg" alt="seta" id="seta_produto_esquerda">
+                        <div id="produtosCarrinho">
+                            <img src="" alt="produto1" id="produto_um">
+                            <img src="" alt="produto2" id="produto_dois">
+                            <img src="" alt="produto3" id="produto_tres">
                         </div>
-                        <h2 id="iconMais">+ mais</h2>
-                    </div>
+                        <img src="../../assets/seta.svg" alt="seta" id="seta_produto_direita">
+                    </section>
                     <div id="divCodigo">
                         <input type="text" placeholder="Insira seu código" id="inputCodigo">
                         <button id="botaoCodigo">Solicitar</button>
@@ -63,7 +66,7 @@
                             <h4 class="textosMenores">Cupons</h4>
                             <img src="../../assets/seta.svg" alt="seta" class="seta">
                         </a>
-                        <a class="secaoEsquerdaLista_Item" href="/creditos">
+                        <a class="secaoEsquerdaLista_Item" onclick="creditos()">
                             <h4 class="textosMenores">Créditos</h4>
                             <img src="../../assets/seta.svg" alt="seta" class="seta">
                         </a>
@@ -79,15 +82,23 @@
                 </section>
                 <section id="secaoDireita">
                     <h2 class="textosMaiores">Enviar para</h2>
-                    <div class="divCaixa">
+                    <div class="divCaixa" id="divEndereco">
                         <div class="subdivCaixa_cima">
-                            <h4 class="textosMenores" id="nomeCompleto">Nome completo,</h4>
-                            <h4 class="textosMenores" id="numeroCelular">número de celular</h4>
+                            <h4 class="textosMenores" id="nomeCompleto">,</h4>
+                            <h4 class="textosMenores" id="numeroResidencia">Número da Residência: 00</h4>
                         </div>
-                        <h4 class="textosMenores" id="endereco">Endereço</h4>
+                        <h4 class="textosMenores" id="endereco"></h4>
                         <div class="subdivCaixa_baixo">
-                            <h4 class="textosMenores" id="cep">Cep</h4>
-                            <h4 onclick="mudarTexto()" class="textosMenores" id="editar">Editar</h4>
+                            <h4 class="textosMenores" id="cep">CEP: 00000-000</h4>
+                            <a href="/enderecos" class="textosMenores" id="editar">Editar</a>
+                        </div>
+                    </div>
+                    <div class="divCaixa" id="divEnderecoErro">
+                        <div class="subdivCaixa_erro">
+                            <h4 class="textosMenores">Não tem endereço padrão</h4>
+                        </div>
+                        <div class="subdivCaixa_selecionar">
+                            <a href="/enderecos" class="textosMenores" id="selecionar">Selecionar</a>
                         </div>
                     </div>
                     <h2 class="textosMaiores">Método de envio</h2>

@@ -158,22 +158,76 @@ main {
 }
 
 #listaProdutos {
-    width: 100%;
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    gap: 0.9vw;
+    justify-content: center;
+    position: relative;
 }
 
-#listaImagens {
+#produtosCarrinho {
     display: flex;
-    gap: 0.3vw;
-    justify-content: space-between;
     align-items: center;
+    overflow: hidden; /* Para ocultar os produtos fora da exibição */
+    gap: 0.9vw;
+    justify-content: center;
 }
 
-#iconMais {
-    display: none;
-    color: var(--branco);
+#produto_um {
+    display: flex;
+    width: 13%;
+}
+
+#produto_dois {
+    display: flex;
+    width: 13%;
+}
+
+#produto_tres {
+    display: flex;
+    width: 13%;
+}
+
+#seta_produto_esquerda, #seta_produto_direita {
+    cursor: pointer;
+    position: absolute;
+    z-index: 1;
+}
+
+#seta_produto_direita {
+    display: flex;
+    justify-self: center;
+    width: 1.5vw;
+    grid-area: seta_produto_direita;
+    rotate: -90deg;
+    filter: invert(100%);
+    right: 0;
+    margin-right: 1vw;
+    opacity: 20%;
+    pointer-events: none;
+}
+
+#seta_produto_esquerda {
+    display: flex;
+    justify-self: center;
+    width: 1.5vw;
+    grid-area: seta_produto_esquerda;
+    rotate: 90deg;
+    filter: invert(100%);
+    left: 0;
+    margin-left: 1vw;
+    opacity: 20%;
+    pointer-events: none;
+}
+
+#produto_um:hover, #produto_dois:hover, #produto_tres:hover {
+    cursor: pointer;
+    filter: brightness(115%);
+}
+
+#seta_produto_direita:hover, #seta_produto_esquerda:hover {
+    cursor: pointer;
+    filter: invert(57%) sepia(74%) saturate(498%) hue-rotate(5deg) brightness(113%) contrast(84%);
 }
 
 #resumo {
@@ -285,15 +339,34 @@ main {
     padding: 1vh 3vw;
 }
 
+#divEndereco {
+    display: none;
+}
+
+#divEnderecoErro {
+    display: flex;
+    height: 14vh;
+}
+
 .subdivCaixa_cima {
     display: flex;
     justify-content: flex-start;
     gap: 1vw;
 }
 
+.subdivCaixa_erro {
+    display: flex;
+    justify-content: center;
+}
+
 .subdivCaixa_baixo {
     display: flex;
     justify-content: space-between;
+}
+
+.subdivCaixa_selecionar {
+    display: flex;
+    justify-content: flex-end;
 }
 
 #botaoFinalizar {
@@ -312,9 +385,14 @@ main {
     justify-content: center;
 }
 
-.secaoEsquerdaLista_Item:hover, #editar:hover, .imagem:hover {
+.imagem:hover {
     cursor: pointer;
     filter: brightness(115%);
+}
+
+#editar:hover, #selecionar:hover, .secaoEsquerdaLista_Item:hover {
+    cursor: pointer;
+    filter: invert(57%) sepia(74%) saturate(498%) hue-rotate(5deg) brightness(113%) contrast(84%);
 }
 
 /* Remover as setas de aumento/diminuição em inputs do tipo number */
