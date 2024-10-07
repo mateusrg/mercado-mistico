@@ -27,6 +27,7 @@ async function listarProdutos() {
 
 async function exibirCatalogo() {
     const produtos = await listarProdutos();
+    const favoritos = await listarFavoritos();
     
     produtos.forEach(produto => {
         document.getElementById("principal").innerHTML += `
@@ -39,7 +40,7 @@ async function exibirCatalogo() {
                     <h6 class="precoProduto">Preço: ${Number(produto.preco).toLocaleString("pt-BR", {style: "currency", currency: "BRL"})}</h6>
                 </div>
                 <div class="subdiv_produto_imagens">
-                    <img src="../../assets/coracao.png" alt="Favoritar" class="coracao" onclick="favoritar(this, ${produto.idProduto})">
+                    <img src="../../assets/coracao${favoritos.includes(produto.idProduto) ? "_cheio" : ""}.png" alt="Favoritar" class="coracao" onclick="favoritar(${produto.idProduto})">
                     <img src="../../assets/adicionar_carrinho.png" alt="Adicionar ao Carrinho" class="carrinho" onclick="addCarrinho(${produto.idProduto})">
                 </div>
             </div>
@@ -48,27 +49,52 @@ async function exibirCatalogo() {
     });
 }
 
-async function favoritar(elemento, idProduto) {
-    const emailUsuario = localStorage.getItem("email");
-    
-    data = {
-        emailUsuario,
-        idProduto
-    };
-
-    const response = await fetch("/favorito/cadastrar", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify(data)
-    });
+async function listarFavoritos() {
+    const email = localStorage.getItem("email");
+    const response = await fetch (`/favorito/listar/${email}`);
     const results = await response.json();
+    const favoritos = results.data;
+    return favoritos.map(produto => produto.idProduto);
+}
 
-    if (results.success) {
-        elemento.src = "./assets/coracao_cheio.png";
+async function favoritar(idProduto) {
+    const coracao = document.querySelector(`[onclick^="favoritar(${idProduto})"]`);
+    coracao.src = `../../assets/coracao${coracao.src.split("/").pop() == "coracao.png" ? "_cheio" : ""}.png`;
+
+    if (coracao.src.split("/").pop() == "coracao_cheio.png") {
+        const data = {
+            email: localStorage.getItem("email"),
+            idProduto: idProduto
+        };
+
+        const response = await fetch("/favorito/cadastrar", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(data)
+        });
+
+        const results = await response.json();
+    
+        if (!results.success) {
+            alert(results.message);
+            return;
+        }
     } else {
-        alert(results.message);
+        const response = await fetch(`/favorito/excluir/${localStorage.getItem("email")}/${idProduto}`, {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json"
+            }
+        });
+
+        const results = await response.json();
+
+        if (!results.success) {
+            alert(results.message);
+            return;
+        }
     }
 }
 
