@@ -122,7 +122,7 @@ async function excluirADM(entrada) {
     // Código do Mateus
     const email = entrada.querySelector(".input").querySelector(".email").value;
 
-    const response = await fetch(`/excluir_adm/${email}`, {
+    const response = await fetch(`/usuario/remover_adm/${email}`, {
         // Apesar da função chamar "excluirADM", na real ele só troca um campo de 1 pra 0, ent é um PUT e n um DELETE
         method: "PUT",
         headers: {

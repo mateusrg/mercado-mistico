@@ -38,7 +38,7 @@ CREATE TABLE Endereco (
 -- Agora que a tabela Endereco já existe, o idEnderecoPadrao no Usuario é transformado em FK
 ALTER TABLE Usuario
 ADD CONSTRAINT FK_Usuario_Endereco
-FOREIGN KEY (idEnderecoPadrao) REFERENCES Endereco(idEndereco);
+FOREIGN KEY (idEnderecoPadrao) REFERENCES Endereco(idEndereco) ON DELETE CASCADE;
 
 CREATE TABLE Avaliacao (
 	idAvaliacao INT PRIMARY KEY AUTO_INCREMENT,
