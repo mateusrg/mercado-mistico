@@ -102,4 +102,26 @@ function paginaProduto(idProduto) {
     window.location.href = `/p/${idProduto}`;
 }
 
+async function addCarrinho(idProduto) {
+    const email = localStorage.getItem("email");
+    const quantidade = 1;
+
+    const data = {
+        email,
+        quantidade,
+        idProduto
+    };
+
+    const response = await fetch("/carrinho/cadastrar", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+    });
+    const results = await response.json();
+    const mensagem = results.message;
+    alert(mensagem);
+}
+
 exibirCatalogo();

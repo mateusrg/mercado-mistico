@@ -31,7 +31,7 @@
                 <h3 id="tituloAdicionar">Adicionar endereço</h3>
                 <img src="../../assets/fechar_amarelo.png" alt="Fechar" id="fechar" onclick="botaoFechar()">
             </div>
-            <form action="/enderecos" id="formEndereco">
+            <section id="formEndereco">
                 <div class="entradas">
                     <label for="nome">Nome completo*</label>
                     <input type="text" class="inputEndereco" id="nomeInput" name="nome" placeholder="Nome e sobrenome" required>
@@ -72,8 +72,8 @@
                     <img src="../../assets/checkbox_desmarcado.png" alt="Checkbox" id="imagemCheckbox" onclick="marcarCheckbox()">
                     <p id="textoCheckbox">Tornar meu endereço padrão</p>
                 </div>
-                <button onclick="enviar(event)" type="submit" id="botaoEnviar">Enviar</button>
-            </form>
+                <button onclick="enviar(event)" id="botaoEnviar">Enviar</button>
+            </section>
         </section>
         <section id="secao_titulo">
             <img src="../../assets/seta_volta.png" alt="seta" class="seta_volta_com_titulo">

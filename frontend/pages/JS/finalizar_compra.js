@@ -174,8 +174,7 @@ async function selecionarEndereco() {
 
 async function finalizarCompra() {
     for (const produto of produtosCarrinho) {
-        console.log(produto.idProduto)
-        const response = await fetch(`/carrinho/excluir/${produto.idProduto}`, {
+        const response = await fetch(`/carrinho/excluir/${produto.idItemCarrinho}`, {
             method: "DELETE",
             headers: {
                 "Content-Type": "application/json"

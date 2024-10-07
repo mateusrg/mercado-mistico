@@ -224,7 +224,7 @@ async function botaoEditar (idEndereco) {
         document.getElementById('cepInput').value = results.data.CEP;
         document.getElementById('bairroInput').value = results.data.bairro;
         document.getElementById('cidadeInput').value = results.data.cidade;
-        document.getElementById('estadoInput').value = results.data.estado
+        document.getElementById('estadoInput').value = results.data.estado;
 
         if (results.data.isPadrao) {
             document.getElementById('imagemCheckbox').src = "../../assets/checkbox_marcado.png";
@@ -243,6 +243,8 @@ async function editarEndereco(idEndereco) {
     const bairro = document.getElementById("bairroInput").value;
     const cidade = document.getElementById("cidadeInput").value;
     const estado = document.getElementById("estadoInput").value;
+    const enderecoPadrao = document.getElementById('imagemCheckbox').src.endsWith("checkbox_marcado.png");
+    const emailUsuario = localStorage.getItem("email");
 
     const data = {
         nome,
@@ -253,7 +255,9 @@ async function editarEndereco(idEndereco) {
         bairro,
         cidade,
         estado,
-        idEndereco
+        enderecoPadrao,
+        idEndereco,
+        emailUsuario
     };
 
     const response = await fetch('/endereco/editar', {
@@ -282,6 +286,5 @@ async function editarEndereco(idEndereco) {
         document.getElementById('imagemCheckbox').src = "../../assets/checkbox_desmarcado.png";
 
         removerEnderecos();
-        exibirEnderecos();
     }
 }

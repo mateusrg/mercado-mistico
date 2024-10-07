@@ -336,12 +336,9 @@ app.delete("/usuario/excluir/:email/:senha", (request, response) => {
     query = "SELECT senha FROM Usuario WHERE email = ?";
     params = [request.params.email];
     connection.query(query, params, (err, results) => {
-        console.log(results)
         if (results && results[0]["senha"] === request.params.senha) {
             query = "DELETE FROM Usuario WHERE email = ?";
             params = [request.params.email];
-            console.log(query)
-            console.log(params)
 
             connection.query(query, params, (err, results) => {
                 if (results) {
@@ -714,13 +711,57 @@ app.put("/endereco/editar", (request, response) => {
 
     connection.query(query, params, (err, results) => {
         if (results) {
-            response
-                .status(200)
-                .json({
-                    success: true,
-                    message: "Endereço editado com sucesso!",
-                    data: results
+            if (request.body.enderecoPadrao) {
+                query = "SELECT idUsuario FROM Usuario WHERE email = ?";
+                params = [request.body.emailUsuario];
+
+                connection.query(query, params, (err, results) => {
+                    if (results) {
+                        const idUsuario = results[0]["idUsuario"];
+                        query = "UPDATE Usuario SET idEnderecoPadrao = ? WHERE idUsuario = ?";
+                        params = [
+                            request.body.idEndereco,
+                            idUsuario
+                        ];
+
+                        connection.query(query, params, (err, results) => {
+                            if (results) {
+                                response
+                                    .status(200)
+                                    .json({
+                                        success: true,
+                                        message: "Endereço editado e endereço padrão atualizado com sucesso!",
+                                        data: results
+                                    });
+                            } else {
+                                response
+                                    .status(500)
+                                    .json({
+                                        success: false,
+                                        message: "Endereço editado, mas erro ao atualizar o endereço padrão.",
+                                        data: err
+                                    });
+                            }
+                        });
+                    } else {
+                        response
+                            .status(500)
+                            .json({
+                                success: false,
+                                message: "Erro ao encontrar o id do usuário.",
+                                data: err
+                            });
+                    }
                 });
+            } else {
+                response
+                    .status(200)
+                    .json({
+                        success: true,
+                        message: "Endereço editado com sucesso!",
+                        data: results
+                    });
+            }
         } else {
             response
                 .status(500)
