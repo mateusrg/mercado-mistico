@@ -96,13 +96,11 @@ async function enviar(event) {
         document.getElementById('imagemCheckbox').src = "../../assets/checkbox_desmarcado.png";
 
         removerEnderecos();
-        exibirEnderecos();
     }
 }
 
 function removerEnderecos() {
-    const divs = document.querySelectorAll('.divCaixa');
-    divs.forEach(div => div.remove());
+    window.location.href = window.location.href;
 }
 
 function formatarCEP(campo) {
@@ -146,7 +144,6 @@ document.getElementById("cepInput").addEventListener("blur", async function() {
 });
 
 async function exibirEnderecos() {
-    removerEnderecos();
     const enderecos = await selecionarEnderecos();
 
     const lista_enderecos = document.getElementById('secao_enderecos');
