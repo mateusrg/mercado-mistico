@@ -166,5 +166,24 @@ async function selecionarEndereco() {
     }
 }
 
+async function finalizarCompra() {
+    for (const produto of produtosCarrinho) {
+        const response = await fetch(`/carrinho/excluir/${produto.idProduto}`, {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json"
+            }
+        });
+
+        const results = await response.json();
+
+        if (results.success) {
+            window.location.href = '/usuario';
+        } else {
+            alert(`Erro ao excluir o produto ${produto.nome}.`);
+        }
+    }
+}
+
 listarProdutos();
 atualizarEndereco();
