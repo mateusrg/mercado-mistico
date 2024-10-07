@@ -137,6 +137,10 @@ async function atualizarEndereco() {
     if (enderecoPadrao) {
         document.getElementById('divEndereco').style.display = "flex";
         document.getElementById('divEnderecoErro').style.display = "none";
+        document.getElementById('botaoFinalizar').style.opacity = "100%";
+        document.getElementById('botaoFinalizar').style.pointerEvents = "auto";
+        document.getElementById('botaoFinalizar').innerText = "FINALIZAR COMPRA";
+        document.getElementById('botaoFinalizar').setAttribute("onclick", "finalizarCompra()");
 
         document.getElementById('nomeCompleto').innerText = `${enderecoPadrao.nome},`;
         document.getElementById('numeroResidencia').innerText = `Número da Residência: ${enderecoPadrao.numeroResidencia}`;
@@ -145,6 +149,10 @@ async function atualizarEndereco() {
     } else {
         document.getElementById('divEndereco').style.display = "none";
         document.getElementById('divEnderecoErro').style.display = "flex";
+        document.getElementById('botaoFinalizar').style.opacity = "30%";
+        document.getElementById('botaoFinalizar').style.pointerEvents = "none";
+        document.getElementById('botaoFinalizar').innerText = "SELECIONAR ENDEREÇO";
+        document.getElementById('botaoFinalizar').setAttribute("onclick", "");
     }
 }
 
@@ -158,8 +166,6 @@ async function selecionarEndereco() {
 
         if (enderecoPadrao) {
             return enderecoPadrao;
-        } else {
-            alert("Nenhum endereço padrão encontrado.");
         }
     } else {
         alert(results.message);
@@ -168,6 +174,7 @@ async function selecionarEndereco() {
 
 async function finalizarCompra() {
     for (const produto of produtosCarrinho) {
+        console.log(produto.idProduto)
         const response = await fetch(`/carrinho/excluir/${produto.idProduto}`, {
             method: "DELETE",
             headers: {
@@ -177,12 +184,12 @@ async function finalizarCompra() {
 
         const results = await response.json();
 
-        if (results.success) {
-            window.location.href = '/usuario';
-        } else {
+        if (!results.success) {
             alert(`Erro ao excluir o produto ${produto.nome}.`);
+            return;
         }
     }
+    window.location.href = '/usuario';
 }
 
 listarProdutos();
