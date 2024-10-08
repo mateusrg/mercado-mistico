@@ -1,18 +1,61 @@
-## 1- Instalação do Banco
+<h1 align="center">Mystic Market</h1>
+<h2 align="center"> ✨🔮🧿🧙 </h2>
+<p align="center">Esse projeto consiste na criação de um site para um mercado, que neste caso vende produtos místicos, como tapetes voadores e botas de super velocidade. O projeto foi criado para um trabalho do componente do técnico, para praticar HTML, CSS e JavaScript.</p>
+<h3 align="center">Status do Projeto:</h3>
+<h4 align="center">Em andamento</h4>
+<h3 align="center">Features</h3>
+
+- [x] Cadastro de usuário
+- [x] Login
+- [x] Perfil do usuário (cliente)
+- [x] Perfil do usuário (administrador)
+- [x] Página de produtos
+- [x] Descrição de produtos
+- [x] Lista de desejos
+- [x] Carrinho de compras
+- [x] Adicionar e remover produtos do carrinho/lista de desejos
+- [x] Valor total de itens
+- [x] Finalizar compras
+- [x] Cadastro de produtos
+- [x] Editar/excluir produtos do estoque
+- [x] Estoque
+- [x] Cadastro de cartão presente
+- [x] Cartões presente
+- [x] Endereços
+- [ ] Cupons
+- [ ] Cadastro de cupons
+- [ ] Avaliações
+- [ ] Devoluções
+
+
+<h3 align="center">Público Alvo:</h3>
+<h4 align="center">Aventureiros, guardiões, hérois, bruxas, magos e todos que querem tem um pouco de magia em suas vidas</h4>
+
+<h3 align="center">Layout</h3>
+<p align="center">O layout do site está disponível no link a seguir:</p>
+<a href="https://www.figma.com/design/5PHAf2DU9jldg9S5IxYg6t/Mercado-M%C3%ADstico?node-id=0-1&t=DScVDkphN0TByNpJ-0"><p align="center">Figma</p></a>
+
+<h3 align="center"> Passo a passo </h3>
+<p align="center">Siga esse passo a passo para executar o mercado</p>
+
+<h3> 1 - Instalação do Banco </h3>
+
 1. Instale o banco de dados no conteúdo do arquivo "db.sql", na pasta "backend"
 2. Verifique se o "host", o "user" e o "password" do servidor rodando seu banco batem com os no arquivo "db_config.js" e altere-o caso necessário
 
-## 2- Testando o Banco e Rodando o Servidor
+<h3> 2 - Testando o Banco e Rodando o Servidor </h3>
+
 1. Abra a pasta do arquivo no terminal e digite os comandos:
-• cd backend
-• npm start
+  <p> • cd backend </p>
+  <p> • npm start </p>
 2. Se aparecer a mensagem "Rodando na porta 3000!", o servidor está rodando.
 3. Se aparecer a mensagem "Mysql conectado!", o banco também está rodando.
 
-## 3- Testando as APIs
-1. As APIs necessárias para o funcionamento do projeto são:
+<h3> 3 - Testando as APIs </h3>
 
-a. Rotas de Produto:
+<h4> 1. As APIs necessárias para o funcionamento do projeto são: </h4>
+
+#### a. Rotas de Produto:
 
 • /produto/cadastrar
 
@@ -27,7 +70,7 @@ a. Rotas de Produto:
 • /produto/excluir/:idProduto
 
 
-b. Rotas de Usuário:
+#### b. Rotas de Usuário:
 
 • /usuario/cadastrar
 
@@ -46,7 +89,7 @@ b. Rotas de Usuário:
 • /usuario/remover_adm/:email
 
 
-c. Rotas de Endereço:
+#### c. Rotas de Endereço:
 
 • /endereco/cadastrar
 
@@ -57,7 +100,7 @@ c. Rotas de Endereço:
 • /endereco/excluir/:idEndereco
 
 
-d. Rotas de Carrinho:
+#### d. Rotas de Carrinho:
 
 • /carrinho/cadastrar
 
@@ -69,7 +112,7 @@ d. Rotas de Carrinho:
 
 
 
-e. Rotas de Favorito:
+#### e. Rotas de Favorito:
 
 • /favorito/cadastrar
 
@@ -78,10 +121,10 @@ e. Rotas de Favorito:
 • /favorito/excluir/:emailUsuario/:idProduto
 
 
-2. Como Usar as Rotas:
+<h4>  2. Como Usar as Rotas: </h4>
 
 
-a. Rota "/produto/cadastrar":
+#### a. Rota "/produto/cadastrar":
 
 • URL: http://localhost:3000/produto/cadastrar
 
@@ -139,7 +182,7 @@ a. Rota "/produto/cadastrar":
 
 
 
-b. Rota "/produto/listar":
+#### b. Rota "/produto/listar":
 
 • URL: http://localhost:3000/produto/listar
 
@@ -179,7 +222,7 @@ b. Rota "/produto/listar":
 
 
 
-c. Rota "/produto/selecionar/:idProduto":
+#### c. Rota "/produto/selecionar/:idProduto":
 
 • URL: http://localhost:3000/produto/selecionar
 
@@ -223,7 +266,7 @@ c. Rota "/produto/selecionar/:idProduto":
 
 
 
-d. Rota "/produto/uppar_imagem":
+#### d. Rota "/produto/uppar_imagem":
 
 • URL: http://localhost:3000/produto/uppar_imagem
 
@@ -234,7 +277,7 @@ d. Rota "/produto/uppar_imagem":
 • Não haverá exemplo de requisição, pois é necessário enviar um objeto FormData() pelo JavaScript, o que não sabemos como fazer diretamente no ThunderClient, PostMan ou semelhantes.
 
 
-e. Rota "/produto/editar":
+#### e. Rota "/produto/editar":
 
 • URL: http://localhost:3000/produto/editar
 
@@ -292,7 +335,7 @@ e. Rota "/produto/editar":
 
 
 
-f. Rota "/produto/excluir/:idProduto":
+#### f. Rota "/produto/excluir/:idProduto":
 
 • URL: http://localhost:3000/produto/excluir
 
@@ -332,7 +375,7 @@ f. Rota "/produto/excluir/:idProduto":
 
 
 
-g. Rota "/usuario/cadastrar":
+#### g. Rota "/usuario/cadastrar":
 
 • URL: http://localhost:3000/usuario/cadastrar
 
@@ -386,7 +429,7 @@ g. Rota "/usuario/cadastrar":
 
 
 
-h. Rota "/usuario/login":
+#### h. Rota "/usuario/login":
 
 • URL: http://localhost:3000/usuario/login
 
@@ -432,7 +475,7 @@ h. Rota "/usuario/login":
 
 
 
-i. Rota "/usuario/editar":
+#### i. Rota "/usuario/editar":
 
 • URL: http://localhost:3000/usuario/editar
 
@@ -488,7 +531,7 @@ i. Rota "/usuario/editar":
 
 
 
-j. Rota "/usuario/excluir/:email/:senha":
+#### j. Rota "/usuario/excluir/:email/:senha":
 
 • URL: http://localhost:3000/usuario/excluir
 
@@ -530,7 +573,7 @@ j. Rota "/usuario/excluir/:email/:senha":
 
 
 
-k. Rota "/usuario/is_adm/:email/:senha":
+#### k. Rota "/usuario/is_adm/:email":
 
 • PS: se estiver seguindo os comandos em ordem, não existem mais usuários para verificar se são ou não administradores, pois todos foram excluídos. por isso, é necessário criar um novo usuário para testar a rota.
 
@@ -538,9 +581,9 @@ k. Rota "/usuario/is_adm/:email/:senha":
 
 • Método: GET
 
-• Parâmetros da URL: email, senha
+• Parâmetros da URL: email
 
-• Exemplo de URL: http://localhost:3000/usuario/is_adm/guigo@gmail.com/euamopython123
+• Exemplo de URL: http://localhost:3000/usuario/is_adm/guigo@gmail.com
 
 
 
@@ -558,7 +601,7 @@ k. Rota "/usuario/is_adm/:email/:senha":
 
 
 
-l. Rota "/usuario/tornar_adm/:email":
+#### l. Rota "/usuario/tornar_adm/:email":
 
 • URL: http://localhost:3000/usuario/tornar_adm
 
@@ -600,7 +643,7 @@ l. Rota "/usuario/tornar_adm/:email":
 
 
 
-m. Rota "/usuario/listar_adms":
+#### m. Rota "/usuario/listar_adms":
 
 • URL: http://localhost:3000/usuario/listar_adms
 
@@ -652,7 +695,7 @@ m. Rota "/usuario/listar_adms":
 
 
 
-n. Rota "/usuario/remover_adm/:email":
+#### n. Rota "/usuario/remover_adm/:email":
 
 • URL: http://localhost:3000/usuario/remover_adm
 
@@ -694,7 +737,7 @@ n. Rota "/usuario/remover_adm/:email":
 
 
 
-o. Rota "/endereco/cadastrar":
+#### o. Rota "/endereco/cadastrar":
 
 • URL: http://localhost:3000/endereco/cadastrar
 
@@ -760,7 +803,7 @@ o. Rota "/endereco/cadastrar":
 
 
 
-p. Rota "/endereco/listar/:email":
+#### p. Rota "/endereco/listar/:email":
 
 • URL: http://localhost:3000/endereco/listar
 
@@ -812,15 +855,53 @@ p. Rota "/endereco/listar/:email":
   
 }
 
+#### Rota extra "/endereco/:email/:id"
+• URL: http://localhost:3000/endereco
 
+• Método: GET
 
-q. Rota "/endereco/editar":
+• Parâmetros da URL: email, id
+
+• Exemplo de URL: http://localhost:3000/endereco/guigo@gmail.com/1
+
+Exemplo de resposta:
+
+{
+  "success": true,
+  "data": {
+      
+      "idEndereco": 1,
+      
+      "nome": "Casa do Guigo",
+      
+      "CEP": "93022-414",
+      
+      "endereco": "Avenida Unisinos",
+      
+      "numeroResidencia": "123",
+      
+      "complemento": "sala 103",
+      
+      "bairro": "São João Batista",
+      
+      "cidade": "São Leopoldo",
+      
+      "estado": "RS",
+      
+      "idUsuario": 2,
+      
+      "isPadrao": false
+      
+    }
+}
+
+#### q. Rota "/endereco/editar":
 
 • URL: http://localhost:3000/endereco/editar
 
 • Método: PUT
 
-• Corpo da Requisição: {nome, CEP, endereco, numeroResidencia, complemento, bairro, cidade, estado, idEndereco}
+• Corpo da Requisição: {nome, CEP, endereco, numeroResidencia, complemento, bairro, cidade, estado, idEndereco, emailUsuario, enderecoPadrao}
 
 
 
@@ -844,7 +925,11 @@ q. Rota "/endereco/editar":
   
   "estado": "RS",
   
-  "idEndereco": 1
+  "idEndereco": 1,
+
+  "emailUsuario": "guigo@gmail.com",
+
+  "enderecoPadrao": true
   
 }
 
@@ -880,7 +965,7 @@ q. Rota "/endereco/editar":
 
 
 
-r. Rota "/endereco/excluir/:idEndereco":
+#### r. Rota "/endereco/excluir/:idEndereco":
 
 • URL: http://localhost:3000/endereco/excluir
 
@@ -922,7 +1007,7 @@ r. Rota "/endereco/excluir/:idEndereco":
 
 
 
-s. Rota "/carrinho/cadastrar":
+#### s. Rota "/carrinho/cadastrar":
 
 • PS: Novamente, não há produtos para cadastrar no carrinho e, portanto, é necessário cadastrar um primeiro para poder usar essa rota.
 
@@ -978,7 +1063,7 @@ s. Rota "/carrinho/cadastrar":
 
 
 
-t. Rota "/carrinho/listar/:email":
+#### t. Rota "/carrinho/listar/:email":
 
 • URL: http://localhost:3000/carrinho/listar
 
@@ -1018,7 +1103,7 @@ t. Rota "/carrinho/listar/:email":
 
 
 
-u. Rota "/carrinho/editar":
+#### u. Rota "/carrinho/editar":
 
 • URL: http://localhost:3000/carrinho/editar
 
@@ -1070,7 +1155,7 @@ u. Rota "/carrinho/editar":
 
 
 
-v. Rota "/carrinho/excluir/:idItemCarrinho":
+#### v. Rota "/carrinho/excluir/:idItemCarrinho":
 
 • URL: http://localhost:3000/carrinho/excluir
 
@@ -1112,7 +1197,7 @@ v. Rota "/carrinho/excluir/:idItemCarrinho":
 
 
 
-w. Rota "/favorito/cadastrar":
+#### w. Rota "/favorito/cadastrar":
 
 • URL: http://localhost:3000/favorito/cadastrar
 
@@ -1164,7 +1249,7 @@ w. Rota "/favorito/cadastrar":
 
 
 
-x. Rota "/favorito/listar/:emailUsuario":
+#### x. Rota "/favorito/listar/:emailUsuario":
 
 • URL: http://localhost:3000/favorito/listar
 
@@ -1200,7 +1285,7 @@ x. Rota "/favorito/listar/:emailUsuario":
 
 
 
-y. Rota "/favorito/excluir/:emailUsuario/:idProduto":
+#### y. Rota "/favorito/excluir/:emailUsuario/:idProduto":
 
 • URL: http://localhost:3000/favorito/excluir
 
@@ -1239,3 +1324,6 @@ y. Rota "/favorito/excluir/:emailUsuario/:idProduto":
   }
   
 }
+
+<h3 align="center">Autores:</h3>
+<h4 align="center">Júlia Scrinz da Silva, Mateus Rostirolla Gewehr e Victor Santos dos Reis </h4>
