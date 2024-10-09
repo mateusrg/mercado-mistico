@@ -620,7 +620,27 @@ app.delete("/usuario/excluir/:email/:senha", (request, response) => {
 
 // Rotas de Administrador (também são usuários)
 
-// Rota para verificar se um usuário é ou não administrador (retorno: 1 para sim e 0 para não)
+/**
+ * @swagger
+ * /usuario/is_adm/{email}:
+ *   get:
+ *     summary: Verifica se o usuário é administrador.
+ *     parameters:
+ *       - name: email
+ *         in: path
+ *         required: true
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: Verificação de adm feita com sucesso!
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *       500:
+ *         description: Erro ao fazer verificação de adm.
+ */
 app.get("/usuario/is_adm/:email", (request, response) => {
     query = "SELECT * FROM Usuario WHERE email = ?";
     params = [request.params.email];
@@ -645,7 +665,23 @@ app.get("/usuario/is_adm/:email", (request, response) => {
     });
 });
 
-// Rota para tornar um usuário administrador
+/**
+ * @swagger
+ * /usuario/tornar_adm/{email}:
+ *   put:
+ *     summary: Torna um usuário administrador.
+ *     parameters:
+ *       - name: email
+ *         in: path
+ *         required: true
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: Administrador adicionado com sucesso!
+ *       500:
+ *         description: Erro ao adicionar o administrador.
+ */
 app.put("/usuario/tornar_adm/:email", (request, response) => {
     query = "UPDATE Usuario SET administrador = 1 WHERE email = ?";
     params = [request.params.email];
@@ -670,7 +706,21 @@ app.put("/usuario/tornar_adm/:email", (request, response) => {
     });
 });
 
-// Rota para listar os usuários administradores (usado na página de cadastro de administradores para poder cadastrar um novo ADM ou remover um já existente)
+/**
+ * @swagger
+ * /usuario/listar_adms:
+ *   get:
+ *     summary: Lista os usuários administradores.
+ *     responses:
+ *       200:
+ *         description: ADMs consultados com sucesso!
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *       500:
+ *         description: Erro ao consultar os ADMs.
+ */
 app.get("/usuario/listar_adms", (request, response) => {
     const query = "SELECT * FROM Usuario WHERE administrador = ?";
     const params = [1];
@@ -695,7 +745,23 @@ app.get("/usuario/listar_adms", (request, response) => {
     });
 });
 
-// Rota para remover um administrador
+/**
+ * @swagger
+ * /usuario/remover_adm/{email}:
+ *   put:
+ *     summary: Remove um administrador.
+ *     parameters:
+ *       - name: email
+ *         in: path
+ *         required: true
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: Administrador removido com sucesso!
+ *       500:
+ *         description: Erro ao remover o administrador.
+ */
 app.put("/usuario/remover_adm/:email", (request, response) => {
     const query = "UPDATE Usuario SET administrador = 0 WHERE email = ?";
     const params = [request.params.email];
@@ -722,7 +788,42 @@ app.put("/usuario/remover_adm/:email", (request, response) => {
 
 // Rotas de Endereço
 
-// Rota para cadastrar um endereço
+/**
+ * @swagger
+ * /endereco/cadastrar:
+ *   post:
+ *     summary: Cadastra um endereço.
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               emailUsuario:
+ *                 type: string
+ *               nome:
+ *                 type: string
+ *               CEP:
+ *                 type: string
+ *               endereco:
+ *                 type: string
+ *               numeroResidencia:
+ *                 type: integer
+ *               complemento:
+ *                 type: string
+ *               bairro:
+ *                 type: string
+ *               cidade:
+ *                 type: string
+ *               estado:
+ *                 type: string
+ *     responses:
+ *       201:
+ *         description: Endereço cadastrado com sucesso!
+ *       500:
+ *         description: Erro ao cadastrar o endereço.
+ */
 app.post("/endereco/cadastrar", (request, response) => {
     query = `INSERT INTO Endereco (nome, CEP, endereco, numeroResidencia, complemento, bairro, cidade, estado, idUsuario)
              VALUES (?, ?, ?, ?, ?, ?, ?, ?, (SELECT idUsuario FROM Usuario WHERE email = ?))`;
@@ -806,7 +907,57 @@ app.post("/endereco/cadastrar", (request, response) => {
     });
 });
 
-// Rota para listar os endereços de um usuário
+/**
+ * @swagger
+ * /endereco/listar/{email}:
+ *   get:
+ *     summary: Lista os endereços de um usuário.
+ *     parameters:
+ *       - name: email
+ *         in: path
+ *         required: true
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: Endereços do usuário encontrados!
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 data:
+ *                   type: array
+ *                   items:
+ *                     type: object
+ *                     properties:
+ *                       idEndereco:
+ *                         type: integer
+ *                       nome:
+ *                         type: string
+ *                       CEP:
+ *                         type: string
+ *                       endereco:
+ *                         type: string
+ *                       numeroResidencia:
+ *                         type: string
+ *                       complemento:
+ *                         type: string
+ *                       bairro:
+ *                         type: string
+ *                       cidade:
+ *                         type: string
+ *                       estado:
+ *                         type: string
+ *                       idUsuario:
+ *                         type: integer
+ *                       isPadrao:
+ *                         type: boolean
+ *       404:
+ *         description: E-mail não cadastrado ou usuário não encontrado.
+ *       500:
+ *         description: Erro ao buscar os endereços do usuário.
+ */
 app.get("/endereco/listar/:email", (request, response) => {
     // Pegando o ID do usuário com base no e-mail
     query = "SELECT idUsuario FROM Usuario WHERE email = ?";
@@ -882,7 +1033,60 @@ app.get("/endereco/listar/:email", (request, response) => {
     });
 });
 
-// Rota para buscar um endereço pelo idEndereco
+/**
+ * @swagger
+ * /endereco/{email}/{id}:
+ *   get:
+ *     summary: Busca um endereço pelo idEndereco.
+ *     parameters:
+ *       - name: email
+ *         in: path
+ *         required: true
+ *         schema:
+ *           type: string
+ *       - name: id
+ *         in: path
+ *         required: true
+ *         schema:
+ *           type: integer
+ *     responses:
+ *       200:
+ *         description: Endereço encontrado.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 data:
+ *                   type: object
+ *                   properties:
+ *                     idEndereco:
+ *                       type: integer
+ *                     nome:
+ *                       type: string
+ *                     CEP:
+ *                       type: string
+ *                     endereco:
+ *                       type: string
+ *                     numeroResidencia:
+ *                       type: string
+ *                     complemento:
+ *                       type: string
+ *                     bairro:
+ *                       type: string
+ *                     cidade:
+ *                       type: string
+ *                     estado:
+ *                       type: string
+ *                     idUsuario:
+ *                       type: integer
+ *                     isPadrao:
+ *                       type: boolean
+ *       404:
+ *         description: E-mail não cadastrado ou endereço não encontrado.
+ *       500:
+ *         description: Erro ao buscar o endereço.
+ */
 app.get('/endereco/:email/:id', (request, response) => {
     const email = request.params.email;
     const idEndereco = request.params.id;
@@ -941,7 +1145,46 @@ app.get('/endereco/:email/:id', (request, response) => {
     });
 });
 
-// Rota para editar um endereço
+/**
+ * @swagger
+ * /endereco/editar:
+ *   put:
+ *     summary: Edita um endereço existente.
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               nome:
+ *                 type: string
+ *               CEP:
+ *                 type: string
+ *               endereco:
+ *                 type: string
+ *               numeroResidencia:
+ *                 type: string
+ *               complemento:
+ *                 type: string
+ *               bairro:
+ *                 type: string
+ *               cidade:
+ *                 type: string
+ *               estado:
+ *                 type: string
+ *               idEndereco:
+ *                 type: integer
+ *               emailUsuario:
+ *                 type: string
+ *               enderecoPadrao:
+ *                 type: boolean
+ *     responses:
+ *       200:
+ *         description: Endereço editado com sucesso.
+ *       500:
+ *         description: Erro ao editar o endereço ou ao atualizar o endereço padrão.
+ */
 app.put("/endereco/editar", (request, response) => {
     query = "UPDATE Endereco SET nome = ?, CEP = ?, endereco = ?, numeroResidencia = ?, complemento = ?, bairro = ?, cidade = ?, estado = ? WHERE idEndereco = ?";
     params = [
@@ -1021,7 +1264,23 @@ app.put("/endereco/editar", (request, response) => {
     });
 });
 
-// Rota para excluir um endereço
+/**
+ * @swagger
+ * /endereco/excluir/{idEndereco}:
+ *   delete:
+ *     summary: Exclui um endereço pelo ID.
+ *     parameters:
+ *       - in: path
+ *         name: idEndereco
+ *         required: true
+ *         schema:
+ *           type: integer
+ *     responses:
+ *       200:
+ *         description: Endereço removido com sucesso.
+ *       500:
+ *         description: Erro ao remover o endereço.
+ */
 app.delete("/endereco/excluir/:idEndereco", (request, response) => {
     query = "UPDATE Usuario SET idEnderecoPadrao = null WHERE idEnderecoPadrao = ?";
     params = [request.params.idEndereco];
