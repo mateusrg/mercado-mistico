@@ -4,11 +4,27 @@ const cors = require("cors");
 const path = require("path");
 const porta = 3000;
 const app = express();
+const swaggerUi = require("swagger-ui-express");
+const swaggerJsDoc = require("swagger-jsdoc");
+
+const swaggerOptions = {
+    definition: {
+    openapi: '3.0.0',
+    info: {
+    title: 'API do Mercado Místico',
+    version: '1.0.0',
+    description: 'Documentação da API do Mercado Místico',
+    },
+  },
+  apis: ['./server.js'], // Caminho para os arquivos com anotações Swagger
+};
+   
+const swaggerSpec = swaggerJsDoc(swaggerOptions);
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 app.use(cors());
 app.use(express.json());
 app.listen(porta, () => console.log(`Rodando na porta ${porta}!`));
 const connection = require("./db_config");
-
 app.use(express.static(path.join(__dirname, "..", "..", "frontend")));
 
 // Configuração do Multer para poder salvar as imagens dos produtos uppados pelos adms
