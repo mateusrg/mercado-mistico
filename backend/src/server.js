@@ -15,10 +15,15 @@ const swaggerOptions = {
     version: '1.0.0',
     description: 'Documentação da API do Mercado Místico',
     },
+    servers: [
+        {
+            url: `http://localhost:${porta}/`
+        }
+    ]
   },
-  apis: ['./server.js'], // Caminho para os arquivos com anotações Swagger
+  apis: ['./server.js'],
 };
-   
+
 const swaggerSpec = swaggerJsDoc(swaggerOptions);
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 app.use(cors());
@@ -64,7 +69,36 @@ app.get("/cadastrar_produto", (req, response) => response.sendFile(path.join(__d
 
 // Rotas de Produto
 
-// Rota para cadastrar um novo produto
+
+
+/**
+ * @swagger
+ * /produto/cadastrar:
+ *   post:
+ *     summary: Cadastra um novo produto.
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               nome:
+ *                 type: string
+ *               preco:
+ *                 type: number
+ *               descricao:
+ *                 type: string
+ *               imagem:
+ *                 type: string
+ *               quantidade:
+ *                 type: integer
+ *     responses:
+ *       201:
+ *         description: Produto cadastrado com sucesso!
+ *       500:
+ *         description: Erro ao cadastrar o produto.
+ */
 app.post("/produto/cadastrar", (request, response) => {
     const query = "INSERT INTO Produto (nome, preco, descricao, imagem, quantidade) VALUES (?, ?, ?, ?, ?);";
     const params = [
@@ -96,7 +130,24 @@ app.post("/produto/cadastrar", (request, response) => {
     });
 });
 
-// Rota para listar os produtos cadastrados para serem exibidos no catálogo
+
+/**
+ * @swagger
+ * /produto/listar:
+ *   get:
+ *     summary: Lista todos os produtos cadastrados.
+ *     responses:
+ *       200:
+ *         description: Produtos selecionados com sucesso!
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 type: object
+ *       500:
+ *         description: Erro ao selecionar os produtos.
+ */
 app.get("/produto/listar", (request, response) => {
     query = "SELECT * FROM Produto";
     connection.query(query, (err, results) => {
@@ -120,7 +171,27 @@ app.get("/produto/listar", (request, response) => {
     });
 });
 
-// Rota para selecionar um produto específico para ser exibido na página de produto
+/**
+ * @swagger
+ * /produto/selecionar/{idProduto}:
+ *   get:
+ *     summary: Seleciona um produto específico pelo ID.
+ *     parameters:
+ *       - name: idProduto
+ *         in: path
+ *         required: true
+ *         schema:
+ *           type: integer
+ *     responses:
+ *       200:
+ *         description: Produto selecionado com sucesso!
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *       404:
+ *         description: Produto não encontrado.
+ */
 app.get("/produto/selecionar/:idProduto", (request, response) => {
     query = "SELECT * FROM Produto WHERE idProduto = ?";
     params = [request.params.idProduto];
@@ -146,7 +217,25 @@ app.get("/produto/selecionar/:idProduto", (request, response) => {
     });
 });
 
-// Rota para uppar a imagem de um produto durante o seu cadastro pelo administrador
+/**
+ * @swagger
+ * /produto/uppar_imagem:
+ *   post:
+ *     summary: Faz o upload da imagem de um produto.
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         multipart/form-data:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               imagem:
+ *                 type: string
+ *                 format: binary
+ *     responses:
+ *       201:
+ *         description: Imagem uppada com sucesso!
+ */
 app.post("/produto/uppar_imagem", upload.single("imagem"), (request, response) => {
     response
         .status(201)
@@ -157,6 +246,34 @@ app.post("/produto/uppar_imagem", upload.single("imagem"), (request, response) =
         });
 });
 
+/**
+ * @swagger
+ * /produto/editar:
+ *   put:
+ *     summary: Edita um produto existente.
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               idProduto:
+ *                 type: integer
+ *               nome:
+ *                 type: string
+ *               preco:
+ *                 type: number
+ *               descricao:
+ *                 type: string
+ *               quantidade:
+ *                 type: integer
+ *     responses:
+ *       200:
+ *         description: Produto alterado com sucesso.
+ *       404:
+ *         description: Erro ao alterar o produto.
+ */
 app.put("/produto/editar", (request, response) => {
     query = "UPDATE Produto SET nome = ?, preco = ?, descricao = ?, quantidade = ? WHERE idProduto = ?";
     params = [
@@ -188,7 +305,23 @@ app.put("/produto/editar", (request, response) => {
     });
 });
 
-// Rota para excluir um produto
+/**
+ * @swagger
+ * /produto/excluir/{idProduto}:
+ *   delete:
+ *     summary: Exclui um produto pelo ID.
+ *     parameters:
+ *       - name: idProduto
+ *         in: path
+ *         required: true
+ *         schema:
+ *           type: integer
+ *     responses:
+ *       200:
+ *         description: Produto excluído com sucesso.
+ *       404:
+ *         description: Erro ao excluir o produto.
+ */
 app.delete("/produto/excluir/:idProduto", (request, response) => {
     query = "DELETE FROM Produto WHERE idProduto = ?";
     params = [request.params.idProduto];
@@ -216,7 +349,32 @@ app.delete("/produto/excluir/:idProduto", (request, response) => {
 
 // Rotas de Usuário
 
-// Rota para cadastrar um novo usuário
+/**
+ * @swagger
+ * /usuario/cadastrar:
+ *   post:
+ *     summary: Cadastra um novo usuário.
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               nome:
+ *                 type: string
+ *               email:
+ *                 type: string
+ *               senha:
+ *                 type: string
+ *     responses:
+ *       201:
+ *         description: Usuário cadastrado com sucesso!
+ *       409:
+ *         description: E-mail já cadastrado.
+ *       500:
+ *         description: Erro ao cadastrar o usuário.
+ */
 app.post("/usuario/cadastrar", (request, response) => {
     // Verificando se o e-mail existe (diferente das outras rotas, aqui retorna "false" se o e-mail já existir)
     query = "SELECT * FROM Usuario WHERE email = ?";
@@ -265,7 +423,30 @@ app.post("/usuario/cadastrar", (request, response) => {
     });
 });
 
-// Rota para fazer login do usuário, verificando se o e-mail e a senha digitados por ele estão corretos
+/**
+ * @swagger
+ * /usuario/login:
+ *   post:
+ *     summary: Faz o login de um usuário com e-mail e senha.
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               email:
+ *                 type: string
+ *               senha:
+ *                 type: string
+ *     responses:
+ *       200:
+ *         description: Usuário logado com sucesso!
+ *       401:
+ *         description: Senha incorreta.
+ *       404:
+ *         description: E-mail não encontrado.
+ */
 app.post("/usuario/login", (request, response) => {
     const query = "SELECT idUsuario, nome, senha, email FROM Usuario WHERE email = ?";
     const params = [request.body.email];
@@ -303,7 +484,34 @@ app.post("/usuario/login", (request, response) => {
     });
 });
 
-// Rota para editar o nome e a senha do usuário
+/**
+ * @swagger
+ * /usuario/editar:
+ *   put:
+ *     summary: Edita o nome e a senha de um usuário.
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               emailUsuario:
+ *                 type: string
+ *               senhaAtual:
+ *                 type: string
+ *               nome:
+ *                 type: string
+ *               senhaNova:
+ *                 type: string
+ *     responses:
+ *       200:
+ *         description: Informações do usuário alteradas com sucesso.
+ *       401:
+ *         description: Senha atual incorreta.
+ *       500:
+ *         description: Erro ao alterar as informações do usuário.
+ */
 app.put("/usuario/editar", (request, response) => {
     query = "SELECT senha FROM Usuario WHERE email = ?";
     params = [request.body.emailUsuario];
@@ -347,7 +555,30 @@ app.put("/usuario/editar", (request, response) => {
     });
 });
 
-// Rota para excluir a conta do usuário
+/**
+ * @swagger
+ * /usuario/excluir/{email}/{senha}:
+ *   delete:
+ *     summary: Exclui a conta de um usuário.
+ *     parameters:
+ *       - name: email
+ *         in: path
+ *         required: true
+ *         schema:
+ *           type: string
+ *       - name: senha
+ *         in: path
+ *         required: true
+ *         schema:
+ *           type: string
+ *     responses:
+ *       200:
+ *         description: Conta excluída com sucesso!
+ *       401:
+ *         description: Senha incorreta.
+ *       500:
+ *         description: Erro ao excluir a conta.
+ */
 app.delete("/usuario/excluir/:email/:senha", (request, response) => {
     query = "SELECT senha FROM Usuario WHERE email = ?";
     params = [request.params.email];
