@@ -89,7 +89,7 @@ app.get("/cadastrar_produto", (req, response) => response.sendFile(path.join(__d
  *                 type: number
  *               descricao:
  *                 type: string
- *               imagem:
+ *               caminhoImagem:
  *                 type: string
  *               quantidade:
  *                 type: integer
